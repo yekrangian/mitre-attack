@@ -179,75 +179,81 @@ h1 {
 .matrix-container {
     display: flex;
     overflow-x: auto;
-    background-color: #f5f5f5;
+    background-color: #f8f9fa;
     gap: 2px;
     padding: 2px;
     margin-top: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
 }
 
 .tactic-column {
-    min-width: 200px;
+    min-width: 160px;
     flex: 0 0 auto;
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    border: 1px solid #e9ecef;
 }
 
 .tactic-header {
-    padding: 10px;
+    padding: 8px 6px;
     text-align: center;
     background-color: white;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .tactic-name {
-    font-weight: 600;
-    color: #3b6b99;
-    margin-bottom: 4px;
+    font-weight: 500;
+    color: #4f7b9f;
+    font-size: 0.85rem;
+    margin-bottom: 2px;
 }
 
 .tactic-count {
-    font-size: 0.8em;
-    color: #666;
+    font-size: 0.75em;
+    color: #6c757d;
 }
 
 .techniques-list {
     display: flex;
     flex-direction: column;
-    gap: 2px;
 }
 
 .technique {
-    padding: 10px;
+    padding: 8px 6px;
     background-color: white;
     cursor: pointer;
-    border: 1px solid transparent;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.technique:last-child {
+    border-bottom: none;
 }
 
 .technique:hover {
     background-color: #f8f9fa;
-    border-color: #ddd;
 }
 
 .technique-id {
-    color: #3b6b99;
-    font-size: 0.8em;
-    margin-bottom: 4px;
+    color: #4f7b9f;
+    font-size: 0.75em;
+    margin-bottom: 3px;
 }
 
 .technique-name {
-    font-size: 0.9em;
-    line-height: 1.4;
+    font-size: 0.8em;
+    line-height: 1.3;
+    color: #212529;
 }
 
 .sub-technique-count {
-    color: #666;
-    font-size: 0.9em;
+    color: #6c757d;
+    font-size: 0.85em;
 }
 
 .selected {
     background-color: #e8f0fe;
-    border-color: #4285f4;
 }
 
 /* Custom scrollbar */
