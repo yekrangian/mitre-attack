@@ -12,10 +12,11 @@ async function loadMitreData() {
         const tacticsMap = new Map();
         
         dataRows.forEach(row => {
-            const [tactic, techniqueId, techniqueName, subTechniqueCount] = row.map(cell => cell.trim());
+            const [tactic, techniqueName] = row.map(cell => cell.trim());
             
             if (!tacticsMap.has(tactic)) {
                 tacticsMap.set(tactic, {
+                    name: tactic,
                     techniques: [],
                     count: 0
                 });
@@ -23,23 +24,96 @@ async function loadMitreData() {
             
             const tacticData = tacticsMap.get(tactic);
             tacticData.techniques.push({
-                id: techniqueId,
-                name: techniqueName,
-                subTechniqueCount: subTechniqueCount || ''
+                id: `T${(tacticData.count + 1).toString().padStart(4, '0')}`,
+                name: techniqueName
             });
             tacticData.count++;
         });
         
-        return Array.from(tacticsMap.entries()).map(([name, data]) => ({
-            name,
-            count: `${data.count} techniques`,
-            techniques: data.techniques
+        // Convert map to array and format the data
+        return Array.from(tacticsMap.values()).map(tactic => ({
+            name: tactic.name,
+            count: `${tactic.count} techniques`,
+            techniques: tactic.techniques
         }));
     } catch (error) {
         console.error('Error loading MITRE data:', error);
         return null;
     }
 }
+
+// Function to create the matrix
+async function createMatrix() {
+    const container = document.querySelector('.matrix-container');
+    container.innerHTML = '<div class="loading">Loading ATT&CK Matrix data...</div>';
+    
+    const tactics = await loadMitreData();
+    if (!tactics) {
+        container.innerHTML = '<div class="error">Error loading ATT&CK Matrix data</div>';
+        return;
+    }
+    
+    container.innerHTML = '';
+    tactics.forEach(tactic => {
+        const column = document.createElement('div');
+        column.className = 'tactic-column';
+        
+        // Create tactic header
+        const header = document.createElement('div');
+        header.className = 'tactic-header';
+        header.innerHTML = `
+            <div class="tactic-name">${tactic.name}</div>
+            <div class="tactic-count">${tactic.count}</div>
+        `;
+        
+        // Add techniques
+        const techniquesList = document.createElement('div');
+        techniquesList.className = 'techniques-list';
+        
+        tactic.techniques.forEach(technique => {
+            const techniqueElement = document.createElement('div');
+            techniqueElement.className = 'technique';
+            techniqueElement.innerHTML = `
+                <div class="technique-id">${technique.id}</div>
+                <div class="technique-name">${technique.name}</div>
+            `;
+            techniquesList.appendChild(techniqueElement);
+        });
+        
+        column.appendChild(header);
+        column.appendChild(techniquesList);
+        container.appendChild(column);
+    });
+}
+
+// Initialize the matrix when the page loads
+document.addEventListener('DOMContentLoaded', createMatrix);
+
+// Add click handler for techniques
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.technique')) {
+        const technique = e.target.closest('.technique');
+        technique.classList.toggle('selected');
+    }
+});
+
+// Add search functionality
+const searchInput = document.querySelector('.search input');
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const techniques = document.querySelectorAll('.technique');
+    
+    techniques.forEach(technique => {
+        const id = technique.querySelector('.technique-id').textContent.toLowerCase();
+        const name = technique.querySelector('.technique-name').textContent.toLowerCase();
+        
+        if (id.includes(searchTerm) || name.includes(searchTerm)) {
+            technique.style.display = '';
+        } else {
+            technique.style.display = 'none';
+        }
+    });
+});
 
 // DOM Elements
 const matrixContainer = document.querySelector('.matrix-container');
@@ -105,10 +179,6 @@ function createTechniqueElement(technique) {
     name.className = 'technique-name';
     name.textContent = technique.name;
     
-    if (technique.subTechniqueCount) {
-        name.textContent += ` ${technique.subTechniqueCount}`;
-    }
-    
     element.appendChild(id);
     element.appendChild(name);
     
@@ -130,9 +200,6 @@ layoutSelect.addEventListener('change', (e) => {
     const layout = e.target.value;
     matrixContainer.className = `matrix-container layout-${layout}`;
 });
-
-// Initialize the matrix when the page loads
-document.addEventListener('DOMContentLoaded', initializeMatrix);
 
 // Handle control buttons
 document.querySelectorAll('.btn').forEach(btn => {
@@ -160,11 +227,4 @@ document.querySelectorAll('.dropdown').forEach(dropdown => {
         e.preventDefault();
         // Add dropdown menu functionality here
     });
-});
-
-// Add search functionality
-const searchInput = document.querySelector('.search input');
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    // Add search functionality here
 }); 
