@@ -74,7 +74,6 @@ async function createMatrix() {
             const techniqueElement = document.createElement('div');
             techniqueElement.className = 'technique';
             techniqueElement.innerHTML = `
-                <div class="technique-id">${technique.id}</div>
                 <div class="technique-name">${technique.name}</div>
             `;
             techniquesList.appendChild(techniqueElement);
@@ -171,15 +170,10 @@ function createTechniqueElement(technique) {
     const element = document.createElement('div');
     element.className = 'technique';
     
-    const id = document.createElement('div');
-    id.className = 'technique-id';
-    id.textContent = technique.id;
-    
     const name = document.createElement('div');
     name.className = 'technique-name';
     name.textContent = technique.name;
     
-    element.appendChild(id);
     element.appendChild(name);
     
     element.addEventListener('click', () => {
