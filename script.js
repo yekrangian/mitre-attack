@@ -12,7 +12,7 @@ async function loadMitreData() {
         const tacticsMap = new Map();
         
         dataRows.forEach(row => {
-            const [tactic, techniqueName] = row.map(cell => cell.trim());
+            const [tactic, techniqueName, stride] = row.map(cell => cell.trim());
             
             if (!tacticsMap.has(tactic)) {
                 tacticsMap.set(tactic, {
@@ -25,7 +25,8 @@ async function loadMitreData() {
             const tacticData = tacticsMap.get(tactic);
             tacticData.techniques.push({
                 id: `T${(tacticData.count + 1).toString().padStart(4, '0')}`,
-                name: techniqueName
+                name: techniqueName,
+                stride: stride || ''
             });
             tacticData.count++;
         });
@@ -74,7 +75,10 @@ async function createMatrix() {
             const techniqueElement = document.createElement('div');
             techniqueElement.className = 'technique';
             techniqueElement.innerHTML = `
-                <div class="technique-name">${technique.name}</div>
+                <div class="technique-content">
+                    <div class="technique-name">${technique.name}</div>
+                    ${technique.stride ? `<div class="stride-tag" data-category="${technique.stride}">${technique.stride}</div>` : ''}
+                </div>
             `;
             techniquesList.appendChild(techniqueElement);
         });

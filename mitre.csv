@@ -1,237 +1,237 @@
-﻿Tactic,TechniqueName
-Reconnaissance,Active Scanning
-Reconnaissance,Gather Victim Host Information
-Reconnaissance,Gather Victim Identity Information
-Reconnaissance,Gather Victim Network Information
-Reconnaissance,Gather Victim Org Information
-Reconnaissance,Phishing for Information
-Reconnaissance,Search Closed Sources
-Reconnaissance,Search Open Technical Databases
-Reconnaissance,Search Open Websites/Domains
-Reconnaissance,Search Victim-Owned Websites
-Resource Development,Acquire Access
-Resource Development,Acquire Infrastructure
-Resource Development,Compromise Accounts
-Resource Development,Compromise Infrastructure
-Resource Development,Develop Capabilities
-Resource Development,Establish Accounts
-Resource Development,Obtain Capabilities
-Resource Development,Stage Capabilities
-Initial Access,Content Injection
-Initial Access,Drive-by Compromise
-Initial Access,Exploit Public-Facing Application
-Initial Access,External Remote Services
-Initial Access,Hardware Additions
-Initial Access,Phishing
-Initial Access,Replication Through Removable Media
-Initial Access,Supply Chain Compromise
-Initial Access,Trusted Relationship
-Initial Access,Valid Accounts
-Execution,Cloud Administration Command
-Execution,Command and Scripting Interpreter
-Execution,Container Administration Command
-Execution,Deploy Container
-Execution,Exploitation for Client Execution
-Execution,Inter-Process Communication
-Execution,Native API
-Execution,Scheduled Task/Job
-Execution,Serverless Execution
-Execution,Shared Modules
-Execution,Software Deployment Tools
-Execution,System Services
-Execution,User Execution
-Execution,Windows Management Instrumentation
-Persistence,Account Manipulation
-Persistence,BITS Jobs
-Persistence,Boot or Logon Autostart Execution
-Persistence,Boot or Logon Initialization Scripts
-Persistence,Browser Extensions
-Persistence,Compromise Host Software Binary
-Persistence,Create Account
-Persistence,Create or Modify System Process
-Persistence,Event Triggered Execution
-Persistence,External Remote Services
-Persistence,Hijack Execution Flow
-Persistence,Implant Internal Image
-Persistence,Modify Authentication Process
-Persistence,Office Application Startup
-Persistence,Power Settings
-Persistence,Pre-OS Boot
-Persistence,Scheduled Task/Job
-Persistence,Server Software Component
-Persistence,Traffic Signaling
-Persistence,Valid Accounts
-Privilege Escalation,Abuse Elevation Control Mechanism
-Privilege Escalation,Access Token Manipulation
-Privilege Escalation,Account Manipulation
-Privilege Escalation,Boot or Logon Autostart Execution
-Privilege Escalation,Boot or Logon Initialization Scripts
-Privilege Escalation,Create or Modify System Process
-Privilege Escalation,Domain or Tenant Policy Modification
-Privilege Escalation,Escape to Host
-Privilege Escalation,Event Triggered Execution
-Privilege Escalation,Exploitation for Privilege Escalation
-Privilege Escalation,Hijack Execution Flow
-Privilege Escalation,Process Injection
-Privilege Escalation,Scheduled Task/Job
-Privilege Escalation,Valid Accounts
-Defence Evasion,Abuse Elevation Control Mechanism
-Defence Evasion,Access Token Manipulation
-Defence Evasion,BITS Jobs
-Defence Evasion,Build Image on Host
-Defence Evasion,Debugger Evasion
-Defence Evasion,Deobfuscate/Decode Files or Information
-Defence Evasion,Deploy Container
-Defence Evasion,Direct Volume Access
-Defence Evasion,Domain or Tenant Policy Modification
-Defence Evasion,Execution Guardrails
-Defence Evasion,Exploitation for Defense Evasion
-Defence Evasion,File and Directory Permissions Modification
-Defence Evasion,Hide Artifacts
-Defence Evasion,Hijack Execution Flow
-Defence Evasion,Impair Defenses
-Defence Evasion,Impersonation
-Defence Evasion,Indicator Removal
-Defence Evasion,Indirect Command Execution
-Defence Evasion,Masquerading
-Defence Evasion,Modify Authentication Process
-Defence Evasion,Modify Cloud Compute Infrastructure
-Defence Evasion,Modify Cloud Resource Hierarchy
-Defence Evasion,Modify Registry
-Defence Evasion,Modify System Image
-Defence Evasion,Network Boundary Bridging
-Defence Evasion,Obfuscated Files or Information
-Defence Evasion,Plist File Modification
-Defence Evasion,Pre-OS Boot
-Defence Evasion,Process Injection
-Defence Evasion,Reflective Code Loading
-Defence Evasion,Rogue Domain Controller
-Defence Evasion,Rootkit
-Defence Evasion,Subvert Trust Controls
-Defence Evasion,System Binary Proxy Execution
-Defence Evasion,System Script Proxy Execution
-Defence Evasion,Template Injection
-Defence Evasion,Traffic Signaling
-Defence Evasion,Trusted Developer Utilities Proxy Execution
-Defence Evasion,Unused/Unsupported Cloud Regions
-Defence Evasion,Use Alternate Authentication Material
-Defence Evasion,Valid Accounts
-Defence Evasion,Virtualization/Sandbox Evasion
-Defence Evasion,Weaken Encryption
-Defence Evasion,XSL Script Processing
-Credential Access,Adversary-in-the-Middle
-Credential Access,Brute Force
-Credential Access,Credentials from Password Stores
-Credential Access,Exploitation for Credential Access
-Credential Access,Forced Authentication
-Credential Access,Forge Web Credentials
-Credential Access,Input Capture
-Credential Access,Modify Authentication Process
-Credential Access,Multi-Factor Authentication Interception
-Credential Access,Multi-Factor Authentication Request Generation
-Credential Access,Network Sniffing
-Credential Access,OS Credential Dumping
-Credential Access,Steal Application Access Token
-Credential Access,Steal or Forge Authentication Certificates
-Credential Access,Steal or Forge Kerberos Tickets
-Credential Access,Steal Web Session Cookie
-Credential Access,Unsecured Credentials
-Discovery,Account Discovery
-Discovery,Application Window Discovery
-Discovery,Browser Information Discovery
-Discovery,Cloud Infrastructure Discovery
-Discovery,Cloud Service Dashboard
-Discovery,Cloud Service Discovery
-Discovery,Cloud Storage Object Discovery
-Discovery,Container and Resource Discovery
-Discovery,Debugger Evasion
-Discovery,Device Driver Discovery
-Discovery,Domain Trust Discovery
-Discovery,File and Directory Discovery
-Discovery,Group Policy Discovery
-Discovery,Log Enumeration
-Discovery,Network Service Discovery
-Discovery,Network Share Discovery
-Discovery,Network Sniffing
-Discovery,Password Policy Discovery
-Discovery,Peripheral Device Discovery
-Discovery,Permission Groups Discovery
-Discovery,Process Discovery
-Discovery,Query Registry
-Discovery,Remote System Discovery
-Discovery,Software Discovery
-Discovery,System Information Discovery
-Discovery,System Location Discovery
-Discovery,System Network Configuration Discovery
-Discovery,System Network Connections Discovery
-Discovery,System Owner/User Discovery
-Discovery,System Service Discovery
-Discovery,System Time Discovery
-Discovery,Virtualization/Sandbox Evasion
-Lateral Movement,Exploitation of Remote Services
-Lateral Movement,Internal Spearphishing
-Lateral Movement,Lateral Tool Transfer
-Lateral Movement,Remote Service Session Hijacking
-Lateral Movement,Remote Services
-Lateral Movement,Replication Through Removable Media
-Lateral Movement,Software Deployment Tools
-Lateral Movement,Taint Shared Content
-Lateral Movement,Use Alternate Authentication Material
-Collection,Adversary-in-the-Middle
-Collection,Archive Collected Data
-Collection,Audio Capture
-Collection,Automated Collection
-Collection,Browser Session Hijacking
-Collection,Clipboard Data
-Collection,Data from Cloud Storage
-Collection,Data from Configuration Repository
-Collection,Data from Information Repositories
-Collection,Data from Local System
-Collection,Data from Network Shared Drive
-Collection,Data from Removable Media
-Collection,Data Staged
-Collection,Email Collection
-Collection,Input Capture
-Collection,Screen Capture
-Collection,Video Capture
-Command and Control,Application Layer Protocol
-Command and Control,Communication Through Removable Media
-Command and Control,Content Injection
-Command and Control,Data Encoding
-Command and Control,Data Obfuscation
-Command and Control,Dynamic Resolution
-Command and Control,Encrypted Channel
-Command and Control,Fallback Channels
-Command and Control,Hide Infrastructure
-Command and Control,Ingress Tool Transfer
-Command and Control,Multi-Stage Channels
-Command and Control,Non-Application Layer Protocol
-Command and Control,Non-Standard Port
-Command and Control,Protocol Tunneling
-Command and Control,Proxy
-Command and Control,Remote Access Software
-Command and Control,Traffic Signaling
-Command and Control,Web Service
-Exfiltration,Automated Exfiltration
-Exfiltration,Data Transfer Size Limits
-Exfiltration,Exfiltration Over Alternative Protocol
-Exfiltration,Exfiltration Over C2 Channel
-Exfiltration,Exfiltration Over Other Network Medium
-Exfiltration,Exfiltration Over Physical Medium
-Exfiltration,Exfiltration Over Web Service
-Exfiltration,Scheduled Transfer
-Exfiltration,Transfer Data to Cloud Account
-Impact,Account Access Removal
-Impact,Data Destruction
-Impact,Data Encrypted for Impact
-Impact,Data Manipulation
-Impact,Defacement
-Impact,Disk Wipe
-Impact,Endpoint Denial of Service
-Impact,Financial Theft
-Impact,Firmware Corruption
-Impact,Inhibit System Recovery
-Impact,Network Denial of Service
-Impact,Resource Hijacking
-Impact,Service Stop
-Impact,System Shutdown/Reboot
+﻿Tactic,TechniqueName,STRIDE
+Reconnaissance,Active Scanning,Information Disclosure
+Reconnaissance,Gather Victim Host Information,
+Reconnaissance,Gather Victim Identity Information,
+Reconnaissance,Gather Victim Network Information,
+Reconnaissance,Gather Victim Org Information,
+Reconnaissance,Phishing for Information,
+Reconnaissance,Search Closed Sources,
+Reconnaissance,Search Open Technical Databases,
+Reconnaissance,Search Open Websites/Domains,
+Reconnaissance,Search Victim-Owned Websites,
+Resource Development,Acquire Access,
+Resource Development,Acquire Infrastructure,
+Resource Development,Compromise Accounts,
+Resource Development,Compromise Infrastructure,
+Resource Development,Develop Capabilities,
+Resource Development,Establish Accounts,
+Resource Development,Obtain Capabilities,
+Resource Development,Stage Capabilities,
+Initial Access,Content Injection,
+Initial Access,Drive-by Compromise,
+Initial Access,Exploit Public-Facing Application,
+Initial Access,External Remote Services,
+Initial Access,Hardware Additions,
+Initial Access,Phishing,
+Initial Access,Replication Through Removable Media,
+Initial Access,Supply Chain Compromise,
+Initial Access,Trusted Relationship,
+Initial Access,Valid Accounts,
+Execution,Cloud Administration Command,
+Execution,Command and Scripting Interpreter,
+Execution,Container Administration Command,
+Execution,Deploy Container,
+Execution,Exploitation for Client Execution,
+Execution,Inter-Process Communication,
+Execution,Native API,
+Execution,Scheduled Task/Job,
+Execution,Serverless Execution,
+Execution,Shared Modules,
+Execution,Software Deployment Tools,
+Execution,System Services,
+Execution,User Execution,
+Execution,Windows Management Instrumentation,
+Persistence,Account Manipulation,
+Persistence,BITS Jobs,
+Persistence,Boot or Logon Autostart Execution,
+Persistence,Boot or Logon Initialization Scripts,
+Persistence,Browser Extensions,
+Persistence,Compromise Host Software Binary,
+Persistence,Create Account,
+Persistence,Create or Modify System Process,
+Persistence,Event Triggered Execution,
+Persistence,External Remote Services,
+Persistence,Hijack Execution Flow,
+Persistence,Implant Internal Image,
+Persistence,Modify Authentication Process,
+Persistence,Office Application Startup,
+Persistence,Power Settings,
+Persistence,Pre-OS Boot,
+Persistence,Scheduled Task/Job,
+Persistence,Server Software Component,
+Persistence,Traffic Signaling,
+Persistence,Valid Accounts,
+Privilege Escalation,Abuse Elevation Control Mechanism,
+Privilege Escalation,Access Token Manipulation,
+Privilege Escalation,Account Manipulation,
+Privilege Escalation,Boot or Logon Autostart Execution,
+Privilege Escalation,Boot or Logon Initialization Scripts,
+Privilege Escalation,Create or Modify System Process,
+Privilege Escalation,Domain or Tenant Policy Modification,
+Privilege Escalation,Escape to Host,
+Privilege Escalation,Event Triggered Execution,
+Privilege Escalation,Exploitation for Privilege Escalation,
+Privilege Escalation,Hijack Execution Flow,
+Privilege Escalation,Process Injection,
+Privilege Escalation,Scheduled Task/Job,
+Privilege Escalation,Valid Accounts,
+Defence Evasion,Abuse Elevation Control Mechanism,
+Defence Evasion,Access Token Manipulation,
+Defence Evasion,BITS Jobs,
+Defence Evasion,Build Image on Host,
+Defence Evasion,Debugger Evasion,
+Defence Evasion,Deobfuscate/Decode Files or Information,
+Defence Evasion,Deploy Container,
+Defence Evasion,Direct Volume Access,
+Defence Evasion,Domain or Tenant Policy Modification,
+Defence Evasion,Execution Guardrails,
+Defence Evasion,Exploitation for Defense Evasion,
+Defence Evasion,File and Directory Permissions Modification,
+Defence Evasion,Hide Artifacts,
+Defence Evasion,Hijack Execution Flow,
+Defence Evasion,Impair Defenses,
+Defence Evasion,Impersonation,
+Defence Evasion,Indicator Removal,
+Defence Evasion,Indirect Command Execution,
+Defence Evasion,Masquerading,
+Defence Evasion,Modify Authentication Process,
+Defence Evasion,Modify Cloud Compute Infrastructure,
+Defence Evasion,Modify Cloud Resource Hierarchy,
+Defence Evasion,Modify Registry,
+Defence Evasion,Modify System Image,
+Defence Evasion,Network Boundary Bridging,
+Defence Evasion,Obfuscated Files or Information,
+Defence Evasion,Plist File Modification,
+Defence Evasion,Pre-OS Boot,
+Defence Evasion,Process Injection,
+Defence Evasion,Reflective Code Loading,
+Defence Evasion,Rogue Domain Controller,
+Defence Evasion,Rootkit,
+Defence Evasion,Subvert Trust Controls,
+Defence Evasion,System Binary Proxy Execution,
+Defence Evasion,System Script Proxy Execution,
+Defence Evasion,Template Injection,
+Defence Evasion,Traffic Signaling,
+Defence Evasion,Trusted Developer Utilities Proxy Execution,
+Defence Evasion,Unused/Unsupported Cloud Regions,
+Defence Evasion,Use Alternate Authentication Material,
+Defence Evasion,Valid Accounts,
+Defence Evasion,Virtualization/Sandbox Evasion,
+Defence Evasion,Weaken Encryption,
+Defence Evasion,XSL Script Processing,
+Credential Access,Adversary-in-the-Middle,
+Credential Access,Brute Force,
+Credential Access,Credentials from Password Stores,
+Credential Access,Exploitation for Credential Access,
+Credential Access,Forced Authentication,
+Credential Access,Forge Web Credentials,
+Credential Access,Input Capture,
+Credential Access,Modify Authentication Process,
+Credential Access,Multi-Factor Authentication Interception,
+Credential Access,Multi-Factor Authentication Request Generation,
+Credential Access,Network Sniffing,
+Credential Access,OS Credential Dumping,
+Credential Access,Steal Application Access Token,
+Credential Access,Steal or Forge Authentication Certificates,
+Credential Access,Steal or Forge Kerberos Tickets,
+Credential Access,Steal Web Session Cookie,
+Credential Access,Unsecured Credentials,
+Discovery,Account Discovery,
+Discovery,Application Window Discovery,
+Discovery,Browser Information Discovery,
+Discovery,Cloud Infrastructure Discovery,
+Discovery,Cloud Service Dashboard,
+Discovery,Cloud Service Discovery,
+Discovery,Cloud Storage Object Discovery,
+Discovery,Container and Resource Discovery,
+Discovery,Debugger Evasion,
+Discovery,Device Driver Discovery,
+Discovery,Domain Trust Discovery,
+Discovery,File and Directory Discovery,
+Discovery,Group Policy Discovery,
+Discovery,Log Enumeration,
+Discovery,Network Service Discovery,
+Discovery,Network Share Discovery,
+Discovery,Network Sniffing,
+Discovery,Password Policy Discovery,
+Discovery,Peripheral Device Discovery,
+Discovery,Permission Groups Discovery,
+Discovery,Process Discovery,
+Discovery,Query Registry,
+Discovery,Remote System Discovery,
+Discovery,Software Discovery,
+Discovery,System Information Discovery,
+Discovery,System Location Discovery,
+Discovery,System Network Configuration Discovery,
+Discovery,System Network Connections Discovery,
+Discovery,System Owner/User Discovery,
+Discovery,System Service Discovery,
+Discovery,System Time Discovery,
+Discovery,Virtualization/Sandbox Evasion,
+Lateral Movement,Exploitation of Remote Services,
+Lateral Movement,Internal Spearphishing,
+Lateral Movement,Lateral Tool Transfer,
+Lateral Movement,Remote Service Session Hijacking,
+Lateral Movement,Remote Services,
+Lateral Movement,Replication Through Removable Media,
+Lateral Movement,Software Deployment Tools,
+Lateral Movement,Taint Shared Content,
+Lateral Movement,Use Alternate Authentication Material,
+Collection,Adversary-in-the-Middle,
+Collection,Archive Collected Data,
+Collection,Audio Capture,
+Collection,Automated Collection,
+Collection,Browser Session Hijacking,
+Collection,Clipboard Data,
+Collection,Data from Cloud Storage,
+Collection,Data from Configuration Repository,
+Collection,Data from Information Repositories,
+Collection,Data from Local System,
+Collection,Data from Network Shared Drive,
+Collection,Data from Removable Media,
+Collection,Data Staged,
+Collection,Email Collection,
+Collection,Input Capture,
+Collection,Screen Capture,
+Collection,Video Capture,
+Command and Control,Application Layer Protocol,
+Command and Control,Communication Through Removable Media,
+Command and Control,Content Injection,
+Command and Control,Data Encoding,
+Command and Control,Data Obfuscation,
+Command and Control,Dynamic Resolution,
+Command and Control,Encrypted Channel,
+Command and Control,Fallback Channels,
+Command and Control,Hide Infrastructure,
+Command and Control,Ingress Tool Transfer,
+Command and Control,Multi-Stage Channels,
+Command and Control,Non-Application Layer Protocol,
+Command and Control,Non-Standard Port,
+Command and Control,Protocol Tunneling,
+Command and Control,Proxy,
+Command and Control,Remote Access Software,
+Command and Control,Traffic Signaling,
+Command and Control,Web Service,
+Exfiltration,Automated Exfiltration,
+Exfiltration,Data Transfer Size Limits,
+Exfiltration,Exfiltration Over Alternative Protocol,
+Exfiltration,Exfiltration Over C2 Channel,
+Exfiltration,Exfiltration Over Other Network Medium,
+Exfiltration,Exfiltration Over Physical Medium,
+Exfiltration,Exfiltration Over Web Service,
+Exfiltration,Scheduled Transfer,
+Exfiltration,Transfer Data to Cloud Account,
+Impact,Account Access Removal,
+Impact,Data Destruction,
+Impact,Data Encrypted for Impact,
+Impact,Data Manipulation,
+Impact,Defacement,
+Impact,Disk Wipe,
+Impact,Endpoint Denial of Service,
+Impact,Financial Theft,
+Impact,Firmware Corruption,
+Impact,Inhibit System Recovery,
+Impact,Network Denial of Service,
+Impact,Resource Hijacking,
+Impact,Service Stop,
+Impact,System Shutdown/Reboot,
