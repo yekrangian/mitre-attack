@@ -26,12 +26,15 @@ header {
 }
 
 .header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    width: 100%;
+    padding: 0 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.logo {
+    margin-left: 10px;
 }
 
 .logo a {
@@ -74,8 +77,9 @@ nav a:hover {
 
 /* Banner Styles */
 .banner {
+    width: 100%;
     background-color: #f0f0f0;
-    padding: 0.5rem;
+    padding: 0.5rem 10px;
     text-align: center;
     font-size: 0.9rem;
     border-bottom: 1px solid var(--border-color);
@@ -143,9 +147,8 @@ nav a:hover {
 
 /* Main Content Styles */
 main {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+    width: 100%;
+    padding: 2rem 10px;
 }
 
 h1 {
@@ -153,6 +156,7 @@ h1 {
     font-weight: 500;
     margin-bottom: 1rem;
     color: var(--text-color);
+    padding: 0 10px;
 }
 
 .controls {
@@ -182,9 +186,10 @@ h1 {
     background-color: #f8f9fa;
     gap: 2px;
     padding: 2px;
-    margin-top: 20px;
+    margin: 20px 10px;
     border: 1px solid #e9ecef;
     border-radius: 4px;
+    width: calc(100% - 20px);
 }
 
 .tactic-column {
