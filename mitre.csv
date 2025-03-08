@@ -1,0 +1,56 @@
+﻿Tactic,TechniqueID,TechniqueName,SubTechniqueCount
+Reconnaissance,T1595,Active Scanning,(1)
+Reconnaissance,T1592,Gather Victim Host Information,(4)
+Reconnaissance,T1589,Gather Victim Identity Information,(3)
+Reconnaissance,T1590,Gather Victim Network Information,(6)
+Reconnaissance,T1591,Gather Victim Org Information,(4)
+Reconnaissance,T1598,Phishing for Information,(3)
+Resource Development,T1583,Acquire Infrastructure,(6)
+Resource Development,T1586,Compromise Accounts,(2)
+Resource Development,T1584,Compromise Infrastructure,(1)
+Resource Development,T1587,Develop Capabilities,(4)
+Resource Development,T1585,Establish Accounts,(2)
+Resource Development,T1588,Obtain Capabilities,(7)
+Initial Access,T1189,Drive-by Compromise,
+Initial Access,T1190,Exploit Public-Facing Application,
+Initial Access,T1133,External Remote Services,
+Initial Access,T1200,Hardware Additions,
+Execution,T1059,Command and Scripting Interpreter,(11)
+Execution,T1203,Exploitation for Client Execution,
+Execution,T1559,Inter-Process Communication,(2)
+Persistence,T1547,Boot or Logon Autostart Execution,(14)
+Persistence,T1037,Boot or Logon Initialization Scripts,(5)
+Persistence,T1176,Browser Extensions,
+Privilege Escalation,T1548,Abuse Elevation Control Mechanism,(6)
+Privilege Escalation,T1134,Access Token Manipulation,(5)
+Privilege Escalation,T1547,Boot or Logon Autostart Execution,(14)
+Defense Evasion,T1548,Abuse Elevation Control Mechanism,(6)
+Defense Evasion,T1134,Access Token Manipulation,(5)
+Defense Evasion,T1197,BITS Jobs,
+Defense Evasion,T1140,Deobfuscate/Decode Files or Information,
+Defense Evasion,T1006,Direct Volume Access,
+Credential Access,T1557,Adversary-in-the-Middle,(2)
+Credential Access,T1110,Brute Force,(4)
+Credential Access,T1555,Credentials from Password Stores,(6)
+Discovery,T1087,Account Discovery,(4)
+Discovery,T1010,Application Window Discovery,
+Discovery,T1217,Browser Information Discovery,
+Discovery,T1580,Cloud Infrastructure Discovery,
+Discovery,T1538,Cloud Service Dashboard,
+Discovery,T1526,Cloud Service Discovery,
+Lateral Movement,T1570,Lateral Tool Transfer,
+Lateral Movement,T1563,Remote Service Session Hijacking,(2)
+Lateral Movement,T1021,Remote Services,(6)
+Collection,T1560,Archive Collected Data,(4)
+Collection,T1123,Audio Capture,
+Collection,T1119,Automated Collection,
+Command and Control,T1071,Application Layer Protocol,(3)
+Command and Control,T1092,Communication Through Removable Media,
+Command and Control,T1132,Data Encoding,(2)
+Exfiltration,T1020,Automated Exfiltration,(1)
+Exfiltration,T1030,Data Transfer Size Limits,
+Exfiltration,T1048,Exfiltration Over Alternative Protocol,(3)
+Impact,T1531,Account Access Removal,
+Impact,T1485,Data Destruction,(1)
+Impact,T1486,Data Encrypted for Impact,
+Impact,T1565,Data Manipulation,(3)

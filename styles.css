@@ -1,0 +1,286 @@
+:root {
+    --primary-color: #c83a2e;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --border-color: #ddd;
+    --link-blue: #3b6b99;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    padding: 0.75rem 0;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.dropdown::after {
+    content: "▼";
+    font-size: 0.7em;
+    margin-left: 0.3em;
+    display: inline-block;
+}
+
+.search input {
+    padding: 0.4rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    width: 200px;
+}
+
+/* Banner Styles */
+.banner {
+    background-color: #f0f0f0;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.banner a {
+    color: var(--link-blue);
+    text-decoration: none;
+}
+
+.banner a:hover {
+    text-decoration: underline;
+}
+
+/* Logo Section Styles */
+.logo-section {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.logo-content {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.logo-content img {
+    width: 300px;
+    height: auto;
+}
+
+.description {
+    flex: 1;
+}
+
+.description p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.quick-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.quick-links a {
+    color: var(--link-blue);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.quick-links a:hover {
+    text-decoration: underline;
+}
+
+.external::after {
+    content: "↗";
+    margin-left: 0.2em;
+    display: inline-block;
+}
+
+/* Main Content Styles */
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    font-size: 0.875rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #f8f9fa;
+}
+
+/* Matrix Styles */
+.matrix-container {
+    display: flex;
+    overflow-x: auto;
+    background-color: var(--border-color);
+    gap: 1px;
+    padding: 1px;
+}
+
+.tactic-column {
+    min-width: 180px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.tactic-header {
+    background-color: white;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.tactic-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.tactic-count {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.technique {
+    background-color: white;
+    padding: 0.75rem 0.5rem;
+    min-height: 65px;
+    cursor: pointer;
+}
+
+.technique:hover {
+    background-color: #f8f9fa;
+}
+
+.technique-id {
+    font-size: 0.75rem;
+    color: var(--link-blue);
+    margin-bottom: 0.25rem;
+}
+
+.technique-name {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+}
+
+.sub-technique-count {
+    color: #666;
+    font-size: 0.75rem;
+}
+
+/* Scrollbar Styles */
+.matrix-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.matrix-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.matrix-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.matrix-container::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Loading and Error States */
+.loading, .error {
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.error {
+    color: var(--primary-color);
+}
+
+/* Add data attributes display on hover if needed */
+.technique[data-stride]:hover::after {
+    content: "STRIDE: " attr(data-stride);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 1;
+    margin-top: 1rem;
+} 
