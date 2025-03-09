@@ -101,22 +101,40 @@ document.addEventListener('click', function(e) {
 });
 
 // Add search functionality
-const searchInput = document.querySelector('.search input');
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
+document.querySelector('.logo input').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
     const techniques = document.querySelectorAll('.technique');
     
     techniques.forEach(technique => {
-        const id = technique.querySelector('.technique-id').textContent.toLowerCase();
         const name = technique.querySelector('.technique-name').textContent.toLowerCase();
+        const strideTag = technique.querySelector('.stride-tag');
+        const stride = strideTag ? strideTag.textContent.toLowerCase() : '';
         
-        if (id.includes(searchTerm) || name.includes(searchTerm)) {
+        if (name.includes(searchTerm) || stride.includes(searchTerm)) {
             technique.style.display = '';
+            technique.style.opacity = '1';
         } else {
             technique.style.display = 'none';
+            technique.style.opacity = '0';
         }
     });
+
+    // Update tactic counts
+    document.querySelectorAll('.tactic-column').forEach(column => {
+        const visibleTechniques = column.querySelectorAll('.technique[style="display: "]').length;
+        const countElement = column.querySelector('.tactic-count');
+        countElement.textContent = `${visibleTechniques} techniques`;
+    });
 });
+
+// Add transition for smooth filtering
+const style = document.createElement('style');
+style.textContent = `
+    .technique {
+        transition: opacity 0.2s ease-in-out;
+    }
+`;
+document.head.appendChild(style);
 
 // DOM Elements
 const matrixContainer = document.querySelector('.matrix-container');
