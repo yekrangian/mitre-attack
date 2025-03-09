@@ -1,22 +1,22 @@
 ﻿Tactic,TechniqueName,STRIDE
 Reconnaissance,Active Scanning,Information Disclosure
-Reconnaissance,Gather Victim Host Information,
-Reconnaissance,Gather Victim Identity Information,
-Reconnaissance,Gather Victim Network Information,
-Reconnaissance,Gather Victim Org Information,
-Reconnaissance,Phishing for Information,
-Reconnaissance,Search Closed Sources,
-Reconnaissance,Search Open Technical Databases,
-Reconnaissance,Search Open Websites/Domains,
-Reconnaissance,Search Victim-Owned Websites,
-Resource Development,Acquire Access,
-Resource Development,Acquire Infrastructure,
-Resource Development,Compromise Accounts,
-Resource Development,Compromise Infrastructure,
-Resource Development,Develop Capabilities,
-Resource Development,Establish Accounts,
-Resource Development,Obtain Capabilities,
-Resource Development,Stage Capabilities,
+Reconnaissance,Gather Victim Host Information,Information Disclosure
+Reconnaissance,Gather Victim Identity Information,Information Disclosure
+Reconnaissance,Gather Victim Network Information,Information Disclosure
+Reconnaissance,Gather Victim Org Information,Information Disclosure
+Reconnaissance,Phishing for Information,Information Disclosure
+Reconnaissance,Search Closed Sources,Information Disclosure
+Reconnaissance,Search Open Technical Databases,Information Disclosure
+Reconnaissance,Search Open Websites/Domains,Information Disclosure
+Reconnaissance,Search Victim-Owned Websites,Information Disclosure
+Resource Development,Acquire Access,Elevation of Privilege
+Resource Development,Acquire Infrastructure,Repudiation
+Resource Development,Compromise Accounts,Spoofing
+Resource Development,Compromise Infrastructure,Tampering
+Resource Development,Develop Capabilities,Tampering
+Resource Development,Establish Accounts,Spoofing
+Resource Development,Obtain Capabilities,Tampering
+Resource Development,Stage Capabilities,Tampering
 Initial Access,Content Injection,
 Initial Access,Drive-by Compromise,
 Initial Access,Exploit Public-Facing Application,
