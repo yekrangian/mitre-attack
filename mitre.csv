@@ -136,102 +136,102 @@ Credential Access,Steal or Forge Authentication Certificates,Spoofing
 Credential Access,Steal or Forge Kerberos Tickets,Spoofing
 Credential Access,Steal Web Session Cookie,Spoofing
 Credential Access,Unsecured Credentials,Spoofing
-Discovery,Account Discovery,
-Discovery,Application Window Discovery,
-Discovery,Browser Information Discovery,
-Discovery,Cloud Infrastructure Discovery,
-Discovery,Cloud Service Dashboard,
-Discovery,Cloud Service Discovery,
-Discovery,Cloud Storage Object Discovery,
-Discovery,Container and Resource Discovery,
-Discovery,Debugger Evasion,
-Discovery,Device Driver Discovery,
-Discovery,Domain Trust Discovery,
-Discovery,File and Directory Discovery,
-Discovery,Group Policy Discovery,
-Discovery,Log Enumeration,
-Discovery,Network Service Discovery,
-Discovery,Network Share Discovery,
-Discovery,Network Sniffing,
-Discovery,Password Policy Discovery,
-Discovery,Peripheral Device Discovery,
-Discovery,Permission Groups Discovery,
-Discovery,Process Discovery,
-Discovery,Query Registry,
-Discovery,Remote System Discovery,
-Discovery,Software Discovery,
-Discovery,System Information Discovery,
-Discovery,System Location Discovery,
-Discovery,System Network Configuration Discovery,
-Discovery,System Network Connections Discovery,
-Discovery,System Owner/User Discovery,
-Discovery,System Service Discovery,
-Discovery,System Time Discovery,
-Discovery,Virtualization/Sandbox Evasion,
-Lateral Movement,Exploitation of Remote Services,
-Lateral Movement,Internal Spearphishing,
-Lateral Movement,Lateral Tool Transfer,
-Lateral Movement,Remote Service Session Hijacking,
-Lateral Movement,Remote Services,
-Lateral Movement,Replication Through Removable Media,
-Lateral Movement,Software Deployment Tools,
-Lateral Movement,Taint Shared Content,
-Lateral Movement,Use Alternate Authentication Material,
-Collection,Adversary-in-the-Middle,
-Collection,Archive Collected Data,
-Collection,Audio Capture,
-Collection,Automated Collection,
-Collection,Browser Session Hijacking,
-Collection,Clipboard Data,
-Collection,Data from Cloud Storage,
-Collection,Data from Configuration Repository,
-Collection,Data from Information Repositories,
-Collection,Data from Local System,
-Collection,Data from Network Shared Drive,
-Collection,Data from Removable Media,
-Collection,Data Staged,
-Collection,Email Collection,
-Collection,Input Capture,
-Collection,Screen Capture,
-Collection,Video Capture,
-Command and Control,Application Layer Protocol,
-Command and Control,Communication Through Removable Media,
-Command and Control,Content Injection,
-Command and Control,Data Encoding,
-Command and Control,Data Obfuscation,
-Command and Control,Dynamic Resolution,
-Command and Control,Encrypted Channel,
-Command and Control,Fallback Channels,
-Command and Control,Hide Infrastructure,
-Command and Control,Ingress Tool Transfer,
-Command and Control,Multi-Stage Channels,
-Command and Control,Non-Application Layer Protocol,
-Command and Control,Non-Standard Port,
-Command and Control,Protocol Tunneling,
-Command and Control,Proxy,
-Command and Control,Remote Access Software,
-Command and Control,Traffic Signaling,
-Command and Control,Web Service,
-Exfiltration,Automated Exfiltration,
-Exfiltration,Data Transfer Size Limits,
-Exfiltration,Exfiltration Over Alternative Protocol,
-Exfiltration,Exfiltration Over C2 Channel,
-Exfiltration,Exfiltration Over Other Network Medium,
-Exfiltration,Exfiltration Over Physical Medium,
-Exfiltration,Exfiltration Over Web Service,
-Exfiltration,Scheduled Transfer,
-Exfiltration,Transfer Data to Cloud Account,
-Impact,Account Access Removal,
-Impact,Data Destruction,
-Impact,Data Encrypted for Impact,
-Impact,Data Manipulation,
-Impact,Defacement,
-Impact,Disk Wipe,
-Impact,Endpoint Denial of Service,
-Impact,Financial Theft,
-Impact,Firmware Corruption,
-Impact,Inhibit System Recovery,
-Impact,Network Denial of Service,
-Impact,Resource Hijacking,
-Impact,Service Stop,
-Impact,System Shutdown/Reboot,
+Discovery,Account Discovery,Information Disclosure
+Discovery,Application Window Discovery,Information Disclosure
+Discovery,Browser Information Discovery,Information Disclosure
+Discovery,Cloud Infrastructure Discovery,Information Disclosure
+Discovery,Cloud Service Dashboard,Information Disclosure
+Discovery,Cloud Service Discovery,Information Disclosure
+Discovery,Cloud Storage Object Discovery,Information Disclosure
+Discovery,Container and Resource Discovery,Information Disclosure
+Discovery,Debugger Evasion,Tampering
+Discovery,Device Driver Discovery,Information Disclosure
+Discovery,Domain Trust Discovery,Information Disclosure
+Discovery,File and Directory Discovery,Information Disclosure
+Discovery,Group Policy Discovery,Information Disclosure
+Discovery,Log Enumeration,Information Disclosure
+Discovery,Network Service Discovery,Information Disclosure
+Discovery,Network Share Discovery,Information Disclosure
+Discovery,Network Sniffing,Information Disclosure
+Discovery,Password Policy Discovery,Information Disclosure
+Discovery,Peripheral Device Discovery,Information Disclosure
+Discovery,Permission Groups Discovery,Information Disclosure
+Discovery,Process Discovery,Information Disclosure
+Discovery,Query Registry,Information Disclosure
+Discovery,Remote System Discovery,Information Disclosure
+Discovery,Software Discovery,Information Disclosure
+Discovery,System Information Discovery,Information Disclosure
+Discovery,System Location Discovery,Information Disclosure
+Discovery,System Network Configuration Discovery,Information Disclosure
+Discovery,System Network Connections Discovery,Information Disclosure
+Discovery,System Owner/User Discovery,Information Disclosure
+Discovery,System Service Discovery,Information Disclosure
+Discovery,System Time Discovery,Information Disclosure
+Discovery,Virtualization/Sandbox Evasion,Tampering
+Lateral Movement,Exploitation of Remote Services,Elevation of Privilege
+Lateral Movement,Internal Spearphishing,Spoofing
+Lateral Movement,Lateral Tool Transfer,Tampering
+Lateral Movement,Remote Service Session Hijacking,Tampering
+Lateral Movement,Remote Services,Elevation of Privilege
+Lateral Movement,Replication Through Removable Media,Tampering
+Lateral Movement,Software Deployment Tools,Elevation of Privilege
+Lateral Movement,Taint Shared Content,Tampering
+Lateral Movement,Use Alternate Authentication Material,Elevation of Privilege
+Collection,Adversary-in-the-Middle,Tampering
+Collection,Archive Collected Data,Tampering
+Collection,Audio Capture,Information Disclosure
+Collection,Automated Collection,Information Disclosure
+Collection,Browser Session Hijacking,Tampering
+Collection,Clipboard Data,Information Disclosure
+Collection,Data from Cloud Storage,Information Disclosure
+Collection,Data from Configuration Repository,Information Disclosure
+Collection,Data from Information Repositories,Information Disclosure
+Collection,Data from Local System,Information Disclosure
+Collection,Data from Network Shared Drive,Information Disclosure
+Collection,Data from Removable Media,Information Disclosure
+Collection,Data Staged,Tampering
+Collection,Email Collection,Information Disclosure
+Collection,Input Capture,Spoofing
+Collection,Screen Capture,Information Disclosure
+Collection,Video Capture,Information Disclosure
+Command and Control,Application Layer Protocol,Tampering
+Command and Control,Communication Through Removable Media,Tampering
+Command and Control,Content Injection,Tampering
+Command and Control,Data Encoding,Tampering
+Command and Control,Data Obfuscation,Tampering
+Command and Control,Dynamic Resolution,Tampering
+Command and Control,Encrypted Channel,Tampering
+Command and Control,Fallback Channels,Tampering
+Command and Control,Hide Infrastructure,Tampering
+Command and Control,Ingress Tool Transfer,Tampering
+Command and Control,Multi-Stage Channels,Tampering
+Command and Control,Non-Application Layer Protocol,Tampering
+Command and Control,Non-Standard Port,Tampering
+Command and Control,Protocol Tunneling,Tampering
+Command and Control,Proxy,Tampering
+Command and Control,Remote Access Software,Tampering
+Command and Control,Traffic Signaling,Tampering
+Command and Control,Web Service,Tampering
+Exfiltration,Automated Exfiltration,Information Disclosure
+Exfiltration,Data Transfer Size Limits,Information Disclosure
+Exfiltration,Exfiltration Over Alternative Protocol,Information Disclosure
+Exfiltration,Exfiltration Over C2 Channel,Information Disclosure
+Exfiltration,Exfiltration Over Other Network Medium,Information Disclosure
+Exfiltration,Exfiltration Over Physical Medium,Information Disclosure
+Exfiltration,Exfiltration Over Web Service,Information Disclosure
+Exfiltration,Scheduled Transfer,Information Disclosure
+Exfiltration,Transfer Data to Cloud Account,Information Disclosure
+Impact,Account Access Removal,Denial of Service
+Impact,Data Destruction,Denial of Service
+Impact,Data Encrypted for Impact,Denial of Service
+Impact,Data Manipulation,Tampering
+Impact,Defacement,Tampering
+Impact,Disk Wipe,Denial of Service
+Impact,Endpoint Denial of Service,Denial of Service
+Impact,Financial Theft,Denial of Service
+Impact,Firmware Corruption,Denial of Service
+Impact,Inhibit System Recovery,Denial of Service
+Impact,Network Denial of Service,Denial of Service
+Impact,Resource Hijacking,Denial of Service
+Impact,Service Stop,Denial of Service
+Impact,System Shutdown/Reboot,Denial of Service
