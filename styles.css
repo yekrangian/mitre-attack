@@ -35,15 +35,112 @@ header {
     font-size: 1.1rem;
 }
 
-.logo input {
+.logo input, .stride-search {
     padding: 6px 8px;
     border: 1px solid #ccc;
     border-radius: 2px;
     font-size: 0.875rem;
-    width: 220px;
-    margin-left: 8px;
     vertical-align: middle;
     line-height: 1.4;
+    width: 300px;
+    background-color: white;
+}
+
+.logo input {
+    margin-left: 8px;
+    margin-right: 20px;
+}
+
+.stride-label {
+    margin-right: 8px;
+}
+
+.stride-search {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    padding: 4px;
+    min-height: 34px;
+    position: relative;
+}
+
+.stride-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.stride-search input {
+    border: none;
+    outline: none;
+    padding: 2px;
+    flex: 1;
+    min-width: 120px;
+    font-size: 0.875rem;
+}
+
+/* Hide placeholder when there are tags or when input is focused */
+.stride-search input::placeholder {
+    color: #999;
+    transition: opacity 0.2s ease;
+}
+
+.stride-search:has(.stride-tag) input::placeholder,
+.stride-search input:focus::placeholder {
+    opacity: 0;
+}
+
+.stride-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    font-weight: 500;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.stride-tag[data-category="Spoofing"] {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.stride-tag[data-category="Tampering"] {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.stride-tag[data-category="Repudiation"] {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.stride-tag[data-category="Information Disclosure"] {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.stride-tag[data-category="Denial of Service"] {
+    background-color: #fbe9e7;
+    color: #c62828;
+}
+
+.stride-tag[data-category="Elevation of Privilege"] {
+    background-color: #e8eaf6;
+    color: #283593;
+}
+
+/* Only show 'x' on tags in the search box */
+.stride-search .stride-tag::after {
+    content: "×";
+    margin-left: 4px;
+    font-size: 1.2em;
+}
+
+.stride-tag:hover {
+    opacity: 0.8;
 }
 
 /* Remove unused styles */

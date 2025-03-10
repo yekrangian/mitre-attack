@@ -100,32 +100,93 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Add search functionality
-document.querySelector('.logo input').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase().trim();
-    const techniques = document.querySelectorAll('.technique');
-    
-    techniques.forEach(technique => {
-        const name = technique.querySelector('.technique-name').textContent.toLowerCase();
-        const strideTag = technique.querySelector('.stride-tag');
-        const stride = strideTag ? strideTag.textContent.toLowerCase() : '';
-        
-        if (name.includes(searchTerm) || stride.includes(searchTerm)) {
-            technique.style.display = '';
-            technique.style.opacity = '1';
-        } else {
-            technique.style.display = 'none';
-            technique.style.opacity = '0';
+const STRIDE_CATEGORIES = [
+    'Spoofing',
+    'Tampering',
+    'Repudiation',
+    'Information Disclosure',
+    'Denial of Service',
+    'Elevation of Privilege'
+];
+
+function initializeStrideSearch() {
+    const strideInput = document.getElementById('strideFilter');
+    const strideTagsContainer = document.querySelector('.stride-tags');
+    const selectedTags = new Set();
+
+    function addTag(category) {
+        if (!selectedTags.has(category)) {
+            const tag = document.createElement('div');
+            tag.className = 'stride-tag';
+            tag.setAttribute('data-category', category);
+            tag.textContent = category;
+            tag.addEventListener('click', () => {
+                tag.remove();
+                selectedTags.delete(category);
+                filterTechniques();
+            });
+            strideTagsContainer.appendChild(tag);
+            selectedTags.add(category);
+        }
+        strideInput.value = '';
+    }
+
+    strideInput.addEventListener('input', (e) => {
+        const value = e.target.value.trim();
+        const match = STRIDE_CATEGORIES.find(cat => 
+            cat.toLowerCase().startsWith(value.toLowerCase())
+        );
+        if (value && match && e.inputType !== 'deleteContentBackward') {
+            addTag(match);
+            filterTechniques();
         }
     });
 
+    strideInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !strideInput.value) {
+            const tags = strideTagsContainer.querySelectorAll('.stride-tag');
+            if (tags.length) {
+                const lastTag = tags[tags.length - 1];
+                selectedTags.delete(lastTag.getAttribute('data-category'));
+                lastTag.remove();
+                filterTechniques();
+            }
+        }
+    });
+}
+
+// Update the filter function to work with tags
+function filterTechniques() {
+    const searchTerm = document.querySelector('.logo input').value.toLowerCase().trim();
+    const selectedStrides = Array.from(document.querySelectorAll('.stride-tags .stride-tag'))
+        .map(tag => tag.getAttribute('data-category'));
+    
+    document.querySelectorAll('.technique').forEach(technique => {
+        const techniqueName = technique.querySelector('.technique-name').textContent.toLowerCase();
+        const techniqueStride = technique.querySelector('.stride-tag')?.dataset.category || '';
+        
+        const matchesSearch = !searchTerm || techniqueName.includes(searchTerm);
+        const matchesStride = selectedStrides.length === 0 || selectedStrides.includes(techniqueStride);
+        
+        technique.style.display = matchesSearch && matchesStride ? 'flex' : 'none';
+        technique.style.opacity = matchesSearch && matchesStride ? '1' : '0';
+    });
+    
     // Update tactic counts
     document.querySelectorAll('.tactic-column').forEach(column => {
-        const visibleTechniques = column.querySelectorAll('.technique[style="display: "]').length;
-        const countElement = column.querySelector('.tactic-count');
-        countElement.textContent = `${visibleTechniques} techniques`;
+        const visibleTechniques = column.querySelectorAll('.technique[style*="display: flex"]').length;
+        column.querySelector('.tactic-count').textContent = `${visibleTechniques} techniques`;
     });
+}
+
+// Initialize the STRIDE search when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    createMatrix();
+    initializeStrideSearch();
 });
+
+// Update event listeners
+document.querySelector('.logo input').addEventListener('input', filterTechniques);
 
 // Add transition for smooth filtering
 const style = document.createElement('style');
