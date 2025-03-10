@@ -12,7 +12,7 @@ async function loadMitreData() {
         const tacticsMap = new Map();
         
         dataRows.forEach(row => {
-            const [tactic, techniqueName, stride] = row.map(cell => cell.trim());
+            const [tactic, techniqueName, stride, cia] = row.map(cell => cell.trim());
             
             if (!tacticsMap.has(tactic)) {
                 tacticsMap.set(tactic, {
@@ -26,7 +26,8 @@ async function loadMitreData() {
             tacticData.techniques.push({
                 id: `T${(tacticData.count + 1).toString().padStart(4, '0')}`,
                 name: techniqueName,
-                stride: stride || ''
+                stride: stride || '',
+                cia: cia || ''
             });
             tacticData.count++;
         });
@@ -77,7 +78,14 @@ async function createMatrix() {
             techniqueElement.innerHTML = `
                 <div class="technique-content">
                     <div class="technique-name">${technique.name}</div>
-                    ${technique.stride ? `<div class="stride-tag" data-category="${technique.stride}">${technique.stride}</div>` : ''}
+                    <div class="tags-container">
+                        <div class="tags-row">
+                            ${technique.stride ? `<div class="stride-tag" data-category="${technique.stride}">${technique.stride}</div>` : ''}
+                        </div>
+                        <div class="tags-row">
+                            ${technique.cia ? `<div class="cia-tag" data-category="${technique.cia}">${technique.cia}</div>` : ''}
+                        </div>
+                    </div>
                 </div>
             `;
             techniquesList.appendChild(techniqueElement);
@@ -155,21 +163,25 @@ function initializeStrideSearch() {
     });
 }
 
-// Update the filter function to work with tags
+// Update the filter function to work with both STRIDE and CIA tags
 function filterTechniques() {
     const searchTerm = document.querySelector('.logo input').value.toLowerCase().trim();
     const selectedStrides = Array.from(document.querySelectorAll('.stride-tags .stride-tag'))
+        .map(tag => tag.getAttribute('data-category'));
+    const selectedCias = Array.from(document.querySelectorAll('.cia-tags .cia-tag'))
         .map(tag => tag.getAttribute('data-category'));
     
     document.querySelectorAll('.technique').forEach(technique => {
         const techniqueName = technique.querySelector('.technique-name').textContent.toLowerCase();
         const techniqueStride = technique.querySelector('.stride-tag')?.dataset.category || '';
+        const techniqueCia = technique.querySelector('.cia-tag')?.dataset.category || '';
         
         const matchesSearch = !searchTerm || techniqueName.includes(searchTerm);
         const matchesStride = selectedStrides.length === 0 || selectedStrides.includes(techniqueStride);
+        const matchesCia = selectedCias.length === 0 || selectedCias.includes(techniqueCia);
         
-        technique.style.display = matchesSearch && matchesStride ? 'flex' : 'none';
-        technique.style.opacity = matchesSearch && matchesStride ? '1' : '0';
+        technique.style.display = matchesSearch && matchesStride && matchesCia ? 'flex' : 'none';
+        technique.style.opacity = matchesSearch && matchesStride && matchesCia ? '1' : '0';
     });
     
     // Update tactic counts

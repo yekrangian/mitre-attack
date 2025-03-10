@@ -339,6 +339,8 @@ h1 {
 
 .technique-content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .technique-name {
@@ -346,7 +348,7 @@ h1 {
     line-height: 1.4;
     color: #444;
     word-break: break-word;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .stride-tag {
@@ -447,4 +449,40 @@ h1 {
     font-size: 0.8rem;
     z-index: 1;
     margin-top: 1rem;
+}
+
+.tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+}
+
+.tags-row {
+    display: flex;
+    gap: 4px;
+}
+
+.stride-tag, .cia-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    font-weight: 500;
+}
+
+/* CIA Tag Colors */
+.cia-tag[data-category="Confidentiality"] {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.cia-tag[data-category="Integrity"] {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.cia-tag[data-category="Availability"] {
+    background-color: #e8f5e9;
+    color: #2e7d32;
 } 
