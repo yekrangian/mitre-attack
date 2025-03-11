@@ -117,55 +117,14 @@ const STRIDE_CATEGORIES = [
     'Elevation of Privilege'
 ];
 
-function initializeStrideSearch() {
-    const strideInput = document.getElementById('strideFilter');
-    const strideTagsContainer = document.querySelector('.stride-tags');
-    const selectedTags = new Set();
+const CIA_CATEGORIES = [
+    'Confidentiality',
+    'Integrity',
+    'Availability'
+];
 
-    function addTag(category) {
-        if (!selectedTags.has(category)) {
-            const tag = document.createElement('div');
-            tag.className = 'stride-tag';
-            tag.setAttribute('data-category', category);
-            tag.textContent = category;
-            tag.addEventListener('click', () => {
-                tag.remove();
-                selectedTags.delete(category);
-                filterTechniques();
-            });
-            strideTagsContainer.appendChild(tag);
-            selectedTags.add(category);
-        }
-        strideInput.value = '';
-    }
-
-    strideInput.addEventListener('input', (e) => {
-        const value = e.target.value.trim();
-        const match = STRIDE_CATEGORIES.find(cat => 
-            cat.toLowerCase().startsWith(value.toLowerCase())
-        );
-        if (value && match && e.inputType !== 'deleteContentBackward') {
-            addTag(match);
-            filterTechniques();
-        }
-    });
-
-    strideInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && !strideInput.value) {
-            const tags = strideTagsContainer.querySelectorAll('.stride-tag');
-            if (tags.length) {
-                const lastTag = tags[tags.length - 1];
-                selectedTags.delete(lastTag.getAttribute('data-category'));
-                lastTag.remove();
-                filterTechniques();
-            }
-        }
-    });
-}
-
-// Update the filter function to work with both STRIDE and CIA tags
 function filterTechniques() {
-    const searchTerm = document.querySelector('.logo input').value.toLowerCase().trim();
+    const searchTerm = document.querySelector('.search-input').value.toLowerCase().trim();
     const selectedStrides = Array.from(document.querySelectorAll('.stride-tags .stride-tag'))
         .map(tag => tag.getAttribute('data-category'));
     const selectedCias = Array.from(document.querySelectorAll('.cia-tags .cia-tag'))
@@ -191,14 +150,15 @@ function filterTechniques() {
     });
 }
 
-// Initialize the STRIDE search when the page loads
+// Initialize both searches when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     createMatrix();
     initializeStrideSearch();
+    initializeCiaSearch();
+    
+    // Add event listener for main search
+    document.querySelector('.search-input').addEventListener('input', filterTechniques);
 });
-
-// Update event listeners
-document.querySelector('.logo input').addEventListener('input', filterTechniques);
 
 // Add transition for smooth filtering
 const style = document.createElement('style');
@@ -208,6 +168,110 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Initialize STRIDE search
+function initializeStrideSearch() {
+    const strideInput = document.getElementById('strideFilter');
+    const strideTagsContainer = document.querySelector('.stride-tags');
+    const strideSearch = document.querySelector('.stride-search');
+    const selectedTags = new Set();
+
+    strideSearch.addEventListener('click', () => {
+        strideInput.focus();
+    });
+
+    function addStrideTag(category) {
+        if (!selectedTags.has(category)) {
+            const tag = document.createElement('div');
+            tag.className = 'stride-tag';
+            tag.setAttribute('data-category', category);
+            tag.textContent = category;
+            tag.addEventListener('click', () => {
+                tag.remove();
+                selectedTags.delete(category);
+                filterTechniques();
+            });
+            strideTagsContainer.appendChild(tag);
+            selectedTags.add(category);
+        }
+        strideInput.value = '';
+    }
+
+    strideInput.addEventListener('input', (e) => {
+        const value = e.target.value.trim();
+        const match = STRIDE_CATEGORIES.find(cat => 
+            cat.toLowerCase().startsWith(value.toLowerCase())
+        );
+        if (value && match && e.inputType !== 'deleteContentBackward') {
+            addStrideTag(match);
+            filterTechniques();
+        }
+    });
+
+    strideInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !strideInput.value) {
+            const tags = strideTagsContainer.querySelectorAll('.stride-tag');
+            if (tags.length) {
+                const lastTag = tags[tags.length - 1];
+                selectedTags.delete(lastTag.getAttribute('data-category'));
+                lastTag.remove();
+                filterTechniques();
+            }
+        }
+    });
+}
+
+// Initialize CIA search
+function initializeCiaSearch() {
+    const ciaInput = document.getElementById('ciaFilter');
+    const ciaTagsContainer = document.querySelector('.cia-tags');
+    const ciaSearch = document.querySelector('.cia-search');
+    const selectedTags = new Set();
+
+    ciaSearch.addEventListener('click', () => {
+        ciaInput.focus();
+    });
+
+    function addCiaTag(category) {
+        if (!selectedTags.has(category)) {
+            const tag = document.createElement('div');
+            tag.className = 'cia-tag';
+            tag.setAttribute('data-category', category);
+            tag.textContent = category;
+            tag.addEventListener('click', () => {
+                tag.remove();
+                selectedTags.delete(category);
+                filterTechniques();
+            });
+            ciaTagsContainer.appendChild(tag);
+            selectedTags.add(category);
+        }
+        ciaInput.value = '';
+    }
+
+    ciaInput.addEventListener('input', (e) => {
+        const value = e.target.value.trim();
+        const match = CIA_CATEGORIES.find(cat => 
+            cat.toLowerCase().startsWith(value.toLowerCase())
+        );
+        if (value && match && e.inputType !== 'deleteContentBackward') {
+            addCiaTag(match);
+            filterTechniques();
+        }
+    });
+
+    ciaInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !ciaInput.value) {
+            const tags = ciaTagsContainer.querySelectorAll('.cia-tag');
+            if (tags.length) {
+                const lastTag = tags[tags.length - 1];
+                selectedTags.delete(lastTag.getAttribute('data-category'));
+                lastTag.remove();
+                filterTechniques();
+            }
+        }
+    });
+}
 
 // DOM Elements
 const matrixContainer = document.querySelector('.matrix-container');

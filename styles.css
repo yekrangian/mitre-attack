@@ -29,66 +29,97 @@ header {
     width: 100%;
 }
 
-.logo {
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-text {
     color: white;
     font-weight: bold;
     font-size: 1.1rem;
+    white-space: nowrap;
 }
 
-.logo input, .stride-search {
-    padding: 6px 8px;
+.search-input {
+    padding: 6px 4px;
     border: 1px solid #ccc;
     border-radius: 2px;
     font-size: 0.875rem;
-    vertical-align: middle;
-    line-height: 1.4;
     width: 300px;
     background-color: white;
 }
 
-.logo input {
-    margin-left: 8px;
-    margin-right: 20px;
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.stride-label {
-    margin-right: 8px;
+.stride-label, .cia-label {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    white-space: nowrap;
 }
 
-.stride-search {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 4px;
+.stride-search, .cia-search {
+    display: flex;
     align-items: center;
     padding: 4px;
-    min-height: 34px;
-    position: relative;
+    height: 34px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: text;
 }
 
-.stride-tags {
+.stride-tags, .cia-tags {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+    min-width: 0;
+    cursor: text;
 }
 
-.stride-search input {
+.stride-tags::-webkit-scrollbar, .cia-tags::-webkit-scrollbar {
+    display: none;
+}
+
+.stride-search input, .cia-search input {
     border: none;
     outline: none;
     padding: 2px;
-    flex: 1;
-    min-width: 120px;
+    width: 80px;
+    min-width: 80px;
     font-size: 0.875rem;
+    background: transparent;
 }
 
 /* Hide placeholder when there are tags or when input is focused */
-.stride-search input::placeholder {
+.stride-search input::placeholder,
+.cia-search input::placeholder {
     color: #999;
     transition: opacity 0.2s ease;
 }
 
 .stride-search:has(.stride-tag) input::placeholder,
-.stride-search input:focus::placeholder {
+.stride-search input:focus::placeholder,
+.cia-search:has(.cia-tag) input::placeholder,
+.cia-search input:focus::placeholder {
     opacity: 0;
+}
+
+.cia-label {
+    margin-left: 20px;
 }
 
 .stride-tag {
