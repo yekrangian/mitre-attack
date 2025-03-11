@@ -380,6 +380,10 @@ function createTacticHeader(tactic) {
     const header = document.createElement('div');
     header.className = 'tactic-header';
     
+    // Create STRIDE chart container
+    const strideChartContainer = document.createElement('div');
+    strideChartContainer.className = 'stride-chart-container';
+    
     // Create STRIDE chart
     const strideChart = document.createElement('div');
     strideChart.className = 'stride-chart';
@@ -390,7 +394,7 @@ function createTacticHeader(tactic) {
         strideCounts[category] = tactic.techniques.filter(t => t.stride === category).length;
     });
     
-    const maxCount = Math.max(...Object.values(strideCounts));
+    const maxStrideCount = Math.max(...Object.values(strideCounts));
     
     // Create bars for each STRIDE category
     STRIDE_CATEGORIES.forEach(category => {
@@ -400,12 +404,47 @@ function createTacticHeader(tactic) {
         
         const fill = document.createElement('div');
         fill.className = 'stride-bar-fill';
-        const percentage = maxCount > 0 ? (strideCounts[category] / maxCount) * 100 : 0;
+        const percentage = maxStrideCount > 0 ? (strideCounts[category] / maxStrideCount) * 100 : 0;
         fill.style.height = `${percentage}%`;
         
         bar.appendChild(fill);
         strideChart.appendChild(bar);
     });
+    
+    strideChartContainer.appendChild(strideChart);
+    
+    // Create CIA chart container
+    const ciaChartContainer = document.createElement('div');
+    ciaChartContainer.className = 'cia-chart-container';
+    
+    // Create CIA chart
+    const ciaChart = document.createElement('div');
+    ciaChart.className = 'cia-chart';
+    
+    // Calculate CIA distribution
+    const ciaCounts = {};
+    CIA_CATEGORIES.forEach(category => {
+        ciaCounts[category] = tactic.techniques.filter(t => t.cia === category).length;
+    });
+    
+    const maxCiaCount = Math.max(...Object.values(ciaCounts));
+    
+    // Create bars for each CIA category
+    CIA_CATEGORIES.forEach(category => {
+        const bar = document.createElement('div');
+        bar.className = 'cia-bar';
+        bar.setAttribute('data-category', category);
+        
+        const fill = document.createElement('div');
+        fill.className = 'cia-bar-fill';
+        const percentage = maxCiaCount > 0 ? (ciaCounts[category] / maxCiaCount) * 100 : 0;
+        fill.style.height = `${percentage}%`;
+        
+        bar.appendChild(fill);
+        ciaChart.appendChild(bar);
+    });
+    
+    ciaChartContainer.appendChild(ciaChart);
     
     // Add name and count
     const name = document.createElement('div');
@@ -416,7 +455,8 @@ function createTacticHeader(tactic) {
     count.className = 'tactic-count';
     count.textContent = tactic.count;
     
-    header.appendChild(strideChart);
+    header.appendChild(strideChartContainer);
+    header.appendChild(ciaChartContainer);
     header.appendChild(name);
     header.appendChild(count);
     

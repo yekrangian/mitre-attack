@@ -42,7 +42,7 @@ header {
     white-space: nowrap;
 }
 
-.search-input, .stride-search input, .cia-search input {
+.search-input {
     padding: 6px 4px;
     border: 1px solid #ccc;
     border-radius: 2px;
@@ -52,16 +52,34 @@ header {
     outline: none;
 }
 
-.stride-search, .cia-search {
-    width: 300px;
-}
-
-.stride-search input, .cia-search input {
+.stride-search input {
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #dee2e6;
     border-radius: 2px;
     padding: 6px 4px;
     height: 34px;
+    background-color: #fff0f3;
+}
+
+.cia-search input {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 2px;
+    padding: 6px 4px;
+    height: 34px;
+    background-color: #f8f0ff;
+}
+
+.stride-search input:focus {
+    outline: none;
+    border-color: #ced4da;
+    background-color: #fff0f3;
+}
+
+.cia-search input:focus {
+    outline: none;
+    border-color: #ced4da;
+    background-color: #f8f0ff;
 }
 
 /* Hide the tags containers initially */
@@ -337,25 +355,35 @@ h1 {
     text-align: center;
     background-color: white;
     border-bottom: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stride-chart-container {
+    background-color: #fff0f3;
+    border: 1px solid #dee2e6;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 0;
+    margin: 0 4px;
 }
 
 .stride-chart {
     width: 100%;
-    height: 60px;
+    height: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 2px;
-    margin-bottom: 8px;
-    padding: 0 4px;
+    gap: 1px;
 }
 
 .stride-bar {
     flex: 1;
     height: 100%;
     background-color: #f0f0f0;
-    border-radius: 2px;
+    border-radius: 0;
     overflow: hidden;
     position: relative;
 }
@@ -390,6 +418,13 @@ h1 {
 
 .stride-bar[data-category="Elevation of Privilege"] .stride-bar-fill {
     background-color: #283593;
+}
+
+.stride-chart-title {
+    font-size: 0.7em;
+    color: #666;
+    text-align: center;
+    margin-bottom: 4px;
 }
 
 .tactic-name {
@@ -572,4 +607,53 @@ h1 {
 .cia-tag[data-category="Availability"] {
     background-color: #e8f5e9;
     color: #2e7d32;
+}
+
+.cia-chart-container {
+    background-color: #f8f0ff;
+    border: 1px solid #dee2e6;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 0;
+    margin: 0 4px;
+}
+
+.cia-chart {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1px;
+}
+
+.cia-bar {
+    flex: 1;
+    height: 100%;
+    background-color: #f0f0f0;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.cia-bar-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: height 0.3s ease;
+}
+
+/* CIA Bar Colors */
+.cia-bar[data-category="Confidentiality"] .cia-bar-fill {
+    background-color: #1565c0;
+}
+
+.cia-bar[data-category="Integrity"] .cia-bar-fill {
+    background-color: #7b1fa2;
+}
+
+.cia-bar[data-category="Availability"] .cia-bar-fill {
+    background-color: #2e7d32;
 } 
