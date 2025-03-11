@@ -82,9 +82,9 @@ Defense Evasion,Build Image on Host,Tampering,Integrity
 Defense Evasion,Debugger Evasion,Repudiation,Integrity
 Defense Evasion,Deobfuscate/Decode Files or Information,Tampering,Integrity
 Defense Evasion,Deploy Container,Elevation of Privilege,Confidentiality
-Defense Evasion,Direct Volume Access,Tampering,
-Defense Evasion,Domain or Tenant Policy Modification,Tampering,
-Defense Evasion,Execution Guardrails,Tampering,
+Defense Evasion,Direct Volume Access,Elevation of Privilege,Integrity
+Defense Evasion,Domain or Tenant Policy Modification,Tampering,Integrity
+Defense Evasion,Execution Guardrails,Repudiation,Integrity
 Defense Evasion,Exploitation for Defense Evasion,Tampering,
 Defense Evasion,File and Directory Permissions Modification,Tampering,
 Defense Evasion,Hide Artifacts,Tampering,

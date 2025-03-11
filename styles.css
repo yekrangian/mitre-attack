@@ -1,3 +1,238 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.logo-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+    color: white;
+}
+
+/* Search and Filter Inputs */
+.search-input, 
+#strideFilter, 
+#ciaFilter {
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    font-size: 0.875rem;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+.search-input::placeholder,
+#strideFilter::placeholder,
+#ciaFilter::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input {
+    width: 200px;
+}
+
+#strideFilter,
+#ciaFilter {
+    width: 150px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stride-label, 
+.cia-label {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* View Toggle Links */
+.view-matrix {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.view-matrix:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Network View Specific Styles */
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.graph-container {
+    flex: 1;
+    background-color: white;
+    position: relative;
+    width: 100%;
+    min-height: 0;
+}
+
+/* SVG Styles */
+#network {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.zoom-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.zoom-controls button:hover {
+    background-color: #f8f9fa;
+    color: #333;
+    transform: translateY(-1px);
+}
+
+.zoom-controls .separator {
+    height: 1px;
+    background-color: #dee2e6;
+    margin: 4px 0;
+}
+
+/* Network Graph Styles */
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    stroke: #fff;
+    stroke-width: 2px;
+}
+
+.node text {
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    stroke-width: 1px;
+}
+
+/* Legend Styles */
+.legend {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
 :root {
     --primary-color: #c83a2e;
     --background-color: #f5f5f5;
@@ -67,91 +302,6 @@
     transform: scale(1);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.4;
-}
-
-/* Header Styles */
-header {
-    background-color: var(--primary-color);
-    padding: 0.75rem 10px;
-}
-
-.header-content {
-    width: 100%;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo-text {
-    color: white;
-    font-weight: bold;
-    font-size: 1.1rem;
-    white-space: nowrap;
-}
-
-.search-input {
-    padding: 6px 4px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    font-size: 0.875rem;
-    width: 150px;
-    height: 34px;
-    background-color: white;
-    outline: none;
-}
-
-.stride-search {
-    width: 150px;
-}
-
-.cia-search {
-    width: 150px;
-}
-
-.stride-search input {
-    width: 100%;
-    border: 1px solid #dee2e6;
-    border-radius: 2px;
-    padding: 6px 4px;
-    height: 34px;
-    background-color: white;
-}
-
-.cia-search input {
-    width: 100%;
-    border: 1px solid #dee2e6;
-    border-radius: 2px;
-    padding: 6px 4px;
-    height: 34px;
-    background-color: white;
-}
-
-.stride-search input:focus {
-    outline: none;
-    border-color: #ced4da;
-    background-color: white;
-}
-
-.cia-search input:focus {
-    outline: none;
-    border-color: #ced4da;
-    background-color: white;
-}
-
 /* Hide the tags containers initially */
 .stride-tags, .cia-tags {
     display: none;
@@ -164,53 +314,6 @@ header {
     height: auto;
     border: none;
     background: none;
-}
-
-.filter-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.stride-label, .cia-label {
-    color: white;
-    font-weight: bold;
-    font-size: 1.1rem;
-    white-space: nowrap;
-}
-
-.stride-tags, .cia-tags {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    flex: 1;
-    min-width: 0;
-    cursor: text;
-}
-
-.stride-tags::-webkit-scrollbar, .cia-tags::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide placeholder when there are tags or when input is focused */
-.stride-search input::placeholder,
-.cia-search input::placeholder {
-    color: #999;
-    transition: opacity 0.2s ease;
-}
-
-.stride-search:has(.stride-tag) input::placeholder,
-.stride-search input:focus::placeholder,
-.cia-search:has(.cia-tag) input::placeholder,
-.cia-search input:focus::placeholder {
-    opacity: 0;
-}
-
-.cia-label {
-    margin-left: 20px;
 }
 
 .stride-tag {
@@ -728,31 +831,44 @@ h1 {
     background-color: #558b2f;
 }
 
-/* Network View Link Styles */
-.view-network {
+/* Ribbon Styles */
+.ribbon {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ribbon .view-matrix,
+.ribbon .view-network {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background-color: white;
+    border: 1px solid #dee2e6;
     border-radius: 4px;
-    color: white;
+    color: #666;
     text-decoration: none;
     font-size: 0.9rem;
     transition: all 0.2s ease;
-    margin-left: auto;
+    margin-left: 0;
 }
 
-.view-network:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
+.ribbon .view-matrix:hover,
+.ribbon .view-network:hover {
+    background-color: #f8f9fa;
+    color: #333;
 }
 
-.view-network svg {
+.ribbon .view-matrix svg,
+.ribbon .view-network svg {
     width: 16px;
     height: 16px;
 }
 
-.view-network span {
-    font-weight: 500;
+/* Remove old view-network styles from header */
+.view-network {
+    margin-left: auto;
 } 
