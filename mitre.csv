@@ -48,77 +48,77 @@ Persistence,Boot or Logon Initialization Scripts,Elevation of Privilege,Integrit
 Persistence,Browser Extensions,Elevation of Privilege,Confidentiality
 Persistence,Compromise Host Software Binary,Tampering,Integrity
 Persistence,Create Account,Elevation of Privilege,Integrity
-Persistence,Create or Modify System Process,Elevation of Privilege,
-Persistence,Event Triggered Execution,Elevation of Privilege,
-Persistence,External Remote Services,Elevation of Privilege,
-Persistence,Hijack Execution Flow,Tampering,
-Persistence,Implant Internal Image,Tampering,
-Persistence,Modify Authentication Process,Tampering,
-Persistence,Office Application Startup,Elevation of Privilege,
-Persistence,Power Settings,Denial of Service,
-Persistence,Pre-OS Boot,Elevation of Privilege,
-Persistence,Scheduled Task/Job,Elevation of Privilege,
-Persistence,Server Software Component,Tampering,
-Persistence,Traffic Signaling,Tampering,
-Persistence,Valid Accounts,Elevation of Privilege,
-Privilege Escalation,Abuse Elevation Control Mechanism,Elevation of Privilege,
-Privilege Escalation,Access Token Manipulation,Elevation of Privilege,
-Privilege Escalation,Account Manipulation,Elevation of Privilege,
-Privilege Escalation,Boot or Logon Autostart Execution,Elevation of Privilege,
-Privilege Escalation,Boot or Logon Initialization Scripts,Elevation of Privilege,
-Privilege Escalation,Create or Modify System Process,Elevation of Privilege,
-Privilege Escalation,Domain or Tenant Policy Modification,Tampering,
-Privilege Escalation,Escape to Host,Elevation of Privilege,
-Privilege Escalation,Event Triggered Execution,Elevation of Privilege,
-Privilege Escalation,Exploitation for Privilege Escalation,Elevation of Privilege,
-Privilege Escalation,Hijack Execution Flow,Tampering,
-Privilege Escalation,Process Injection,Tampering,
-Privilege Escalation,Scheduled Task/Job,Elevation of Privilege,
-Privilege Escalation,Valid Accounts,Elevation of Privilege,
-Defence Evasion,Abuse Elevation Control Mechanism,Elevation of Privilege,
-Defence Evasion,Access Token Manipulation,Elevation of Privilege,
-Defence Evasion,BITS Jobs,Elevation of Privilege,
-Defence Evasion,Build Image on Host,Tampering,
-Defence Evasion,Debugger Evasion,Tampering,
-Defence Evasion,Deobfuscate/Decode Files or Information,Tampering,
-Defence Evasion,Deploy Container,Elevation of Privilege,
-Defence Evasion,Direct Volume Access,Tampering,
-Defence Evasion,Domain or Tenant Policy Modification,Tampering,
-Defence Evasion,Execution Guardrails,Tampering,
-Defence Evasion,Exploitation for Defense Evasion,Tampering,
-Defence Evasion,File and Directory Permissions Modification,Tampering,
-Defence Evasion,Hide Artifacts,Tampering,
-Defence Evasion,Hijack Execution Flow,Tampering,
-Defence Evasion,Impair Defenses,Tampering,
-Defence Evasion,Impersonation,Spoofing,
-Defence Evasion,Indicator Removal,Tampering,
-Defence Evasion,Indirect Command Execution,Elevation of Privilege,
-Defence Evasion,Masquerading,Spoofing,
-Defence Evasion,Modify Authentication Process,Tampering,
-Defence Evasion,Modify Cloud Compute Infrastructure,Tampering,
-Defence Evasion,Modify Cloud Resource Hierarchy,Tampering,
-Defence Evasion,Modify Registry,Tampering,
-Defence Evasion,Modify System Image,Tampering,
-Defence Evasion,Network Boundary Bridging,Tampering,
-Defence Evasion,Obfuscated Files or Information,Tampering,
-Defence Evasion,Plist File Modification,Tampering,
-Defence Evasion,Pre-OS Boot,Elevation of Privilege,
-Defence Evasion,Process Injection,Tampering,
-Defence Evasion,Reflective Code Loading,Tampering,
-Defence Evasion,Rogue Domain Controller,Tampering,
-Defence Evasion,Rootkit,Tampering,
-Defence Evasion,Subvert Trust Controls,Tampering,
-Defence Evasion,System Binary Proxy Execution,Tampering,
-Defence Evasion,System Script Proxy Execution,Tampering,
-Defence Evasion,Template Injection,Tampering,
-Defence Evasion,Traffic Signaling,Tampering,
-Defence Evasion,Trusted Developer Utilities Proxy Execution,Tampering,
-Defence Evasion,Unused/Unsupported Cloud Regions,Tampering,
-Defence Evasion,Use Alternate Authentication Material,Elevation of Privilege,
-Defence Evasion,Valid Accounts,Elevation of Privilege,
-Defence Evasion,Virtualization/Sandbox Evasion,Tampering,
-Defence Evasion,Weaken Encryption,Tampering,
-Defence Evasion,XSL Script Processing,Tampering,
+Persistence,Create or Modify System Process,Elevation of Privilege,Integrity
+Persistence,Event Triggered Execution,Elevation of Privilege,Integrity
+Persistence,External Remote Services,Elevation of Privilege,Confidentiality
+Persistence,Hijack Execution Flow,Elevation of Privilege,Integrity
+Persistence,Implant Internal Image,Tampering,Integrity
+Persistence,Modify Authentication Process,Tampering,Integrity
+Persistence,Office Application Startup,Elevation of Privilege,Integrity
+Persistence,Power Settings,Denial of Service,Availability
+Persistence,Pre-OS Boot,Elevation of Privilege,Integrity
+Persistence,Scheduled Task/Job,Elevation of Privilege,Integrity
+Persistence,Server Software Component,Elevation of Privilege,Integrity
+Persistence,Traffic Signaling,Tampering,Integrity
+Persistence,Valid Accounts,Spoofing,Confidentiality
+Privilege Escalation,Abuse Elevation Control Mechanism,Elevation of Privilege,Integrity
+Privilege Escalation,Access Token Manipulation,Elevation of Privilege,Integrity
+Privilege Escalation,Account Manipulation,Elevation of Privilege,Integrity
+Privilege Escalation,Boot or Logon Autostart Execution,Elevation of Privilege,Integrity
+Privilege Escalation,Boot or Logon Initialization Scripts,Elevation of Privilege,Integrity
+Privilege Escalation,Create or Modify System Process,Elevation of Privilege,Integrity
+Privilege Escalation,Domain or Tenant Policy Modification,Tampering,Integrity
+Privilege Escalation,Escape to Host,Elevation of Privilege,Confidentiality
+Privilege Escalation,Event Triggered Execution,Elevation of Privilege,Integrity
+Privilege Escalation,Exploitation for Privilege Escalation,Elevation of Privilege,Integrity
+Privilege Escalation,Hijack Execution Flow,Elevation of Privilege,Integrity
+Privilege Escalation,Process Injection,Elevation of Privilege,Integrity
+Privilege Escalation,Scheduled Task/Job,Elevation of Privilege,Integrity
+Privilege Escalation,Valid Accounts,Spoofing,Confidentiality
+Defense Evasion,Abuse Elevation Control Mechanism,Elevation of Privilege,Integrity
+Defense Evasion,Access Token Manipulation,Elevation of Privilege,Integrity
+Defense Evasion,BITS Jobs,Elevation of Privilege,Integrity
+Defense Evasion,Build Image on Host,Tampering,Integrity
+Defense Evasion,Debugger Evasion,Repudiation,Integrity
+Defense Evasion,Deobfuscate/Decode Files or Information,Tampering,Integrity
+Defense Evasion,Deploy Container,Elevation of Privilege,Confidentiality
+Defense Evasion,Direct Volume Access,Tampering,
+Defense Evasion,Domain or Tenant Policy Modification,Tampering,
+Defense Evasion,Execution Guardrails,Tampering,
+Defense Evasion,Exploitation for Defense Evasion,Tampering,
+Defense Evasion,File and Directory Permissions Modification,Tampering,
+Defense Evasion,Hide Artifacts,Tampering,
+Defense Evasion,Hijack Execution Flow,Tampering,
+Defense Evasion,Impair Defenses,Tampering,
+Defense Evasion,Impersonation,Spoofing,
+Defense Evasion,Indicator Removal,Tampering,
+Defense Evasion,Indirect Command Execution,Elevation of Privilege,
+Defense Evasion,Masquerading,Spoofing,
+Defense Evasion,Modify Authentication Process,Tampering,
+Defense Evasion,Modify Cloud Compute Infrastructure,Tampering,
+Defense Evasion,Modify Cloud Resource Hierarchy,Tampering,
+Defense Evasion,Modify Registry,Tampering,
+Defense Evasion,Modify System Image,Tampering,
+Defense Evasion,Network Boundary Bridging,Tampering,
+Defense Evasion,Obfuscated Files or Information,Tampering,
+Defense Evasion,Plist File Modification,Tampering,
+Defense Evasion,Pre-OS Boot,Elevation of Privilege,
+Defense Evasion,Process Injection,Tampering,
+Defense Evasion,Reflective Code Loading,Tampering,
+Defense Evasion,Rogue Domain Controller,Tampering,
+Defense Evasion,Rootkit,Tampering,
+Defense Evasion,Subvert Trust Controls,Tampering,
+Defense Evasion,System Binary Proxy Execution,Tampering,
+Defense Evasion,System Script Proxy Execution,Tampering,
+Defense Evasion,Template Injection,Tampering,
+Defense Evasion,Traffic Signaling,Tampering,
+Defense Evasion,Trusted Developer Utilities Proxy Execution,Tampering,
+Defense Evasion,Unused/Unsupported Cloud Regions,Tampering,
+Defense Evasion,Use Alternate Authentication Material,Elevation of Privilege,
+Defense Evasion,Valid Accounts,Elevation of Privilege,
+Defense Evasion,Virtualization/Sandbox Evasion,Tampering,
+Defense Evasion,Weaken Encryption,Tampering,
+Defense Evasion,XSL Script Processing,Tampering,
 Credential Access,Adversary-in-the-Middle,Tampering,
 Credential Access,Brute Force,Elevation of Privilege,
 Credential Access,Credentials from Password Stores,Elevation of Privilege,
