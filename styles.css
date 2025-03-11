@@ -4,6 +4,67 @@
     --text-color: #333;
     --border-color: #ddd;
     --link-blue: #3b6b99;
+    --technique-bg: white;
+    --technique-border: #dee2e6;
+    --matrix-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+    --primary-color: #ff4d4d;
+    --background-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --border-color: #404040;
+    --link-blue: #64b5f6;
+    --technique-bg: #2d2d2d;
+    --technique-border: #404040;
+    --matrix-bg: #262626;
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: white;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+    position: absolute;
+    transition: transform 0.5s, opacity 0.3s;
+}
+
+.theme-toggle .sun-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.theme-toggle .moon-icon {
+    opacity: 0;
+    transform: scale(0);
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+    opacity: 0;
+    transform: scale(0);
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+    opacity: 1;
+    transform: scale(1);
 }
 
 * {
@@ -47,9 +108,18 @@ header {
     border: 1px solid #ccc;
     border-radius: 2px;
     font-size: 0.875rem;
-    width: 300px;
+    width: 150px;
+    height: 34px;
     background-color: white;
     outline: none;
+}
+
+.stride-search {
+    width: 150px;
+}
+
+.cia-search {
+    width: 150px;
 }
 
 .stride-search input {
@@ -58,7 +128,7 @@ header {
     border-radius: 2px;
     padding: 6px 4px;
     height: 34px;
-    background-color: #fff0f3;
+    background-color: white;
 }
 
 .cia-search input {
@@ -67,19 +137,19 @@ header {
     border-radius: 2px;
     padding: 6px 4px;
     height: 34px;
-    background-color: #f8f0ff;
+    background-color: white;
 }
 
 .stride-search input:focus {
     outline: none;
     border-color: #ced4da;
-    background-color: #fff0f3;
+    background-color: white;
 }
 
 .cia-search input:focus {
     outline: none;
     border-color: #ced4da;
-    background-color: #f8f0ff;
+    background-color: white;
 }
 
 /* Hide the tags containers initially */
@@ -331,11 +401,11 @@ h1 {
 .matrix-container {
     display: flex;
     overflow-x: auto;
-    background-color: #f8f9fa;
+    background-color: var(--matrix-bg);
     gap: 2px;
     padding: 2px;
     margin: 20px 10px;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     width: calc(100% - 20px);
 }
@@ -344,17 +414,17 @@ h1 {
     min-width: 160px;
     max-width: 160px;
     flex: 0 0 auto;
-    background-color: white;
+    background-color: var(--technique-bg);
     display: flex;
     flex-direction: column;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
 }
 
 .tactic-header {
     padding: 8px 6px;
     text-align: center;
-    background-color: white;
-    border-bottom: 1px solid #e9ecef;
+    background-color: var(--technique-bg);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -436,22 +506,23 @@ h1 {
 
 .tactic-count {
     font-size: 0.75em;
-    color: #6c757d;
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
 .techniques-list {
     display: flex;
     flex-direction: column;
     padding: 4px;
-    background-color: #f8f9fa;
+    background-color: var(--matrix-bg);
     gap: 4px;
 }
 
 .technique {
     min-height: 40px;
     padding: 8px;
-    background-color: white;
-    border: 1px solid #dee2e6;
+    background-color: var(--technique-bg);
+    border: 1px solid var(--technique-border);
     border-radius: 2px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     display: flex;
@@ -467,7 +538,7 @@ h1 {
 .technique-name {
     font-size: 0.75em;
     line-height: 1.4;
-    color: #444;
+    color: var(--text-color);
     word-break: break-word;
     margin-bottom: 2px;
 }
@@ -512,8 +583,8 @@ h1 {
 }
 
 .technique:hover {
-    background-color: white;
-    border-color: #dee2e6;
+    background-color: var(--technique-bg);
+    border-color: var(--technique-border);
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
