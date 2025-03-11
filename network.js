@@ -280,11 +280,155 @@ function createForceSimulation(data) {
     return simulation;
 }
 
-// Initialize the visualization
+// Filter nodes and links based on search criteria
+function filterGraph(nodes, links, searchTerm, strideFilter, ciaFilter) {
+    const searchTermLower = searchTerm.toLowerCase();
+    const strideFilterLower = strideFilter.toLowerCase();
+    const ciaFilterLower = ciaFilter.toLowerCase();
+
+    // First, find matching technique nodes
+    const matchingTechniqueIds = new Set(
+        nodes
+            .filter(node => {
+                if (node.type !== NODE_TYPES.TECHNIQUE) return false;
+                
+                const matchesSearch = !searchTerm || node.name.toLowerCase().includes(searchTermLower);
+                const matchesStride = !strideFilter || links.some(link => 
+                    link.source.id === node.id && 
+                    link.type === 'stride' && 
+                    link.target.name.toLowerCase().includes(strideFilterLower)
+                );
+                const matchesCia = !ciaFilter || links.some(link => 
+                    link.source.id === node.id && 
+                    link.type === 'cia' && 
+                    link.target.name.toLowerCase().includes(ciaFilterLower)
+                );
+                
+                return matchesSearch && matchesStride && matchesCia;
+            })
+            .map(node => node.id)
+    );
+
+    // If no filters are active, show everything
+    if (!searchTerm && !strideFilter && !ciaFilter) {
+        nodes.forEach(node => {
+            node.visible = true;
+            node.opacity = 1;
+        });
+        links.forEach(link => {
+            link.visible = true;
+            link.opacity = 1;
+        });
+        return;
+    }
+
+    // Find all related nodes and links
+    const visibleNodeIds = new Set();
+    const visibleLinks = new Set();
+
+    // Add matching techniques and their direct connections
+    matchingTechniqueIds.forEach(techniqueId => {
+        visibleNodeIds.add(techniqueId);
+        
+        links.forEach(link => {
+            if (link.source.id === techniqueId || link.target.id === techniqueId) {
+                visibleLinks.add(link);
+                visibleNodeIds.add(link.source.id);
+                visibleNodeIds.add(link.target.id);
+            }
+        });
+    });
+
+    // Update visibility and opacity
+    nodes.forEach(node => {
+        node.visible = visibleNodeIds.has(node.id);
+        node.opacity = node.visible ? 1 : 0.1;
+    });
+
+    links.forEach(link => {
+        link.visible = visibleLinks.has(link);
+        link.opacity = link.visible ? 1 : 0.1;
+    });
+}
+
+// Apply visual updates based on filtering
+function updateVisualization(simulation) {
+    const nodes = simulation.nodes();
+    const container = d3.select('#network g');
+    
+    // Update nodes
+    container.selectAll('.node')
+        .style('opacity', d => d.opacity)
+        .style('display', d => d.visible ? null : 'none');
+    
+    // Update links
+    container.selectAll('.link')
+        .style('opacity', d => d.opacity)
+        .style('display', d => d.visible ? null : 'none');
+}
+
+// Initialize the visualization with search functionality
 async function init() {
     const data = await loadData();
     if (data) {
-        createForceSimulation(data);
+        const simulation = createForceSimulation(data);
+        
+        // Add event listeners for search inputs
+        const searchInput = document.querySelector('.search-input');
+        const strideInput = document.querySelector('#strideFilter');
+        const ciaInput = document.querySelector('#ciaFilter');
+        
+        function handleSearch() {
+            filterGraph(
+                data.nodes,
+                data.links,
+                searchInput.value,
+                strideInput.value,
+                ciaInput.value
+            );
+            updateVisualization(simulation);
+        }
+        
+        searchInput.addEventListener('input', handleSearch);
+        strideInput.addEventListener('input', handleSearch);
+        ciaInput.addEventListener('input', handleSearch);
+        
+        // Initialize STRIDE categories
+        const strideCategories = [
+            'Spoofing',
+            'Tampering',
+            'Repudiation',
+            'Information Disclosure',
+            'Denial of Service',
+            'Elevation of Privilege'
+        ];
+        
+        // Initialize CIA categories
+        const ciaCategories = ['Confidentiality', 'Integrity', 'Availability'];
+        
+        // Add autocomplete for STRIDE
+        strideInput.addEventListener('input', (e) => {
+            const value = e.target.value.trim();
+            const match = strideCategories.find(cat => 
+                cat.toLowerCase().startsWith(value.toLowerCase())
+            );
+            if (value && match && e.inputType !== 'deleteContentBackward') {
+                strideInput.value = match;
+                handleSearch();
+            }
+        });
+        
+        // Add autocomplete for CIA
+        ciaInput.addEventListener('input', (e) => {
+            const value = e.target.value.trim();
+            const match = ciaCategories.find(cat => 
+                cat.toLowerCase().startsWith(value.toLowerCase())
+            );
+            if (value && match && e.inputType !== 'deleteContentBackward') {
+                ciaInput.value = match;
+                handleSearch();
+            }
+        });
     }
 }
 

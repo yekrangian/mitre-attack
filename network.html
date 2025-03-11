@@ -28,14 +28,69 @@
             background-color: #c83a2e;
             color: white;
             padding: 1rem;
+        }
+
+        .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
         }
 
         .title {
             font-size: 1.2rem;
             font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .search-input {
+            padding: 6px 4px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            width: 150px;
+            height: 34px;
+            background-color: white;
+            outline: none;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stride-label, .cia-label {
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .stride-search, .cia-search {
+            width: 150px;
+        }
+
+        .stride-search input, .cia-search input {
+            width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 2px;
+            padding: 6px 4px;
+            height: 34px;
+            background-color: white;
+        }
+
+        .stride-search input:focus, .cia-search input:focus {
+            outline: none;
+            border-color: #ced4da;
+            background-color: white;
         }
 
         .controls {
@@ -147,21 +202,40 @@
 <body>
     <div class="container">
         <header>
-            <div class="title">ATT&CK Relationships Network</div>
-            <div class="controls">
-                <a href="index.html" class="view-matrix">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                        <line x1="3" y1="9" x2="21" y2="9"></line>
-                        <line x1="3" y1="15" x2="21" y2="15"></line>
-                        <line x1="9" y1="3" x2="9" y2="21"></line>
-                        <line x1="15" y1="3" x2="15" y2="21"></line>
-                    </svg>
-                    <span>Matrix View</span>
-                </a>
-                <button id="zoomIn">Zoom In</button>
-                <button id="zoomOut">Zoom Out</button>
-                <button id="resetView">Reset View</button>
+            <div class="header-content">
+                <div class="search-container">
+                    <span class="title">ATT&CK Relationships Network</span>
+                    <input type="text" class="search-input" placeholder="Search techniques...">
+                    <div class="filter-group">
+                        <span class="stride-label">STRIDE</span>
+                        <div class="stride-search">
+                            <div class="stride-tags"></div>
+                            <input type="text" id="strideFilter">
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <span class="cia-label">CIA</span>
+                        <div class="cia-search">
+                            <div class="cia-tags"></div>
+                            <input type="text" id="ciaFilter">
+                        </div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <a href="index.html" class="view-matrix">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="3" y1="15" x2="21" y2="15"></line>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                            <line x1="15" y1="3" x2="15" y2="21"></line>
+                        </svg>
+                        <span>Matrix View</span>
+                    </a>
+                    <button id="zoomIn">Zoom In</button>
+                    <button id="zoomOut">Zoom Out</button>
+                    <button id="resetView">Reset View</button>
+                </div>
             </div>
         </header>
         <div class="graph-container">
