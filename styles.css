@@ -42,13 +42,40 @@ header {
     white-space: nowrap;
 }
 
-.search-input {
+.search-input, .stride-search input, .cia-search input {
     padding: 6px 4px;
     border: 1px solid #ccc;
     border-radius: 2px;
     font-size: 0.875rem;
     width: 300px;
     background-color: white;
+    outline: none;
+}
+
+.stride-search, .cia-search {
+    width: 300px;
+}
+
+.stride-search input, .cia-search input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 6px 4px;
+    height: 34px;
+}
+
+/* Hide the tags containers initially */
+.stride-tags, .cia-tags {
+    display: none;
+}
+
+/* Remove flex from search containers */
+.stride-search, .cia-search {
+    display: block;
+    padding: 0;
+    height: auto;
+    border: none;
+    background: none;
 }
 
 .filter-group {
@@ -62,20 +89,6 @@ header {
     font-weight: bold;
     font-size: 1.1rem;
     white-space: nowrap;
-}
-
-.stride-search, .cia-search {
-    display: flex;
-    align-items: center;
-    padding: 4px;
-    height: 34px;
-    width: 300px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    overflow: hidden;
-    white-space: nowrap;
-    cursor: text;
 }
 
 .stride-tags, .cia-tags {
@@ -92,16 +105,6 @@ header {
 
 .stride-tags::-webkit-scrollbar, .cia-tags::-webkit-scrollbar {
     display: none;
-}
-
-.stride-search input, .cia-search input {
-    border: none;
-    outline: none;
-    padding: 2px;
-    width: 80px;
-    min-width: 80px;
-    font-size: 0.875rem;
-    background: transparent;
 }
 
 /* Hide placeholder when there are tags or when input is focused */

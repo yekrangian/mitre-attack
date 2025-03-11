@@ -125,19 +125,17 @@ const CIA_CATEGORIES = [
 
 function filterTechniques() {
     const searchTerm = document.querySelector('.search-input').value.toLowerCase().trim();
-    const selectedStrides = Array.from(document.querySelectorAll('.stride-tags .stride-tag'))
-        .map(tag => tag.getAttribute('data-category'));
-    const selectedCias = Array.from(document.querySelectorAll('.cia-tags .cia-tag'))
-        .map(tag => tag.getAttribute('data-category'));
+    const strideFilter = document.querySelector('#strideFilter').value.toLowerCase().trim();
+    const ciaFilter = document.querySelector('#ciaFilter').value.toLowerCase().trim();
     
     document.querySelectorAll('.technique').forEach(technique => {
         const techniqueName = technique.querySelector('.technique-name').textContent.toLowerCase();
-        const techniqueStride = technique.querySelector('.stride-tag')?.dataset.category || '';
-        const techniqueCia = technique.querySelector('.cia-tag')?.dataset.category || '';
+        const techniqueStride = technique.querySelector('.stride-tag')?.dataset.category.toLowerCase() || '';
+        const techniqueCia = technique.querySelector('.cia-tag')?.dataset.category.toLowerCase() || '';
         
         const matchesSearch = !searchTerm || techniqueName.includes(searchTerm);
-        const matchesStride = selectedStrides.length === 0 || selectedStrides.includes(techniqueStride);
-        const matchesCia = selectedCias.length === 0 || selectedCias.includes(techniqueCia);
+        const matchesStride = !strideFilter || techniqueStride.includes(strideFilter);
+        const matchesCia = !ciaFilter || techniqueCia.includes(ciaFilter);
         
         technique.style.display = matchesSearch && matchesStride && matchesCia ? 'flex' : 'none';
         technique.style.opacity = matchesSearch && matchesStride && matchesCia ? '1' : '0';
@@ -150,14 +148,14 @@ function filterTechniques() {
     });
 }
 
-// Initialize both searches when the page loads
+// Initialize searches when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     createMatrix();
-    initializeStrideSearch();
-    initializeCiaSearch();
     
-    // Add event listener for main search
+    // Add event listeners for all search inputs
     document.querySelector('.search-input').addEventListener('input', filterTechniques);
+    document.querySelector('#strideFilter').addEventListener('input', filterTechniques);
+    document.querySelector('#ciaFilter').addEventListener('input', filterTechniques);
 });
 
 // Add transition for smooth filtering
