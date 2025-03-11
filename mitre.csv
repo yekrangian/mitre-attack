@@ -93,32 +93,32 @@ Defense Evasion,Impair Defenses,Tampering,Integrity
 Defense Evasion,Impersonation,Spoofing,Confidentiality
 Defense Evasion,Indicator Removal,Repudiation,Integrity
 Defense Evasion,Indirect Command Execution,Elevation of Privilege,Integrity
-Defense Evasion,Masquerading,Spoofing,
-Defense Evasion,Modify Authentication Process,Tampering,
-Defense Evasion,Modify Cloud Compute Infrastructure,Tampering,
-Defense Evasion,Modify Cloud Resource Hierarchy,Tampering,
-Defense Evasion,Modify Registry,Tampering,
-Defense Evasion,Modify System Image,Tampering,
-Defense Evasion,Network Boundary Bridging,Tampering,
-Defense Evasion,Obfuscated Files or Information,Tampering,
-Defense Evasion,Plist File Modification,Tampering,
-Defense Evasion,Pre-OS Boot,Elevation of Privilege,
-Defense Evasion,Process Injection,Tampering,
-Defense Evasion,Reflective Code Loading,Tampering,
-Defense Evasion,Rogue Domain Controller,Tampering,
-Defense Evasion,Rootkit,Tampering,
-Defense Evasion,Subvert Trust Controls,Tampering,
-Defense Evasion,System Binary Proxy Execution,Tampering,
-Defense Evasion,System Script Proxy Execution,Tampering,
-Defense Evasion,Template Injection,Tampering,
-Defense Evasion,Traffic Signaling,Tampering,
-Defense Evasion,Trusted Developer Utilities Proxy Execution,Tampering,
-Defense Evasion,Unused/Unsupported Cloud Regions,Tampering,
-Defense Evasion,Use Alternate Authentication Material,Elevation of Privilege,
-Defense Evasion,Valid Accounts,Elevation of Privilege,
-Defense Evasion,Virtualization/Sandbox Evasion,Tampering,
-Defense Evasion,Weaken Encryption,Tampering,
-Defense Evasion,XSL Script Processing,Tampering,
+Defense Evasion,Masquerading,Spoofing,Confidentiality
+Defense Evasion,Modify Authentication Process,Tampering,Integrity
+Defense Evasion,Modify Cloud Compute Infrastructure,Tampering,Integrity
+Defense Evasion,Modify Cloud Resource Hierarchy,Tampering,Integrity
+Defense Evasion,Modify Registry,Tampering,Integrity
+Defense Evasion,Modify System Image,Tampering,Integrity
+Defense Evasion,Network Boundary Bridging,Elevation of Privilege,Confidentiality
+Defense Evasion,Obfuscated Files or Information,Tampering,Integrity
+Defense Evasion,Plist File Modification,Tampering,Integrity
+Defense Evasion,Pre-OS Boot,Elevation of Privilege,Integrity
+Defense Evasion,Process Injection,Elevation of Privilege,Integrity
+Defense Evasion,Reflective Code Loading,Elevation of Privilege,Integrity
+Defense Evasion,Rogue Domain Controller,Tampering,Integrity
+Defense Evasion,Rootkit,Repudiation,Integrity
+Defense Evasion,Subvert Trust Controls,Spoofing,Integrity
+Defense Evasion,System Binary Proxy Execution,Elevation of Privilege,Integrity
+Defense Evasion,System Script Proxy Execution,Elevation of Privilege,Integrity
+Defense Evasion,Template Injection,Tampering,Integrity
+Defense Evasion,Traffic Signaling,Tampering,Integrity
+Defense Evasion,Trusted Developer Utilities Proxy Execution,Elevation of Privilege,Integrity
+Defense Evasion,Unused/Unsupported Cloud Regions,Elevation of Privilege,Confidentiality
+Defense Evasion,Use Alternate Authentication Material,Spoofing,Confidentiality
+Defense Evasion,Valid Accounts,Spoofing,Confidentiality
+Defense Evasion,Virtualization/Sandbox Evasion,Repudiation,Integrity
+Defense Evasion,Weaken Encryption,Tampering,Confidentiality
+Defense Evasion,XSL Script Processing,Elevation of Privilege,Integrity
 Credential Access,Adversary-in-the-Middle,Tampering,
 Credential Access,Brute Force,Elevation of Privilege,
 Credential Access,Credentials from Password Stores,Elevation of Privilege,
