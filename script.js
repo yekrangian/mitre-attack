@@ -60,13 +60,8 @@ async function createMatrix() {
         const column = document.createElement('div');
         column.className = 'tactic-column';
         
-        // Create tactic header
-        const header = document.createElement('div');
-        header.className = 'tactic-header';
-        header.innerHTML = `
-            <div class="tactic-name">${tactic.name}</div>
-            <div class="tactic-count">${tactic.count}</div>
-        `;
+        // Use the new header creation function
+        const header = createTacticHeader(tactic);
         
         // Add techniques
         const techniquesList = document.createElement('div');
@@ -378,4 +373,52 @@ document.querySelectorAll('.dropdown').forEach(dropdown => {
         e.preventDefault();
         // Add dropdown menu functionality here
     });
-}); 
+});
+
+// Create tactic header with STRIDE chart
+function createTacticHeader(tactic) {
+    const header = document.createElement('div');
+    header.className = 'tactic-header';
+    
+    // Create STRIDE chart
+    const strideChart = document.createElement('div');
+    strideChart.className = 'stride-chart';
+    
+    // Calculate STRIDE distribution
+    const strideCounts = {};
+    STRIDE_CATEGORIES.forEach(category => {
+        strideCounts[category] = tactic.techniques.filter(t => t.stride === category).length;
+    });
+    
+    const maxCount = Math.max(...Object.values(strideCounts));
+    
+    // Create bars for each STRIDE category
+    STRIDE_CATEGORIES.forEach(category => {
+        const bar = document.createElement('div');
+        bar.className = 'stride-bar';
+        bar.setAttribute('data-category', category);
+        
+        const fill = document.createElement('div');
+        fill.className = 'stride-bar-fill';
+        const percentage = maxCount > 0 ? (strideCounts[category] / maxCount) * 100 : 0;
+        fill.style.height = `${percentage}%`;
+        
+        bar.appendChild(fill);
+        strideChart.appendChild(bar);
+    });
+    
+    // Add name and count
+    const name = document.createElement('div');
+    name.className = 'tactic-name';
+    name.textContent = tactic.name;
+    
+    const count = document.createElement('div');
+    count.className = 'tactic-count';
+    count.textContent = tactic.count;
+    
+    header.appendChild(strideChart);
+    header.appendChild(name);
+    header.appendChild(count);
+    
+    return header;
+} 

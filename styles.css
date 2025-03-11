@@ -339,6 +339,59 @@ h1 {
     border-bottom: 1px solid #e9ecef;
 }
 
+.stride-chart {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2px;
+    margin-bottom: 8px;
+    padding: 0 4px;
+}
+
+.stride-bar {
+    flex: 1;
+    height: 100%;
+    background-color: #f0f0f0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.stride-bar-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: height 0.3s ease;
+}
+
+.stride-bar[data-category="Spoofing"] .stride-bar-fill {
+    background-color: #1565c0;
+}
+
+.stride-bar[data-category="Tampering"] .stride-bar-fill {
+    background-color: #7b1fa2;
+}
+
+.stride-bar[data-category="Repudiation"] .stride-bar-fill {
+    background-color: #2e7d32;
+}
+
+.stride-bar[data-category="Information Disclosure"] .stride-bar-fill {
+    background-color: #e65100;
+}
+
+.stride-bar[data-category="Denial of Service"] .stride-bar-fill {
+    background-color: #c62828;
+}
+
+.stride-bar[data-category="Elevation of Privilege"] .stride-bar-fill {
+    background-color: #283593;
+}
+
 .tactic-name {
     font-weight: 500;
     color: #4f7b9f;
