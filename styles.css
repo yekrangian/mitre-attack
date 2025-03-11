@@ -27,7 +27,7 @@
     padding: 4px;
     cursor: pointer;
     color: white;
-    margin-left: auto;
+    margin-left: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -726,4 +726,33 @@ h1 {
 
 .cia-bar[data-category="Availability"] .cia-bar-fill {
     background-color: #558b2f;
+}
+
+/* Network View Link Styles */
+.view-network {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    margin-left: auto;
+}
+
+.view-network:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.view-network svg {
+    width: 16px;
+    height: 16px;
+}
+
+.view-network span {
+    font-weight: 500;
 } 

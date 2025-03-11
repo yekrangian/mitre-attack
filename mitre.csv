@@ -41,13 +41,13 @@ Execution,Software Deployment Tools,Elevation of Privilege,Integrity
 Execution,System Services,Elevation of Privilege,Integrity
 Execution,User Execution,Spoofing,Confidentiality
 Execution,Windows Management Instrumentation,Elevation of Privilege,Integrity
-Persistence,Account Manipulation,Elevation of Privilege,
-Persistence,BITS Jobs,Elevation of Privilege,
-Persistence,Boot or Logon Autostart Execution,Elevation of Privilege,
-Persistence,Boot or Logon Initialization Scripts,Elevation of Privilege,
-Persistence,Browser Extensions,Tampering,
-Persistence,Compromise Host Software Binary,Tampering,
-Persistence,Create Account,Elevation of Privilege,
+Persistence,Account Manipulation,Elevation of Privilege,Integrity
+Persistence,BITS Jobs,Elevation of Privilege,Integrity
+Persistence,Boot or Logon Autostart Execution,Elevation of Privilege,Integrity
+Persistence,Boot or Logon Initialization Scripts,Elevation of Privilege,Integrity
+Persistence,Browser Extensions,Elevation of Privilege,Confidentiality
+Persistence,Compromise Host Software Binary,Tampering,Integrity
+Persistence,Create Account,Elevation of Privilege,Integrity
 Persistence,Create or Modify System Process,Elevation of Privilege,
 Persistence,Event Triggered Execution,Elevation of Privilege,
 Persistence,External Remote Services,Elevation of Privilege,
