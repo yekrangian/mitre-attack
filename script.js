@@ -95,14 +95,6 @@ async function createMatrix() {
 // Initialize the matrix when the page loads
 document.addEventListener('DOMContentLoaded', createMatrix);
 
-// Add click handler for techniques
-document.addEventListener('click', function(e) {
-    if (e.target.closest('.technique')) {
-        const technique = e.target.closest('.technique');
-        technique.classList.toggle('selected');
-    }
-});
-
 const STRIDE_CATEGORIES = [
     'Spoofing',
     'Tampering',
@@ -327,10 +319,6 @@ function createTechniqueElement(technique) {
     name.textContent = technique.name;
     
     element.appendChild(name);
-    
-    element.addEventListener('click', () => {
-        element.classList.toggle('selected');
-    });
     
     return element;
 }

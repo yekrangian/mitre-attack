@@ -155,33 +155,33 @@ header {
 }
 
 .stride-tag[data-category="Spoofing"] {
-    background-color: #e3f2fd;
-    color: #1565c0;
+    background-color: #ffebee;
+    color: #d32f2f;
 }
 
 .stride-tag[data-category="Tampering"] {
-    background-color: #f3e5f5;
-    color: #7b1fa2;
-}
-
-.stride-tag[data-category="Repudiation"] {
     background-color: #e8f5e9;
     color: #2e7d32;
 }
 
-.stride-tag[data-category="Information Disclosure"] {
+.stride-tag[data-category="Repudiation"] {
     background-color: #fff3e0;
-    color: #e65100;
+    color: #f57c00;
+}
+
+.stride-tag[data-category="Information Disclosure"] {
+    background-color: #e3f2fd;
+    color: #1976d2;
 }
 
 .stride-tag[data-category="Denial of Service"] {
-    background-color: #fbe9e7;
-    color: #c62828;
+    background-color: #f3e5f5;
+    color: #7b1fa2;
 }
 
 .stride-tag[data-category="Elevation of Privilege"] {
-    background-color: #e8eaf6;
-    color: #283593;
+    background-color: #e0f2f1;
+    color: #00796b;
 }
 
 /* Only show 'x' on tags in the search box */
@@ -397,27 +397,27 @@ h1 {
 }
 
 .stride-bar[data-category="Spoofing"] .stride-bar-fill {
-    background-color: #1565c0;
+    background-color: #d32f2f;
 }
 
 .stride-bar[data-category="Tampering"] .stride-bar-fill {
-    background-color: #7b1fa2;
-}
-
-.stride-bar[data-category="Repudiation"] .stride-bar-fill {
     background-color: #2e7d32;
 }
 
+.stride-bar[data-category="Repudiation"] .stride-bar-fill {
+    background-color: #f57c00;
+}
+
 .stride-bar[data-category="Information Disclosure"] .stride-bar-fill {
-    background-color: #e65100;
+    background-color: #1976d2;
 }
 
 .stride-bar[data-category="Denial of Service"] .stride-bar-fill {
-    background-color: #c62828;
+    background-color: #7b1fa2;
 }
 
 .stride-bar[data-category="Elevation of Privilege"] .stride-bar-fill {
-    background-color: #283593;
+    background-color: #00796b;
 }
 
 .stride-chart-title {
@@ -451,7 +451,6 @@ h1 {
     min-height: 40px;
     padding: 8px;
     background-color: white;
-    cursor: pointer;
     border: 1px solid #dee2e6;
     border-radius: 2px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
@@ -483,39 +482,39 @@ h1 {
 }
 
 .stride-tag[data-category="Spoofing"] {
-    background-color: #e3f2fd;
-    color: #1565c0;
+    background-color: #ffebee;
+    color: #d32f2f;
 }
 
 .stride-tag[data-category="Tampering"] {
-    background-color: #f3e5f5;
-    color: #7b1fa2;
-}
-
-.stride-tag[data-category="Repudiation"] {
     background-color: #e8f5e9;
     color: #2e7d32;
 }
 
-.stride-tag[data-category="Information Disclosure"] {
+.stride-tag[data-category="Repudiation"] {
     background-color: #fff3e0;
-    color: #e65100;
+    color: #f57c00;
+}
+
+.stride-tag[data-category="Information Disclosure"] {
+    background-color: #e3f2fd;
+    color: #1976d2;
 }
 
 .stride-tag[data-category="Denial of Service"] {
-    background-color: #fbe9e7;
-    color: #c62828;
+    background-color: #f3e5f5;
+    color: #7b1fa2;
 }
 
 .stride-tag[data-category="Elevation of Privilege"] {
-    background-color: #e8eaf6;
-    color: #283593;
+    background-color: #e0f2f1;
+    color: #00796b;
 }
 
 .technique:hover {
-    background-color: #f8f9fa;
-    border-color: #ced4da;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    background-color: white;
+    border-color: #dee2e6;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .sub-technique-count {
@@ -524,9 +523,9 @@ h1 {
 }
 
 .selected {
-    background-color: #e8f0fe;
-    border-color: #4285f4;
-    box-shadow: 0 1px 2px rgba(66,133,244,0.15);
+    background-color: white;
+    border-color: #dee2e6;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 /* Custom scrollbar */
@@ -595,18 +594,18 @@ h1 {
 
 /* CIA Tag Colors */
 .cia-tag[data-category="Confidentiality"] {
-    background-color: #e3f2fd;
-    color: #1565c0;
+    background-color: #e8eaf6;
+    color: #3949ab;
 }
 
 .cia-tag[data-category="Integrity"] {
-    background-color: #f3e5f5;
-    color: #7b1fa2;
+    background-color: #fce4ec;
+    color: #c2185b;
 }
 
 .cia-tag[data-category="Availability"] {
-    background-color: #e8f5e9;
-    color: #2e7d32;
+    background-color: #f1f8e9;
+    color: #558b2f;
 }
 
 .cia-chart-container {
@@ -647,13 +646,13 @@ h1 {
 
 /* CIA Bar Colors */
 .cia-bar[data-category="Confidentiality"] .cia-bar-fill {
-    background-color: #1565c0;
+    background-color: #3949ab;
 }
 
 .cia-bar[data-category="Integrity"] .cia-bar-fill {
-    background-color: #7b1fa2;
+    background-color: #c2185b;
 }
 
 .cia-bar[data-category="Availability"] .cia-bar-fill {
-    background-color: #2e7d32;
+    background-color: #558b2f;
 } 
