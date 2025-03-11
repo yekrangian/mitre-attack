@@ -85,14 +85,14 @@ Defense Evasion,Deploy Container,Elevation of Privilege,Confidentiality
 Defense Evasion,Direct Volume Access,Elevation of Privilege,Integrity
 Defense Evasion,Domain or Tenant Policy Modification,Tampering,Integrity
 Defense Evasion,Execution Guardrails,Repudiation,Integrity
-Defense Evasion,Exploitation for Defense Evasion,Tampering,
-Defense Evasion,File and Directory Permissions Modification,Tampering,
-Defense Evasion,Hide Artifacts,Tampering,
-Defense Evasion,Hijack Execution Flow,Tampering,
-Defense Evasion,Impair Defenses,Tampering,
-Defense Evasion,Impersonation,Spoofing,
-Defense Evasion,Indicator Removal,Tampering,
-Defense Evasion,Indirect Command Execution,Elevation of Privilege,
+Defense Evasion,Exploitation for Defense Evasion,Elevation of Privilege,Integrity
+Defense Evasion,File and Directory Permissions Modification,Tampering,Integrity
+Defense Evasion,Hide Artifacts,Repudiation,Integrity
+Defense Evasion,Hijack Execution Flow,Elevation of Privilege,Integrity
+Defense Evasion,Impair Defenses,Tampering,Integrity
+Defense Evasion,Impersonation,Spoofing,Confidentiality
+Defense Evasion,Indicator Removal,Repudiation,Integrity
+Defense Evasion,Indirect Command Execution,Elevation of Privilege,Integrity
 Defense Evasion,Masquerading,Spoofing,
 Defense Evasion,Modify Authentication Process,Tampering,
 Defense Evasion,Modify Cloud Compute Infrastructure,Tampering,

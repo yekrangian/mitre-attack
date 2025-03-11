@@ -871,4 +871,90 @@ h1 {
 /* Remove old view-network styles from header */
 .view-network {
     margin-left: auto;
-} 
+}
+
+/* Modern Legend Styles */
+.legend-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    margin: 0 10px 20px 10px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.legend-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #666;
+    white-space: nowrap;
+}
+
+.legend-tags {
+    display: flex;
+    gap: 4px;
+}
+
+.legend-tag {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    cursor: help;
+    transition: transform 0.1s ease;
+}
+
+.legend-tag:hover {
+    transform: translateY(-1px);
+}
+
+.legend-separator {
+    width: 1px;
+    height: 20px;
+    background-color: var(--border-color);
+    margin: 0 16px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .legend-container {
+    background-color: var(--technique-bg);
+}
+
+[data-theme="dark"] .legend-label {
+    color: #999;
+}
+
+[data-theme="dark"] .legend-separator {
+    background-color: #444;
+}
+
+/* Tooltip styles */
+.legend-tag[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Keep existing STRIDE and CIA tag color styles */ 
