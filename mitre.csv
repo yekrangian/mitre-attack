@@ -119,119 +119,119 @@ Defense Evasion,Valid Accounts,Spoofing,Confidentiality
 Defense Evasion,Virtualization/Sandbox Evasion,Repudiation,Integrity
 Defense Evasion,Weaken Encryption,Tampering,Confidentiality
 Defense Evasion,XSL Script Processing,Elevation of Privilege,Integrity
-Credential Access,Adversary-in-the-Middle,Tampering,
-Credential Access,Brute Force,Elevation of Privilege,
-Credential Access,Credentials from Password Stores,Elevation of Privilege,
-Credential Access,Exploitation for Credential Access,Elevation of Privilege,
-Credential Access,Forced Authentication,Spoofing,
-Credential Access,Forge Web Credentials,Spoofing,
-Credential Access,Input Capture,Spoofing,
-Credential Access,Modify Authentication Process,Tampering,
-Credential Access,Multi-Factor Authentication Interception,Spoofing,
-Credential Access,Multi-Factor Authentication Request Generation,Spoofing,
-Credential Access,Network Sniffing,Information Disclosure,
-Credential Access,OS Credential Dumping,Elevation of Privilege,
-Credential Access,Steal Application Access Token,Spoofing,
-Credential Access,Steal or Forge Authentication Certificates,Spoofing,
-Credential Access,Steal or Forge Kerberos Tickets,Spoofing,
-Credential Access,Steal Web Session Cookie,Spoofing,
-Credential Access,Unsecured Credentials,Spoofing,
-Discovery,Account Discovery,Information Disclosure,
-Discovery,Application Window Discovery,Information Disclosure,
-Discovery,Browser Information Discovery,Information Disclosure,
-Discovery,Cloud Infrastructure Discovery,Information Disclosure,
-Discovery,Cloud Service Dashboard,Information Disclosure,
-Discovery,Cloud Service Discovery,Information Disclosure,
-Discovery,Cloud Storage Object Discovery,Information Disclosure,
-Discovery,Container and Resource Discovery,Information Disclosure,
-Discovery,Debugger Evasion,Tampering,
-Discovery,Device Driver Discovery,Information Disclosure,
-Discovery,Domain Trust Discovery,Information Disclosure,
-Discovery,File and Directory Discovery,Information Disclosure,
-Discovery,Group Policy Discovery,Information Disclosure,
-Discovery,Log Enumeration,Information Disclosure,
-Discovery,Network Service Discovery,Information Disclosure,
-Discovery,Network Share Discovery,Information Disclosure,
-Discovery,Network Sniffing,Information Disclosure,
-Discovery,Password Policy Discovery,Information Disclosure,
-Discovery,Peripheral Device Discovery,Information Disclosure,
-Discovery,Permission Groups Discovery,Information Disclosure,
-Discovery,Process Discovery,Information Disclosure,
-Discovery,Query Registry,Information Disclosure,
-Discovery,Remote System Discovery,Information Disclosure,
-Discovery,Software Discovery,Information Disclosure,
-Discovery,System Information Discovery,Information Disclosure,
-Discovery,System Location Discovery,Information Disclosure,
-Discovery,System Network Configuration Discovery,Information Disclosure,
-Discovery,System Network Connections Discovery,Information Disclosure,
-Discovery,System Owner/User Discovery,Information Disclosure,
-Discovery,System Service Discovery,Information Disclosure,
-Discovery,System Time Discovery,Information Disclosure,
-Discovery,Virtualization/Sandbox Evasion,Tampering,
-Lateral Movement,Exploitation of Remote Services,Elevation of Privilege,
-Lateral Movement,Internal Spearphishing,Spoofing,
-Lateral Movement,Lateral Tool Transfer,Tampering,
-Lateral Movement,Remote Service Session Hijacking,Tampering,
-Lateral Movement,Remote Services,Elevation of Privilege,
-Lateral Movement,Replication Through Removable Media,Tampering,
-Lateral Movement,Software Deployment Tools,Elevation of Privilege,
-Lateral Movement,Taint Shared Content,Tampering,
-Lateral Movement,Use Alternate Authentication Material,Elevation of Privilege,
-Collection,Adversary-in-the-Middle,Tampering,
-Collection,Archive Collected Data,Tampering,
-Collection,Audio Capture,Information Disclosure,
-Collection,Automated Collection,Information Disclosure,
-Collection,Browser Session Hijacking,Tampering,
-Collection,Clipboard Data,Information Disclosure,
-Collection,Data from Cloud Storage,Information Disclosure,
-Collection,Data from Configuration Repository,Information Disclosure,
-Collection,Data from Information Repositories,Information Disclosure,
-Collection,Data from Local System,Information Disclosure,
-Collection,Data from Network Shared Drive,Information Disclosure,
-Collection,Data from Removable Media,Information Disclosure,
-Collection,Data Staged,Tampering,
-Collection,Email Collection,Information Disclosure,
-Collection,Input Capture,Spoofing,
-Collection,Screen Capture,Information Disclosure,
-Collection,Video Capture,Information Disclosure,
-Command and Control,Application Layer Protocol,Tampering,
-Command and Control,Communication Through Removable Media,Tampering,
-Command and Control,Content Injection,Tampering,
-Command and Control,Data Encoding,Tampering,
-Command and Control,Data Obfuscation,Tampering,
-Command and Control,Dynamic Resolution,Tampering,
-Command and Control,Encrypted Channel,Tampering,
-Command and Control,Fallback Channels,Tampering,
-Command and Control,Hide Infrastructure,Tampering,
-Command and Control,Ingress Tool Transfer,Tampering,
-Command and Control,Multi-Stage Channels,Tampering,
-Command and Control,Non-Application Layer Protocol,Tampering,
-Command and Control,Non-Standard Port,Tampering,
-Command and Control,Protocol Tunneling,Tampering,
-Command and Control,Proxy,Tampering,
-Command and Control,Remote Access Software,Tampering,
-Command and Control,Traffic Signaling,Tampering,
-Command and Control,Web Service,Tampering,
-Exfiltration,Automated Exfiltration,Information Disclosure,
-Exfiltration,Data Transfer Size Limits,Information Disclosure,
-Exfiltration,Exfiltration Over Alternative Protocol,Information Disclosure,
-Exfiltration,Exfiltration Over C2 Channel,Information Disclosure,
-Exfiltration,Exfiltration Over Other Network Medium,Information Disclosure,
-Exfiltration,Exfiltration Over Physical Medium,Information Disclosure,
-Exfiltration,Exfiltration Over Web Service,Information Disclosure,
-Exfiltration,Scheduled Transfer,Information Disclosure,
-Exfiltration,Transfer Data to Cloud Account,Information Disclosure,
-Impact,Account Access Removal,Denial of Service,
-Impact,Data Destruction,Denial of Service,
-Impact,Data Encrypted for Impact,Denial of Service,
-Impact,Data Manipulation,Tampering,
-Impact,Defacement,Tampering,
-Impact,Disk Wipe,Denial of Service,
-Impact,Endpoint Denial of Service,Denial of Service,
-Impact,Financial Theft,Denial of Service,
-Impact,Firmware Corruption,Denial of Service,
-Impact,Inhibit System Recovery,Denial of Service,
-Impact,Network Denial of Service,Denial of Service,
-Impact,Resource Hijacking,Denial of Service,
-Impact,Service Stop,Denial of Service,
-Impact,System Shutdown/Reboot,Denial of Service,
+Credential Access,Adversary-in-the-Middle,Tampering,Confidentiality
+Credential Access,Brute Force,Elevation of Privilege,Confidentiality
+Credential Access,Credentials from Password Stores,Elevation of Privilege,Confidentiality
+Credential Access,Exploitation for Credential Access,Elevation of Privilege,Confidentiality
+Credential Access,Forced Authentication,Spoofing,Confidentiality
+Credential Access,Forge Web Credentials,Spoofing,Integrity
+Credential Access,Input Capture,Spoofing,Confidentiality
+Credential Access,Modify Authentication Process,Tampering,Integrity
+Credential Access,Multi-Factor Authentication Interception,Spoofing,Confidentiality
+Credential Access,Multi-Factor Authentication Request Generation,Spoofing,Integrity
+Credential Access,Network Sniffing,Information Disclosure,Confidentiality
+Credential Access,OS Credential Dumping,Elevation of Privilege,Confidentiality
+Credential Access,Steal Application Access Token,Spoofing,Confidentiality
+Credential Access,Steal or Forge Authentication Certificates,Spoofing,Integrity
+Credential Access,Steal or Forge Kerberos Tickets,Spoofing,Integrity
+Credential Access,Steal Web Session Cookie,Spoofing,Confidentiality
+Credential Access,Unsecured Credentials,Spoofing,Confidentiality
+Discovery,Account Discovery,Information Disclosure,Confidentiality
+Discovery,Application Window Discovery,Information Disclosure,Confidentiality
+Discovery,Browser Information Discovery,Information Disclosure,Confidentiality
+Discovery,Cloud Infrastructure Discovery,Information Disclosure,Confidentiality
+Discovery,Cloud Service Dashboard,Information Disclosure,Confidentiality
+Discovery,Cloud Service Discovery,Information Disclosure,Confidentiality
+Discovery,Cloud Storage Object Discovery,Information Disclosure,Confidentiality
+Discovery,Container and Resource Discovery,Information Disclosure,Confidentiality
+Discovery,Debugger Evasion,Tampering,Confidentiality
+Discovery,Device Driver Discovery,Information Disclosure,Confidentiality
+Discovery,Domain Trust Discovery,Information Disclosure,Confidentiality
+Discovery,File and Directory Discovery,Information Disclosure,Confidentiality
+Discovery,Group Policy Discovery,Information Disclosure,Confidentiality
+Discovery,Log Enumeration,Information Disclosure,Confidentiality
+Discovery,Network Service Discovery,Information Disclosure,Confidentiality
+Discovery,Network Share Discovery,Information Disclosure,Confidentiality
+Discovery,Network Sniffing,Information Disclosure,Confidentiality
+Discovery,Password Policy Discovery,Information Disclosure,Confidentiality
+Discovery,Peripheral Device Discovery,Information Disclosure,Confidentiality
+Discovery,Permission Groups Discovery,Information Disclosure,Confidentiality
+Discovery,Process Discovery,Information Disclosure,Confidentiality
+Discovery,Query Registry,Information Disclosure,Confidentiality
+Discovery,Remote System Discovery,Information Disclosure,Confidentiality
+Discovery,Software Discovery,Information Disclosure,Confidentiality
+Discovery,System Information Discovery,Information Disclosure,Confidentiality
+Discovery,System Location Discovery,Information Disclosure,Confidentiality
+Discovery,System Network Configuration Discovery,Information Disclosure,Confidentiality
+Discovery,System Network Connections Discovery,Information Disclosure,Confidentiality
+Discovery,System Owner/User Discovery,Information Disclosure,Confidentiality
+Discovery,System Service Discovery,Information Disclosure,Confidentiality
+Discovery,System Time Discovery,Information Disclosure,Confidentiality
+Discovery,Virtualization/Sandbox Evasion,Tampering,Confidentiality
+Lateral Movement,Exploitation of Remote Services,Elevation of Privilege,Integrity
+Lateral Movement,Internal Spearphishing,Spoofing,Confidentiality
+Lateral Movement,Lateral Tool Transfer,Tampering,Integrity
+Lateral Movement,Remote Service Session Hijacking,Tampering,Confidentiality
+Lateral Movement,Remote Services,Elevation of Privilege,Confidentiality
+Lateral Movement,Replication Through Removable Media,Tampering,Integrity
+Lateral Movement,Software Deployment Tools,Elevation of Privilege,Integrity
+Lateral Movement,Taint Shared Content,Tampering,Integrity
+Lateral Movement,Use Alternate Authentication Material,Elevation of Privilege,Confidentiality
+Collection,Adversary-in-the-Middle,Tampering,Confidentiality
+Collection,Archive Collected Data,Tampering,Confidentiality
+Collection,Audio Capture,Information Disclosure,Confidentiality
+Collection,Automated Collection,Information Disclosure,Confidentiality
+Collection,Browser Session Hijacking,Tampering,Confidentiality
+Collection,Clipboard Data,Information Disclosure,Confidentiality
+Collection,Data from Cloud Storage,Information Disclosure,Confidentiality
+Collection,Data from Configuration Repository,Information Disclosure,Confidentiality
+Collection,Data from Information Repositories,Information Disclosure,Confidentiality
+Collection,Data from Local System,Information Disclosure,Confidentiality
+Collection,Data from Network Shared Drive,Information Disclosure,Confidentiality
+Collection,Data from Removable Media,Information Disclosure,Confidentiality
+Collection,Data Staged,Tampering,Confidentiality
+Collection,Email Collection,Information Disclosure,Confidentiality
+Collection,Input Capture,Spoofing,Confidentiality
+Collection,Screen Capture,Information Disclosure,Confidentiality
+Collection,Video Capture,Information Disclosure,Confidentiality
+Command and Control,Application Layer Protocol,Tampering,Confidentiality
+Command and Control,Communication Through Removable Media,Tampering,Confidentiality
+Command and Control,Content Injection,Tampering,Integrity
+Command and Control,Data Encoding,Tampering,Confidentiality
+Command and Control,Data Obfuscation,Tampering,Confidentiality
+Command and Control,Dynamic Resolution,Tampering,Confidentiality
+Command and Control,Encrypted Channel,Tampering,Confidentiality
+Command and Control,Fallback Channels,Tampering,Confidentiality
+Command and Control,Hide Infrastructure,Tampering,Confidentiality
+Command and Control,Ingress Tool Transfer,Tampering,Integrity
+Command and Control,Multi-Stage Channels,Tampering,Confidentiality
+Command and Control,Non-Application Layer Protocol,Tampering,Confidentiality
+Command and Control,Non-Standard Port,Tampering,Confidentiality
+Command and Control,Protocol Tunneling,Tampering,Confidentiality
+Command and Control,Proxy,Tampering,Confidentiality
+Command and Control,Remote Access Software,Tampering,Confidentiality
+Command and Control,Traffic Signaling,Tampering,Confidentiality
+Command and Control,Web Service,Tampering,Confidentiality
+Exfiltration,Automated Exfiltration,Information Disclosure,Confidentiality
+Exfiltration,Data Transfer Size Limits,Information Disclosure,Confidentiality
+Exfiltration,Exfiltration Over Alternative Protocol,Information Disclosure,Confidentiality
+Exfiltration,Exfiltration Over C2 Channel,Information Disclosure,Confidentiality
+Exfiltration,Exfiltration Over Other Network Medium,Information Disclosure,Confidentiality
+Exfiltration,Exfiltration Over Physical Medium,Information Disclosure,Confidentiality
+Exfiltration,Exfiltration Over Web Service,Information Disclosure,Confidentiality
+Exfiltration,Scheduled Transfer,Information Disclosure,Confidentiality
+Exfiltration,Transfer Data to Cloud Account,Information Disclosure,Confidentiality
+Impact,Account Access Removal,Denial of Service,Availability
+Impact,Data Destruction,Denial of Service,Availability
+Impact,Data Encrypted for Impact,Denial of Service,Availability
+Impact,Data Manipulation,Tampering,Integrity
+Impact,Defacement,Tampering,Integrity
+Impact,Disk Wipe,Denial of Service,Availability
+Impact,Endpoint Denial of Service,Denial of Service,Availability
+Impact,Financial Theft,Denial of Service,Availability
+Impact,Firmware Corruption,Denial of Service,Availability
+Impact,Inhibit System Recovery,Denial of Service,Availability
+Impact,Network Denial of Service,Denial of Service,Availability
+Impact,Resource Hijacking,Denial of Service,Availability
+Impact,Service Stop,Denial of Service,Availability
+Impact,System Shutdown/Reboot,Denial of Service,Availability
