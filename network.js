@@ -47,7 +47,7 @@ async function loadData() {
         });
         
         // Add CIA categories
-        const ciaCategories = ['Confidentiality', 'Integrity', 'Availability'];
+        const ciaCategories = ['Confidentiality', 'Integrity', 'Availability', 'Authorization', 'Authenticity', 'Non-Repudiation'];
         ciaCategories.forEach(category => {
             nodes.set(category, {
                 id: category,

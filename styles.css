@@ -782,6 +782,21 @@ h1 {
     color: #558b2f;
 }
 
+.cia-tag[data-category="Authorization"] {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.cia-tag[data-category="Authenticity"] {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.cia-tag[data-category="Non-Repudiation"] {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
 .cia-chart-container {
     background-color: #f8f0ff;
     border: 1px solid #dee2e6;
@@ -829,6 +844,18 @@ h1 {
 
 .cia-bar[data-category="Availability"] .cia-bar-fill {
     background-color: #558b2f;
+}
+
+.cia-bar[data-category="Authorization"] .cia-bar-fill {
+    background-color: #e65100;
+}
+
+.cia-bar[data-category="Authenticity"] .cia-bar-fill {
+    background-color: #7b1fa2;
+}
+
+.cia-bar[data-category="Non-Repudiation"] .cia-bar-fill {
+    background-color: #2e7d32;
 }
 
 /* Ribbon Styles */

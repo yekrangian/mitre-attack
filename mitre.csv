@@ -9,133 +9,140 @@ Reconnaissance,Search Closed Sources,Information Disclosure,Confidentiality
 Reconnaissance,Search Open Technical Databases,Information Disclosure,Confidentiality
 Reconnaissance,Search Open Websites/Domains,Information Disclosure,Confidentiality
 Reconnaissance,Search Victim-Owned Websites,Information Disclosure,Confidentiality
-Resource Development,Acquire Access,Information Disclosure,Confidentiality
-Resource Development,Acquire Infrastructure,Elevation of Privilege,Availability
-Resource Development,Compromise Accounts,Spoofing,Confidentiality
-Resource Development,Compromise Infrastructure,Elevation of Privilege,Availability
-Resource Development,Develop Capabilities,Tampering,Integrity
-Resource Development,Establish Accounts,Spoofing,Confidentiality
-Resource Development,Obtain Capabilities,Tampering,Integrity
+Resource Development,Acquire Access,Elevation of Privilege,Authorization
+Resource Development,Acquire Infrastructure,Elevation of Privilege,Authorization
+Resource Development,Compromise Accounts,Elevation of Privilege,Authorization
+Resource Development,Compromise Infrastructure,Elevation of Privilege,Authorization
+Resource Development,Develop Capabilities,Elevation of Privilege,Authorization
+Resource Development,Establish Accounts,Spoofing,Authenticity
+Resource Development,Obtain Capabilities,Elevation of Privilege,Authorization
 Resource Development,Stage Capabilities,Tampering,Integrity
 Initial Access,Content Injection,Tampering,Integrity
-Initial Access,Drive-by Compromise,Elevation of Privilege,Confidentiality
-Initial Access,Exploit Public-Facing Application,Elevation of Privilege,Confidentiality
-Initial Access,External Remote Services,Elevation of Privilege,Confidentiality
-Initial Access,Hardware Additions,Elevation of Privilege,Confidentiality
-Initial Access,Phishing,Spoofing,Confidentiality
+Initial Access,Drive-by Compromise,Tampering,Integrity
+Initial Access,Exploit Public-Facing Application,Tampering,Integrity
+Initial Access,External Remote Services,Spoofing,Authenticity
+Initial Access,Hardware Additions,Tampering,Integrity
+Initial Access,Phishing,Spoofing,Authenticity
 Initial Access,Replication Through Removable Media,Tampering,Integrity
 Initial Access,Supply Chain Compromise,Tampering,Integrity
-Initial Access,Trusted Relationship,Spoofing,Confidentiality
-Initial Access,Valid Accounts,Spoofing,Confidentiality
-Execution,Cloud Administration Command,Elevation of Privilege,Confidentiality
-Execution,Command and Scripting Interpreter,Elevation of Privilege,Integrity
-Execution,Container Administration Command,Elevation of Privilege,Confidentiality
-Execution,Deploy Container,Elevation of Privilege,Confidentiality
-Execution,Exploitation for Client Execution,Elevation of Privilege,Confidentiality
-Execution,Inter-Process Communication,Elevation of Privilege,Integrity
-Execution,Native API,Elevation of Privilege,Integrity
-Execution,Scheduled Task/Job,Elevation of Privilege,Integrity
-Execution,Serverless Execution,Elevation of Privilege,Confidentiality
-Execution,Shared Modules,Elevation of Privilege,Integrity
-Execution,Software Deployment Tools,Elevation of Privilege,Integrity
-Execution,System Services,Elevation of Privilege,Integrity
-Execution,User Execution,Spoofing,Confidentiality
-Execution,Windows Management Instrumentation,Elevation of Privilege,Integrity
-Persistence,Account Manipulation,Elevation of Privilege,Integrity
-Persistence,BITS Jobs,Elevation of Privilege,Integrity
-Persistence,Boot or Logon Autostart Execution,Elevation of Privilege,Integrity
-Persistence,Boot or Logon Initialization Scripts,Elevation of Privilege,Integrity
-Persistence,Browser Extensions,Elevation of Privilege,Confidentiality
+Initial Access,Trusted Relationship,Spoofing,Authenticity
+Initial Access,Valid Accounts,Elevation of Privilege,Authorization
+Initial Access,WiFi Networks,Spoofing,Authenticity
+Execution,Cloud Administration Command,Elevation of Privilege,Authorization
+Execution,Command and Scripting Interpreter,Tampering,Integrity
+Execution,Container Administration Command,Elevation of Privilege,Authorization
+Execution,Deploy Container,Tampering,Integrity
+Execution,ESXi Administration Command,Elevation of Privilege,Authorization
+Execution,Exploitation for Client Execution,Tampering,Integrity
+Execution,Input Injection,Tampering,Integrity
+Execution,Inter-Process Communication,Tampering,Integrity
+Execution,Native API,Tampering,Integrity
+Execution,Scheduled Task/Job,Tampering,Integrity
+Execution,Serverless Execution,Elevation of Privilege,Authorization
+Execution,Shared Modules,Tampering,Integrity
+Execution,Software Deployment Tools,Elevation of Privilege,Authorization
+Execution,System Services,Tampering,Integrity
+Execution,User Execution,Spoofing,Authenticity
+Execution,Windows Management Instrumentation,Tampering,Integrity
+Persistence,Account Manipulation,Elevation of Privilege,Authorization
+Persistence,BITS Jobs,Tampering,Integrity
+Persistence,Boot or Logon Autostart Execution,Tampering,Integrity
+Persistence,Boot or Logon Initialization Scripts,Tampering,Integrity
+Persistence,Cloud Application Integration,Elevation of Privilege,Authorization
 Persistence,Compromise Host Software Binary,Tampering,Integrity
-Persistence,Create Account,Elevation of Privilege,Integrity
-Persistence,Create or Modify System Process,Elevation of Privilege,Integrity
-Persistence,Event Triggered Execution,Elevation of Privilege,Integrity
-Persistence,External Remote Services,Elevation of Privilege,Confidentiality
-Persistence,Hijack Execution Flow,Elevation of Privilege,Integrity
+Persistence,Create Account,Elevation of Privilege,Authorization
+Persistence,Create or Modify System Process,Tampering,Integrity
+Persistence,Event Triggered Execution,Tampering,Integrity
+Persistence,Exclusive Control,Tampering,Integrity
+Persistence,External Remote Services,Spoofing,Authenticity
+Persistence,Hijack Execution Flow,Tampering,Integrity
 Persistence,Implant Internal Image,Tampering,Integrity
-Persistence,Modify Authentication Process,Tampering,Integrity
-Persistence,Office Application Startup,Elevation of Privilege,Integrity
+Persistence,Modify Authentication Process,Elevation of Privilege,Authorization
+Persistence,Modify Registry,Tampering,Integrity
+Persistence,Office Application Startup,Tampering,Integrity
 Persistence,Power Settings,Denial of Service,Availability
-Persistence,Pre-OS Boot,Elevation of Privilege,Integrity
-Persistence,Scheduled Task/Job,Elevation of Privilege,Integrity
-Persistence,Server Software Component,Elevation of Privilege,Integrity
-Persistence,Traffic Signaling,Tampering,Integrity
-Persistence,Valid Accounts,Spoofing,Confidentiality
-Privilege Escalation,Abuse Elevation Control Mechanism,Elevation of Privilege,Integrity
-Privilege Escalation,Access Token Manipulation,Elevation of Privilege,Integrity
-Privilege Escalation,Account Manipulation,Elevation of Privilege,Integrity
-Privilege Escalation,Boot or Logon Autostart Execution,Elevation of Privilege,Integrity
-Privilege Escalation,Boot or Logon Initialization Scripts,Elevation of Privilege,Integrity
-Privilege Escalation,Create or Modify System Process,Elevation of Privilege,Integrity
+Persistence,Pre-OS Boot,Tampering,Integrity
+Persistence,Scheduled Task/Job,Tampering,Integrity
+Persistence,Server Software Component,Tampering,Integrity
+Persistence,Software Extensions,Tampering,Integrity
+Persistence,Traffic Signaling,Denial of Service,Availability
+Persistence,Valid Accounts,Elevation of Privilege,Authorization
+Privilege Escalation,Abuse Elevation Control Mechanism,Elevation of Privilege,Authorization
+Privilege Escalation,Access Token Manipulation,Elevation of Privilege,Authorization
+Privilege Escalation,Account Manipulation,Elevation of Privilege,Authorization
+Privilege Escalation,Boot or Logon Autostart Execution,Tampering,Integrity
+Privilege Escalation,Boot or Logon Initialization Scripts,Tampering,Integrity
+Privilege Escalation,Create or Modify System Process,Tampering,Integrity
 Privilege Escalation,Domain or Tenant Policy Modification,Tampering,Integrity
-Privilege Escalation,Escape to Host,Elevation of Privilege,Confidentiality
-Privilege Escalation,Event Triggered Execution,Elevation of Privilege,Integrity
-Privilege Escalation,Exploitation for Privilege Escalation,Elevation of Privilege,Integrity
-Privilege Escalation,Hijack Execution Flow,Elevation of Privilege,Integrity
-Privilege Escalation,Process Injection,Elevation of Privilege,Integrity
-Privilege Escalation,Scheduled Task/Job,Elevation of Privilege,Integrity
-Privilege Escalation,Valid Accounts,Spoofing,Confidentiality
-Defense Evasion,Abuse Elevation Control Mechanism,Elevation of Privilege,Integrity
-Defense Evasion,Access Token Manipulation,Elevation of Privilege,Integrity
-Defense Evasion,BITS Jobs,Elevation of Privilege,Integrity
+Privilege Escalation,Escape to Host,Elevation of Privilege,Authorization
+Privilege Escalation,Event Triggered Execution,Tampering,Integrity
+Privilege Escalation,Exploitation for Privilege Escalation,Elevation of Privilege,Authorization
+Privilege Escalation,Hijack Execution Flow,Tampering,Integrity
+Privilege Escalation,Process Injection,Tampering,Integrity
+Privilege Escalation,Scheduled Task/Job,Tampering,Integrity
+Privilege Escalation,Valid Accounts,Elevation of Privilege,Authorization
+Defense Evasion,Abuse Elevation Control Mechanism,Elevation of Privilege,Authorization
+Defense Evasion,Access Token Manipulation,Elevation of Privilege,Authorization
+Defense Evasion,BITS Jobs,Tampering,Integrity
 Defense Evasion,Build Image on Host,Tampering,Integrity
-Defense Evasion,Debugger Evasion,Repudiation,Integrity
+Defense Evasion,Debugger Evasion,Tampering,Integrity
 Defense Evasion,Deobfuscate/Decode Files or Information,Tampering,Integrity
-Defense Evasion,Deploy Container,Elevation of Privilege,Confidentiality
-Defense Evasion,Direct Volume Access,Elevation of Privilege,Integrity
+Defense Evasion,Deploy Container,Tampering,Integrity
+Defense Evasion,Direct Volume Access,Tampering,Integrity
 Defense Evasion,Domain or Tenant Policy Modification,Tampering,Integrity
-Defense Evasion,Execution Guardrails,Repudiation,Integrity
-Defense Evasion,Exploitation for Defense Evasion,Elevation of Privilege,Integrity
+Defense Evasion,Email Spoofing,Spoofing,Authenticity
+Defense Evasion,Execution Guardrails,Tampering,Integrity
+Defense Evasion,Exploitation for Defense Evasion,Tampering,Integrity
 Defense Evasion,File and Directory Permissions Modification,Tampering,Integrity
-Defense Evasion,Hide Artifacts,Repudiation,Integrity
-Defense Evasion,Hijack Execution Flow,Elevation of Privilege,Integrity
+Defense Evasion,Hide Artifacts,Tampering,Integrity
+Defense Evasion,Hijack Execution Flow,Tampering,Integrity
 Defense Evasion,Impair Defenses,Tampering,Integrity
-Defense Evasion,Impersonation,Spoofing,Confidentiality
-Defense Evasion,Indicator Removal,Repudiation,Integrity
-Defense Evasion,Indirect Command Execution,Elevation of Privilege,Integrity
-Defense Evasion,Masquerading,Spoofing,Confidentiality
-Defense Evasion,Modify Authentication Process,Tampering,Integrity
+Defense Evasion,Impersonation,Spoofing,Authenticity
+Defense Evasion,Indicator Removal,Tampering,Integrity
+Defense Evasion,Indirect Command Execution,Tampering,Integrity
+Defense Evasion,Masquerading,Tampering,Integrity
+Defense Evasion,Modify Authentication Process,Elevation of Privilege,Authorization
 Defense Evasion,Modify Cloud Compute Infrastructure,Tampering,Integrity
 Defense Evasion,Modify Cloud Resource Hierarchy,Tampering,Integrity
 Defense Evasion,Modify Registry,Tampering,Integrity
 Defense Evasion,Modify System Image,Tampering,Integrity
-Defense Evasion,Network Boundary Bridging,Elevation of Privilege,Confidentiality
+Defense Evasion,Network Boundary Bridging,Tampering,Integrity
 Defense Evasion,Obfuscated Files or Information,Tampering,Integrity
 Defense Evasion,Plist File Modification,Tampering,Integrity
-Defense Evasion,Pre-OS Boot,Elevation of Privilege,Integrity
-Defense Evasion,Process Injection,Elevation of Privilege,Integrity
-Defense Evasion,Reflective Code Loading,Elevation of Privilege,Integrity
+Defense Evasion,Pre-OS Boot,Tampering,Integrity
+Defense Evasion,Process Injection,Tampering,Integrity
+Defense Evasion,Reflective Code Loading,Tampering,Integrity
 Defense Evasion,Rogue Domain Controller,Tampering,Integrity
-Defense Evasion,Rootkit,Repudiation,Integrity
-Defense Evasion,Subvert Trust Controls,Spoofing,Integrity
-Defense Evasion,System Binary Proxy Execution,Elevation of Privilege,Integrity
-Defense Evasion,System Script Proxy Execution,Elevation of Privilege,Integrity
+Defense Evasion,Rootkit,Tampering,Integrity
+Defense Evasion,Subvert Trust Controls,Spoofing,Authenticity
+Defense Evasion,System Binary Proxy Execution,Elevation of Privilege,Authorization
+Defense Evasion,System Script Proxy Execution,Elevation of Privilege,Authorization
 Defense Evasion,Template Injection,Tampering,Integrity
-Defense Evasion,Traffic Signaling,Tampering,Integrity
-Defense Evasion,Trusted Developer Utilities Proxy Execution,Elevation of Privilege,Integrity
-Defense Evasion,Unused/Unsupported Cloud Regions,Elevation of Privilege,Confidentiality
-Defense Evasion,Use Alternate Authentication Material,Spoofing,Confidentiality
-Defense Evasion,Valid Accounts,Spoofing,Confidentiality
-Defense Evasion,Virtualization/Sandbox Evasion,Repudiation,Integrity
-Defense Evasion,Weaken Encryption,Tampering,Confidentiality
-Defense Evasion,XSL Script Processing,Elevation of Privilege,Integrity
-Credential Access,Adversary-in-the-Middle,Tampering,Confidentiality
-Credential Access,Brute Force,Elevation of Privilege,Confidentiality
-Credential Access,Credentials from Password Stores,Elevation of Privilege,Confidentiality
-Credential Access,Exploitation for Credential Access,Elevation of Privilege,Confidentiality
-Credential Access,Forced Authentication,Spoofing,Confidentiality
-Credential Access,Forge Web Credentials,Spoofing,Integrity
-Credential Access,Input Capture,Spoofing,Confidentiality
-Credential Access,Modify Authentication Process,Tampering,Integrity
-Credential Access,Multi-Factor Authentication Interception,Spoofing,Confidentiality
-Credential Access,Multi-Factor Authentication Request Generation,Spoofing,Integrity
+Defense Evasion,Traffic Signaling,Denial of Service,Availability
+Defense Evasion,Trusted Developer Utilities Proxy Execution,Tampering,Integrity
+Defense Evasion,Unused/Unsupported Cloud Regions,Tampering,Integrity
+Defense Evasion,Use Alternate Authentication Material,Elevation of Privilege,Authorization
+Defense Evasion,Valid Accounts,Elevation of Privilege,Authorization
+Defense Evasion,Virtualization/Sandbox Evasion,Tampering,Integrity
+Defense Evasion,Weaken Encryption,Information Disclosure,Confidentiality
+Defense Evasion,XSL Script Processing,Tampering,Integrity
+Credential Access,Adversary-in-the-Middle,Information Disclosure,Confidentiality
+Credential Access,Brute Force,Spoofing,Authorization
+Credential Access,Credentials from Password Stores,Information Disclosure,Confidentiality
+Credential Access,Exploitation for Credential Access,Information Disclosure,Confidentiality
+Credential Access,Forced Authentication,Information Disclosure,Confidentiality
+Credential Access,Forge Web Credentials,Spoofing,Authorization
+Credential Access,Input Capture,Information Disclosure,Confidentiality
+Credential Access,Modify Authentication Process,Elevation of Privilege,Authorization
+Credential Access,Multi-Factor Authentication Interception,Spoofing,Authenticity
+Credential Access,Multi-Factor Authentication Request Generation,Spoofing,Authenticity
 Credential Access,Network Sniffing,Information Disclosure,Confidentiality
-Credential Access,OS Credential Dumping,Elevation of Privilege,Confidentiality
-Credential Access,Steal Application Access Token,Spoofing,Confidentiality
-Credential Access,Steal or Forge Authentication Certificates,Spoofing,Integrity
-Credential Access,Steal or Forge Kerberos Tickets,Spoofing,Integrity
-Credential Access,Steal Web Session Cookie,Spoofing,Confidentiality
-Credential Access,Unsecured Credentials,Spoofing,Confidentiality
+Credential Access,OS Credential Dumping,Information Disclosure,Confidentiality
+Credential Access,Steal Application Access Token,Information Disclosure,Confidentiality
+Credential Access,Steal or Forge Authentication Certificates,Spoofing,Authenticity
+Credential Access,Steal or Forge Kerberos Tickets,Spoofing,Authenticity
+Credential Access,Steal Web Session Cookie,Information Disclosure,Confidentiality
+Credential Access,Unsecured Credentials,Information Disclosure,Confidentiality
 Discovery,Account Discovery,Information Disclosure,Confidentiality
 Discovery,Application Window Discovery,Information Disclosure,Confidentiality
 Discovery,Browser Information Discovery,Information Disclosure,Confidentiality
@@ -144,7 +151,7 @@ Discovery,Cloud Service Dashboard,Information Disclosure,Confidentiality
 Discovery,Cloud Service Discovery,Information Disclosure,Confidentiality
 Discovery,Cloud Storage Object Discovery,Information Disclosure,Confidentiality
 Discovery,Container and Resource Discovery,Information Disclosure,Confidentiality
-Discovery,Debugger Evasion,Tampering,Confidentiality
+Discovery,Debugger Evasion,Tampering,Integrity
 Discovery,Device Driver Discovery,Information Disclosure,Confidentiality
 Discovery,Domain Trust Discovery,Information Disclosure,Confidentiality
 Discovery,File and Directory Discovery,Information Disclosure,Confidentiality
@@ -167,21 +174,22 @@ Discovery,System Network Connections Discovery,Information Disclosure,Confidenti
 Discovery,System Owner/User Discovery,Information Disclosure,Confidentiality
 Discovery,System Service Discovery,Information Disclosure,Confidentiality
 Discovery,System Time Discovery,Information Disclosure,Confidentiality
-Discovery,Virtualization/Sandbox Evasion,Tampering,Confidentiality
-Lateral Movement,Exploitation of Remote Services,Elevation of Privilege,Integrity
-Lateral Movement,Internal Spearphishing,Spoofing,Confidentiality
+Discovery,Virtual Machine Discovery,Information Disclosure,Confidentiality
+Discovery,Virtualization/Sandbox Evasion,Tampering,Integrity
+Lateral Movement,Exploitation of Remote Services,Tampering,Integrity
+Lateral Movement,Internal Spearphishing,Spoofing,Authenticity
 Lateral Movement,Lateral Tool Transfer,Tampering,Integrity
-Lateral Movement,Remote Service Session Hijacking,Tampering,Confidentiality
-Lateral Movement,Remote Services,Elevation of Privilege,Confidentiality
+Lateral Movement,Remote Service Session Hijacking,Spoofing,Authenticity
+Lateral Movement,Remote Services,Spoofing,Authenticity
 Lateral Movement,Replication Through Removable Media,Tampering,Integrity
-Lateral Movement,Software Deployment Tools,Elevation of Privilege,Integrity
+Lateral Movement,Software Deployment Tools,Tampering,Integrity
 Lateral Movement,Taint Shared Content,Tampering,Integrity
-Lateral Movement,Use Alternate Authentication Material,Elevation of Privilege,Confidentiality
-Collection,Adversary-in-the-Middle,Tampering,Confidentiality
-Collection,Archive Collected Data,Tampering,Confidentiality
+Lateral Movement,Use Alternate Authentication Material,Spoofing,Authenticity
+Collection,Adversary-in-the-Middle,Spoofing,Authenticity
+Collection,Archive Collected Data,Information Disclosure,Confidentiality
 Collection,Audio Capture,Information Disclosure,Confidentiality
 Collection,Automated Collection,Information Disclosure,Confidentiality
-Collection,Browser Session Hijacking,Tampering,Confidentiality
+Collection,Browser Session Hijacking,Tampering,Integrity
 Collection,Clipboard Data,Information Disclosure,Confidentiality
 Collection,Data from Cloud Storage,Information Disclosure,Confidentiality
 Collection,Data from Configuration Repository,Information Disclosure,Confidentiality
@@ -189,29 +197,29 @@ Collection,Data from Information Repositories,Information Disclosure,Confidentia
 Collection,Data from Local System,Information Disclosure,Confidentiality
 Collection,Data from Network Shared Drive,Information Disclosure,Confidentiality
 Collection,Data from Removable Media,Information Disclosure,Confidentiality
-Collection,Data Staged,Tampering,Confidentiality
+Collection,Data Staged,Information Disclosure,Confidentiality
 Collection,Email Collection,Information Disclosure,Confidentiality
-Collection,Input Capture,Spoofing,Confidentiality
+Collection,Input Capture,Information Disclosure,Confidentiality
 Collection,Screen Capture,Information Disclosure,Confidentiality
 Collection,Video Capture,Information Disclosure,Confidentiality
-Command and Control,Application Layer Protocol,Tampering,Confidentiality
-Command and Control,Communication Through Removable Media,Tampering,Confidentiality
+Command and Control,Application Layer Protocol,Denial of Service,Availability
+Command and Control,Communication Through Removable Media,Tampering,Integrity
 Command and Control,Content Injection,Tampering,Integrity
-Command and Control,Data Encoding,Tampering,Confidentiality
-Command and Control,Data Obfuscation,Tampering,Confidentiality
-Command and Control,Dynamic Resolution,Tampering,Confidentiality
-Command and Control,Encrypted Channel,Tampering,Confidentiality
-Command and Control,Fallback Channels,Tampering,Confidentiality
-Command and Control,Hide Infrastructure,Tampering,Confidentiality
+Command and Control,Data Encoding,Tampering,Integrity
+Command and Control,Data Obfuscation,Tampering,Integrity
+Command and Control,Dynamic Resolution,Tampering,Integrity
+Command and Control,Encrypted Channel,Information Disclosure,Confidentiality
+Command and Control,Fallback Channels,Denial of Service,Availability
+Command and Control,Hide Infrastructure,Tampering,Integrity
 Command and Control,Ingress Tool Transfer,Tampering,Integrity
-Command and Control,Multi-Stage Channels,Tampering,Confidentiality
-Command and Control,Non-Application Layer Protocol,Tampering,Confidentiality
-Command and Control,Non-Standard Port,Tampering,Confidentiality
-Command and Control,Protocol Tunneling,Tampering,Confidentiality
-Command and Control,Proxy,Tampering,Confidentiality
-Command and Control,Remote Access Software,Tampering,Confidentiality
-Command and Control,Traffic Signaling,Tampering,Confidentiality
-Command and Control,Web Service,Tampering,Confidentiality
+Command and Control,Multi-Stage Channels,Tampering,Integrity
+Command and Control,Non-Application Layer Protocol,Tampering,Integrity
+Command and Control,Non-Standard Port,Tampering,Integrity
+Command and Control,Protocol Tunneling,Tampering,Integrity
+Command and Control,Proxy,Tampering,Integrity
+Command and Control,Remote Access Software,Spoofing,Authenticity
+Command and Control,Traffic Signaling,Tampering,Integrity
+Command and Control,Web Service,Tampering,Integrity
 Exfiltration,Automated Exfiltration,Information Disclosure,Confidentiality
 Exfiltration,Data Transfer Size Limits,Information Disclosure,Confidentiality
 Exfiltration,Exfiltration Over Alternative Protocol,Information Disclosure,Confidentiality
@@ -227,6 +235,7 @@ Impact,Data Encrypted for Impact,Denial of Service,Availability
 Impact,Data Manipulation,Tampering,Integrity
 Impact,Defacement,Tampering,Integrity
 Impact,Disk Wipe,Denial of Service,Availability
+Impact,Email Bombing,Denial of Service,Availability
 Impact,Endpoint Denial of Service,Denial of Service,Availability
 Impact,Financial Theft,Denial of Service,Availability
 Impact,Firmware Corruption,Denial of Service,Availability

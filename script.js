@@ -140,7 +140,10 @@ const STRIDE_CATEGORIES = [
 const CIA_CATEGORIES = [
     'Confidentiality',
     'Integrity',
-    'Availability'
+    'Availability',
+    'Authorization',
+    'Authenticity',
+    'Non-Repudiation'
 ];
 
 function filterTechniques() {
