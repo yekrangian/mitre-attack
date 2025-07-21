@@ -77,6 +77,251 @@ async function loadMitreData() {
     }
 }
 
+// Feedback collection system
+let feedbackData = [];
+
+// API base URL
+const API_BASE = 'http://localhost:8000/api';
+
+// Load feedback from server on page load
+async function loadFeedbackFromServer() {
+    try {
+        const response = await fetch(`${API_BASE}/feedback`);
+        if (response.ok) {
+            const data = await response.json();
+            feedbackData = data.feedback || [];
+            console.log('Loaded feedback from server:', feedbackData.length, 'entries');
+            updateDownloadButtonText();
+        } else {
+            console.error('Error loading feedback from server:', response.status);
+        }
+    } catch (error) {
+        console.error('Error loading feedback from server:', error);
+        feedbackData = [];
+    }
+}
+
+// Submit feedback to server
+async function submitFeedbackToServer(feedback) {
+    try {
+        const response = await fetch(`${API_BASE}/feedback`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                technique: feedback.technique,
+                stride: feedback.stride,
+                cia: feedback.cia,
+                feedback_type: feedback.type
+            })
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Feedback submitted to server:', result);
+            return true;
+        } else {
+            console.error('Error submitting feedback to server:', response.status);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error submitting feedback to server:', error);
+        return false;
+    }
+}
+
+// Generate unique ID for feedback
+function generateFeedbackId() {
+    return 'fb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Download feedback as CSV
+async function downloadFeedbackCSV() {
+    try {
+        // Get the CSV file directly from the server
+        const response = await fetch('/feedback.csv');
+        if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'feedback.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showFeedbackMessage(`Downloaded feedback CSV!`, 'success');
+        } else {
+            showFeedbackMessage('No feedback file found.', 'error');
+        }
+    } catch (error) {
+        console.error('Error downloading feedback:', error);
+        showFeedbackMessage('Error downloading feedback.', 'error');
+    }
+}
+
+// Clear all feedback data
+async function clearAllFeedback() {
+    if (confirm('Are you sure you want to clear all feedback data? This cannot be undone.')) {
+        try {
+            const response = await fetch(`${API_BASE}/feedback`, {
+                method: 'DELETE'
+            });
+            
+            if (response.ok) {
+                feedbackData = [];
+                updateDownloadButtonText();
+                showFeedbackMessage('All feedback cleared!', 'success');
+            } else {
+                showFeedbackMessage('Error clearing feedback.', 'error');
+            }
+        } catch (error) {
+            console.error('Error clearing feedback:', error);
+            showFeedbackMessage('Error clearing feedback.', 'error');
+        }
+    }
+}
+
+// Handle thumbs up feedback
+async function handleThumbsUp(techniqueName, stride, cia) {
+    const feedback = {
+        id: generateFeedbackId(),
+        technique: techniqueName,
+        stride: stride || '',
+        cia: cia || '',
+        type: 'thumbs_up',
+        timestamp: new Date().toISOString()
+    };
+    
+    const success = await submitFeedbackToServer(feedback);
+    if (success) {
+        feedbackData.push(feedback);
+        console.log('Feedback collected:', feedback);
+        console.log('Total feedback count:', feedbackData.length);
+        updateDownloadButtonText();
+        showFeedbackMessage(`Feedback submitted successfully! (Total: ${feedbackData.length})`, 'success');
+    } else {
+        showFeedbackMessage('Error submitting feedback. Please try again.', 'error');
+    }
+}
+
+// Handle thumbs down feedback
+function handleThumbsDown(techniqueName) {
+    showFeedbackModal(techniqueName);
+}
+
+// Show feedback modal for thumbs down
+function showFeedbackModal(techniqueName) {
+    // Remove existing modal if any
+    const existingModal = document.querySelector('.feedback-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    const modal = document.createElement('div');
+    modal.className = 'feedback-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>Provide Correct Classification</h3>
+                <p>Please select the correct STRIDE and CIA classifications for: <strong>${techniqueName}</strong></p>
+                
+                <div class="modal-form">
+                    <div class="form-group">
+                        <label for="modal-stride">STRIDE Category:</label>
+                        <select id="modal-stride" required>
+                            <option value="">Select STRIDE category...</option>
+                            ${STRIDE_CATEGORIES.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal-cia">CIA Category:</label>
+                        <select id="modal-cia" required>
+                            <option value="">Select CIA category...</option>
+                            ${CIA_CATEGORIES.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeFeedbackModal()">Cancel</button>
+                    <button class="btn-save" onclick="saveFeedback('${techniqueName}')">Save Feedback</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// Close feedback modal
+function closeFeedbackModal() {
+    const modal = document.querySelector('.feedback-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Save feedback from modal
+async function saveFeedback(techniqueName) {
+    const strideSelect = document.getElementById('modal-stride');
+    const ciaSelect = document.getElementById('modal-cia');
+    
+    const selectedStride = strideSelect.value;
+    const selectedCia = ciaSelect.value;
+    
+    if (!selectedStride || !selectedCia) {
+        showFeedbackMessage('Please select both STRIDE and CIA categories.', 'error');
+        return;
+    }
+    
+    const feedback = {
+        id: generateFeedbackId(),
+        technique: techniqueName,
+        stride: selectedStride,
+        cia: selectedCia,
+        type: 'thumbs_down',
+        timestamp: new Date().toISOString()
+    };
+    
+    const success = await submitFeedbackToServer(feedback);
+    if (success) {
+        feedbackData.push(feedback);
+        console.log('Feedback collected:', feedback);
+        console.log('Total feedback count:', feedbackData.length);
+        updateDownloadButtonText();
+        closeFeedbackModal();
+        showFeedbackMessage(`Feedback submitted successfully! (Total: ${feedbackData.length})`, 'success');
+    } else {
+        showFeedbackMessage('Error submitting feedback. Please try again.', 'error');
+    }
+}
+
+// Show feedback message
+function showFeedbackMessage(message, type) {
+    // Remove existing message if any
+    const existingMessage = document.querySelector('.feedback-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    const messageElement = document.createElement('div');
+    messageElement.className = `feedback-message feedback-${type}`;
+    messageElement.textContent = message;
+    
+    document.body.appendChild(messageElement);
+    
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+        if (messageElement.parentNode) {
+            messageElement.remove();
+        }
+    }, 3000);
+}
+
 // Function to create the matrix
 async function createMatrix() {
     const container = document.querySelector('.matrix-container');
@@ -113,6 +358,14 @@ async function createMatrix() {
                         <div class="tags-row">
                             ${technique.cia ? `<div class="cia-tag" data-category="${technique.cia}">${technique.cia}</div>` : ''}
                         </div>
+                    </div>
+                    <div class="feedback-buttons">
+                        <button class="feedback-btn thumbs-up" title="Agree with classification" onclick="handleThumbsUp('${technique.name}', '${technique.stride || ''}', '${technique.cia || ''}')">
+                            👍
+                        </button>
+                        <button class="feedback-btn thumbs-down" title="Disagree with classification" onclick="handleThumbsDown('${technique.name}')">
+                            👎
+                        </button>
                     </div>
                 </div>
             `;
@@ -486,3 +739,47 @@ function createTacticHeader(tactic) {
     
     return header;
 } 
+
+// Add Download Feedback button to the UI on page load
+function addDownloadFeedbackButton() {
+    let header = document.querySelector('header');
+    if (!header) return;
+    let existingBtn = document.getElementById('download-feedback-btn');
+    if (existingBtn) return;
+    
+    // Create button container
+    const btnContainer = document.createElement('div');
+    btnContainer.className = 'feedback-controls';
+    
+    // Download button
+    const downloadBtn = document.createElement('button');
+    downloadBtn.id = 'download-feedback-btn';
+    downloadBtn.className = 'btn-download-feedback';
+    downloadBtn.textContent = 'Download Feedback (0)';
+    downloadBtn.onclick = downloadFeedbackCSV;
+    
+    // Clear button
+    const clearBtn = document.createElement('button');
+    clearBtn.id = 'clear-feedback-btn';
+    clearBtn.className = 'btn-clear-feedback';
+    clearBtn.textContent = 'Clear Feedback';
+    clearBtn.onclick = clearAllFeedback;
+    
+    btnContainer.appendChild(downloadBtn);
+    btnContainer.appendChild(clearBtn);
+    header.appendChild(btnContainer);
+}
+
+// Update download button text with current feedback count
+function updateDownloadButtonText() {
+    const btn = document.getElementById('download-feedback-btn');
+    if (btn) {
+        btn.textContent = `Download Feedback (${feedbackData.length})`;
+    }
+}
+
+// Initialize feedback system
+document.addEventListener('DOMContentLoaded', () => {
+    loadFeedbackFromServer(); // Load existing feedback from server
+    addDownloadFeedbackButton();
+}); 

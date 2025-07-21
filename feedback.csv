@@ -1,0 +1,7 @@
+﻿ID,Technique,STRIDE,CIA,Feedback Type,Timestampfb_1753112862_6f74d984,Exploitation of Remote Services,Tampering,Integrity,thumbs_up,2025-07-21T11:47:42.173407
+fb_1753112864_ca783056,Account Discovery,Information Disclosure,Confidentiality,thumbs_up,2025-07-21T11:47:44.568433
+fb_1753112865_568f166e,Adversary-in-the-Middle,Information Disclosure,Confidentiality,thumbs_up,2025-07-21T11:47:45.517173
+fb_1753113038_a3862fb2,Acquire Access,Elevation of Privilege,Authorization,thumbs_up,2025-07-21T11:50:38.780038
+fb_1753113040_58e7eb4d,Active Scanning,Information Disclosure,Confidentiality,thumbs_up,2025-07-21T11:50:40.070753
+fb_1753113041_6a76b8b9,Gather Victim Host Information,Information Disclosure,Confidentiality,thumbs_up,2025-07-21T11:50:41.347557
+fb_1753113050_1bf3bab6,Gather Victim Host Information,Elevation of Privilege,Authenticity,thumbs_down,2025-07-21T11:50:50.758132
