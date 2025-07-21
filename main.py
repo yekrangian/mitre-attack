@@ -29,6 +29,7 @@ class FeedbackItem(BaseModel):
     stride: str
     cia: str
     feedback_type: str  # "thumbs_up" or "thumbs_down"
+    sid: str = ""  # User SID for thumbs down feedback
 
 class FeedbackResponse(BaseModel):
     id: str
@@ -37,6 +38,7 @@ class FeedbackResponse(BaseModel):
     cia: str
     feedback_type: str
     timestamp: str
+    sid: str
     message: str
 
 # CSV file path
@@ -47,7 +49,7 @@ def ensure_csv_exists():
     if not os.path.exists(FEEDBACK_CSV):
         with open(FEEDBACK_CSV, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(['ID', 'Technique', 'STRIDE', 'CIA', 'Feedback Type', 'Timestamp'])
+            writer.writerow(['ID', 'Technique', 'STRIDE', 'CIA', 'Feedback Type', 'SID', 'Timestamp'])
 
 def append_feedback_to_csv(feedback_data: dict):
     """Append feedback to CSV file"""
@@ -61,6 +63,7 @@ def append_feedback_to_csv(feedback_data: dict):
             feedback_data['stride'],
             feedback_data['cia'],
             feedback_data['feedback_type'],
+            feedback_data.get('sid', ''),  # Include SID
             feedback_data['timestamp']
         ])
 
@@ -94,6 +97,7 @@ async def submit_feedback(feedback: FeedbackItem):
             'stride': feedback.stride,
             'cia': feedback.cia,
             'feedback_type': feedback.feedback_type,
+            'sid': feedback.sid,
             'timestamp': timestamp
         }
         
@@ -107,6 +111,7 @@ async def submit_feedback(feedback: FeedbackItem):
             cia=feedback.cia,
             feedback_type=feedback.feedback_type,
             timestamp=timestamp,
+            sid=feedback.sid,
             message="Feedback submitted successfully!"
         )
         

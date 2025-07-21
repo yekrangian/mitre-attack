@@ -1067,6 +1067,24 @@ h1 {
     line-height: 1.5;
 }
 
+/* Current Classification Display */
+.current-classification {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.classification-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #e9ecef;
+    color: #495057;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Modal form improvements */
 .modal-form {
     margin-bottom: 24px;
 }
@@ -1082,7 +1100,8 @@ h1 {
     color: #333;
 }
 
-.form-group select {
+.form-group select,
+.form-group input {
     width: 100%;
     padding: 8px 12px;
     border: 1px solid #dee2e6;
@@ -1091,7 +1110,8 @@ h1 {
     background-color: white;
 }
 
-.form-group select:focus {
+.form-group select:focus,
+.form-group input:focus {
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);

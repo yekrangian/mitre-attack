@@ -102,7 +102,7 @@ async function loadFeedbackFromServer() {
 }
 
 // Submit feedback to server
-async function submitFeedbackToServer(feedback) {
+async function submitFeedbackToServer(feedback, sid = "") {
     try {
         const response = await fetch(`${API_BASE}/feedback`, {
             method: 'POST',
@@ -113,7 +113,8 @@ async function submitFeedbackToServer(feedback) {
                 technique: feedback.technique,
                 stride: feedback.stride,
                 cia: feedback.cia,
-                feedback_type: feedback.type
+                feedback_type: feedback.type,
+                sid: sid
             })
         });
         
@@ -139,10 +140,41 @@ function generateFeedbackId() {
 // Download feedback as CSV
 async function downloadFeedbackCSV() {
     try {
-        // Get the CSV file directly from the server
-        const response = await fetch('/feedback.csv');
+        console.log('Attempting to download feedback CSV...');
+        
+        // First, get the feedback data from the API
+        const response = await fetch(`${API_BASE}/feedback`);
+        console.log('API response status:', response.status);
+        
         if (response.ok) {
-            const blob = await response.blob();
+            const data = await response.json();
+            const feedback = data.feedback || [];
+            console.log('Retrieved feedback data:', feedback.length, 'entries');
+            
+            if (feedback.length === 0) {
+                showFeedbackMessage('No feedback to download.', 'error');
+                return;
+            }
+            
+            // Create CSV content
+            const headers = ['ID', 'Technique', 'STRIDE', 'CIA', 'Feedback Type', 'SID', 'Timestamp'];
+            const csvContent = [
+                headers.join(','),
+                ...feedback.map(f => [
+                    f.ID || f.id,
+                    `"${f.Technique || f.technique}"`,
+                    f.STRIDE || f.stride,
+                    f.CIA || f.cia,
+                    f['Feedback Type'] || f.feedback_type,
+                    f.SID || f.sid || '',
+                    f.Timestamp || f.timestamp
+                ].join(','))
+            ].join('\n');
+            
+            console.log('Generated CSV content length:', csvContent.length);
+            
+            // Create and download the blob
+            const blob = new Blob([csvContent], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -152,13 +184,16 @@ async function downloadFeedbackCSV() {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
             
-            showFeedbackMessage(`Downloaded feedback CSV!`, 'success');
+            showFeedbackMessage(`Downloaded feedback CSV! (${feedback.length} entries)`, 'success');
         } else {
-            showFeedbackMessage('No feedback file found.', 'error');
+            console.error('API request failed with status:', response.status);
+            const errorText = await response.text();
+            console.error('Error response:', errorText);
+            showFeedbackMessage(`Download failed: ${response.status}`, 'error');
         }
     } catch (error) {
         console.error('Error downloading feedback:', error);
-        showFeedbackMessage('Error downloading feedback.', 'error');
+        showFeedbackMessage(`Download error: ${error.message}`, 'error');
     }
 }
 
@@ -186,54 +221,44 @@ async function clearAllFeedback() {
 
 // Handle thumbs up feedback
 async function handleThumbsUp(techniqueName, stride, cia) {
-    const feedback = {
-        id: generateFeedbackId(),
-        technique: techniqueName,
-        stride: stride || '',
-        cia: cia || '',
-        type: 'thumbs_up',
-        timestamp: new Date().toISOString()
-    };
-    
-    const success = await submitFeedbackToServer(feedback);
-    if (success) {
-        feedbackData.push(feedback);
-        console.log('Feedback collected:', feedback);
-        console.log('Total feedback count:', feedbackData.length);
-        updateDownloadButtonText();
-        showFeedbackMessage(`Feedback submitted successfully! (Total: ${feedbackData.length})`, 'success');
-    } else {
-        showFeedbackMessage('Error submitting feedback. Please try again.', 'error');
-    }
+    // Show modal for thumbs up to collect SID
+    showFeedbackModal(techniqueName, 'thumbs_up', stride, cia);
 }
 
 // Handle thumbs down feedback
 function handleThumbsDown(techniqueName) {
-    showFeedbackModal(techniqueName);
+    showFeedbackModal(techniqueName, 'thumbs_down');
 }
 
-// Show feedback modal for thumbs down
-function showFeedbackModal(techniqueName) {
+// Show feedback modal for both thumbs up and thumbs down
+function showFeedbackModal(techniqueName, feedbackType, existingStride = '', existingCia = '') {
     // Remove existing modal if any
     const existingModal = document.querySelector('.feedback-modal');
     if (existingModal) {
         existingModal.remove();
     }
     
+    const isThumbsUp = feedbackType === 'thumbs_up';
+    const modalTitle = isThumbsUp ? 'Confirm Classification' : 'Provide Correct Classification';
+    const modalDescription = isThumbsUp 
+        ? `Please confirm your SID for: <strong>${techniqueName}</strong>`
+        : `Please select the correct STRIDE and CIA classifications for: <strong>${techniqueName}</strong>`;
+    
     const modal = document.createElement('div');
     modal.className = 'feedback-modal';
     modal.innerHTML = `
         <div class="modal-overlay">
             <div class="modal-content">
-                <h3>Provide Correct Classification</h3>
-                <p>Please select the correct STRIDE and CIA classifications for: <strong>${techniqueName}</strong></p>
+                <h3>${modalTitle}</h3>
+                <p>${modalDescription}</p>
                 
                 <div class="modal-form">
+                    ${!isThumbsUp ? `
                     <div class="form-group">
                         <label for="modal-stride">STRIDE Category:</label>
                         <select id="modal-stride" required>
                             <option value="">Select STRIDE category...</option>
-                            ${STRIDE_CATEGORIES.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                            ${STRIDE_CATEGORIES.map(cat => `<option value="${cat}" ${cat === existingStride ? 'selected' : ''}>${cat}</option>`).join('')}
                         </select>
                     </div>
                     
@@ -241,14 +266,28 @@ function showFeedbackModal(techniqueName) {
                         <label for="modal-cia">CIA Category:</label>
                         <select id="modal-cia" required>
                             <option value="">Select CIA category...</option>
-                            ${CIA_CATEGORIES.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                            ${CIA_CATEGORIES.map(cat => `<option value="${cat}" ${cat === existingCia ? 'selected' : ''}>${cat}</option>`).join('')}
                         </select>
+                    </div>
+                    ` : `
+                    <div class="form-group">
+                        <label>Current Classification:</label>
+                        <div class="current-classification">
+                            <span class="classification-tag">STRIDE: ${existingStride || 'None'}</span>
+                            <span class="classification-tag">CIA: ${existingCia || 'None'}</span>
+                        </div>
+                    </div>
+                    `}
+                    
+                    <div class="form-group">
+                        <label for="modal-sid">Your SID (User ID):</label>
+                        <input type="text" id="modal-sid" placeholder="Enter your SID" required>
                     </div>
                 </div>
                 
                 <div class="modal-actions">
                     <button class="btn-cancel" onclick="closeFeedbackModal()">Cancel</button>
-                    <button class="btn-save" onclick="saveFeedback('${techniqueName}')">Save Feedback</button>
+                    <button class="btn-save" onclick="saveFeedback('${techniqueName}', '${feedbackType}', '${existingStride}', '${existingCia}')">Save Feedback</button>
                 </div>
             </div>
         </div>
@@ -266,16 +305,33 @@ function closeFeedbackModal() {
 }
 
 // Save feedback from modal
-async function saveFeedback(techniqueName) {
-    const strideSelect = document.getElementById('modal-stride');
-    const ciaSelect = document.getElementById('modal-cia');
+async function saveFeedback(techniqueName, feedbackType, existingStride = '', existingCia = '') {
+    const sidInput = document.getElementById('modal-sid');
+    const userSid = sidInput.value.trim();
     
-    const selectedStride = strideSelect.value;
-    const selectedCia = ciaSelect.value;
-    
-    if (!selectedStride || !selectedCia) {
-        showFeedbackMessage('Please select both STRIDE and CIA categories.', 'error');
+    if (!userSid) {
+        showFeedbackMessage('Please enter your SID.', 'error');
         return;
+    }
+    
+    let selectedStride, selectedCia;
+    
+    if (feedbackType === 'thumbs_up') {
+        // Use existing values for thumbs up
+        selectedStride = existingStride;
+        selectedCia = existingCia;
+    } else {
+        // Get selected values for thumbs down
+        const strideSelect = document.getElementById('modal-stride');
+        const ciaSelect = document.getElementById('modal-cia');
+        
+        selectedStride = strideSelect.value;
+        selectedCia = ciaSelect.value;
+        
+        if (!selectedStride || !selectedCia) {
+            showFeedbackMessage('Please select both STRIDE and CIA categories.', 'error');
+            return;
+        }
     }
     
     const feedback = {
@@ -283,11 +339,11 @@ async function saveFeedback(techniqueName) {
         technique: techniqueName,
         stride: selectedStride,
         cia: selectedCia,
-        type: 'thumbs_down',
+        type: feedbackType,
         timestamp: new Date().toISOString()
     };
     
-    const success = await submitFeedbackToServer(feedback);
+    const success = await submitFeedbackToServer(feedback, userSid);
     if (success) {
         feedbackData.push(feedback);
         console.log('Feedback collected:', feedback);
