@@ -1,1 +1,5 @@
 ﻿ID,Technique,STRIDE,CIA,Feedback Type,SID,Timestamp
+
+fb_1753124690_311a2c19,Active Scanning,Information Disclosure,Confidentiality,thumbs_up,R714214,2025-07-21T15:04:50.321392
+fb_1753124697_28df37f9,Active Scanning,Spoofing,Confidentiality,thumbs_down,R714214,2025-07-21T15:04:57.003461
+fb_1753124721_3d3111d7,Gather Victim Host Information,Information Disclosure,Confidentiality,thumbs_up,R714214,2025-07-21T15:05:21.269244

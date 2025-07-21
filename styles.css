@@ -41,7 +41,8 @@ header {
 /* Search and Filter Inputs */
 .search-input, 
 #strideFilter, 
-#ciaFilter {
+#ciaFilter,
+#userSid {
     padding: 4px 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 2px;
@@ -54,7 +55,8 @@ header {
 
 .search-input::placeholder,
 #strideFilter::placeholder,
-#ciaFilter::placeholder {
+#ciaFilter::placeholder,
+#userSid::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
 
@@ -63,7 +65,8 @@ header {
 }
 
 #strideFilter,
-#ciaFilter {
+#ciaFilter,
+#userSid {
     width: 150px;
 }
 
@@ -74,7 +77,8 @@ header {
 }
 
 .stride-label, 
-.cia-label {
+.cia-label,
+.sid-label {
     color: white;
     font-weight: 500;
     font-size: 1rem;

@@ -432,5 +432,24 @@ async function init() {
     }
 }
 
+// SID persistence functionality
+function initializeSidPersistence() {
+    const sidInput = document.getElementById('userSid');
+    
+    // Load saved SID from localStorage
+    const savedSid = localStorage.getItem('userSid');
+    if (savedSid) {
+        sidInput.value = savedSid;
+    }
+    
+    // Save SID to localStorage when user types
+    sidInput.addEventListener('input', () => {
+        localStorage.setItem('userSid', sidInput.value);
+    });
+}
+
 // Start the visualization when the page loads
-window.addEventListener('load', init); 
+window.addEventListener('load', () => {
+    init();
+    initializeSidPersistence();
+}); 

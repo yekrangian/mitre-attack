@@ -31,6 +31,25 @@ function initializeTheme() {
 // Initialize theme when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeTheme);
 
+// SID persistence functionality
+function initializeSidPersistence() {
+    const sidInput = document.getElementById('userSid');
+    
+    // Load saved SID from localStorage
+    const savedSid = localStorage.getItem('userSid');
+    if (savedSid) {
+        sidInput.value = savedSid;
+    }
+    
+    // Save SID to localStorage when user types
+    sidInput.addEventListener('input', () => {
+        localStorage.setItem('userSid', sidInput.value);
+    });
+}
+
+// Initialize SID persistence when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeSidPersistence);
+
 // Function to fetch and parse CSV data
 async function loadMitreData() {
     try {
@@ -221,16 +240,49 @@ async function clearAllFeedback() {
 
 // Handle thumbs up feedback
 async function handleThumbsUp(techniqueName, stride, cia) {
-    // Show modal for thumbs up to collect SID
-    showFeedbackModal(techniqueName, 'thumbs_up', stride, cia);
+    // Get SID from main page
+    const userSid = document.getElementById('userSid').value.trim();
+    
+    if (!userSid) {
+        showFeedbackMessage('Please enter your SID in the header before submitting feedback.', 'error');
+        return;
+    }
+    
+    // Submit feedback directly without modal
+    const feedback = {
+        id: generateFeedbackId(),
+        technique: techniqueName,
+        stride: stride,
+        cia: cia,
+        type: 'thumbs_up',
+        timestamp: new Date().toISOString()
+    };
+    
+    const success = await submitFeedbackToServer(feedback, userSid);
+    if (success) {
+        feedbackData.push(feedback);
+        console.log('Feedback collected:', feedback);
+        console.log('Total feedback count:', feedbackData.length);
+        showFeedbackMessage('Feedback submitted successfully!', 'success');
+        updateDownloadButtonText();
+    }
 }
 
 // Handle thumbs down feedback
 function handleThumbsDown(techniqueName) {
+    // Get SID from main page
+    const userSid = document.getElementById('userSid').value.trim();
+    
+    if (!userSid) {
+        showFeedbackMessage('Please enter your SID in the header before submitting feedback.', 'error');
+        return;
+    }
+    
+    // Show modal for thumbs down to select correct classifications
     showFeedbackModal(techniqueName, 'thumbs_down');
 }
 
-// Show feedback modal for both thumbs up and thumbs down
+// Show feedback modal for thumbs down only (SID is now on main page)
 function showFeedbackModal(techniqueName, feedbackType, existingStride = '', existingCia = '') {
     // Remove existing modal if any
     const existingModal = document.querySelector('.feedback-modal');
@@ -238,11 +290,8 @@ function showFeedbackModal(techniqueName, feedbackType, existingStride = '', exi
         existingModal.remove();
     }
     
-    const isThumbsUp = feedbackType === 'thumbs_up';
-    const modalTitle = isThumbsUp ? 'Confirm Classification' : 'Provide Correct Classification';
-    const modalDescription = isThumbsUp 
-        ? `Please confirm your SID for: <strong>${techniqueName}</strong>`
-        : `Please select the correct STRIDE and CIA classifications for: <strong>${techniqueName}</strong>`;
+    const modalTitle = 'Provide Correct Classification';
+    const modalDescription = `Please select the correct STRIDE and CIA classifications for: <strong>${techniqueName}</strong>`;
     
     const modal = document.createElement('div');
     modal.className = 'feedback-modal';
@@ -253,7 +302,6 @@ function showFeedbackModal(techniqueName, feedbackType, existingStride = '', exi
                 <p>${modalDescription}</p>
                 
                 <div class="modal-form">
-                    ${!isThumbsUp ? `
                     <div class="form-group">
                         <label for="modal-stride">STRIDE Category:</label>
                         <select id="modal-stride" required>
@@ -268,20 +316,6 @@ function showFeedbackModal(techniqueName, feedbackType, existingStride = '', exi
                             <option value="">Select CIA category...</option>
                             ${CIA_CATEGORIES.map(cat => `<option value="${cat}" ${cat === existingCia ? 'selected' : ''}>${cat}</option>`).join('')}
                         </select>
-                    </div>
-                    ` : `
-                    <div class="form-group">
-                        <label>Current Classification:</label>
-                        <div class="current-classification">
-                            <span class="classification-tag">STRIDE: ${existingStride || 'None'}</span>
-                            <span class="classification-tag">CIA: ${existingCia || 'None'}</span>
-                        </div>
-                    </div>
-                    `}
-                    
-                    <div class="form-group">
-                        <label for="modal-sid">Your SID (User ID):</label>
-                        <input type="text" id="modal-sid" placeholder="Enter your SID" required>
                     </div>
                 </div>
                 
@@ -304,34 +338,26 @@ function closeFeedbackModal() {
     }
 }
 
-// Save feedback from modal
+// Save feedback from modal (SID now comes from main page)
 async function saveFeedback(techniqueName, feedbackType, existingStride = '', existingCia = '') {
-    const sidInput = document.getElementById('modal-sid');
-    const userSid = sidInput.value.trim();
+    // Get SID from main page
+    const userSid = document.getElementById('userSid').value.trim();
     
     if (!userSid) {
-        showFeedbackMessage('Please enter your SID.', 'error');
+        showFeedbackMessage('Please enter your SID in the header before submitting feedback.', 'error');
         return;
     }
     
-    let selectedStride, selectedCia;
+    // Get selected values for thumbs down
+    const strideSelect = document.getElementById('modal-stride');
+    const ciaSelect = document.getElementById('modal-cia');
     
-    if (feedbackType === 'thumbs_up') {
-        // Use existing values for thumbs up
-        selectedStride = existingStride;
-        selectedCia = existingCia;
-    } else {
-        // Get selected values for thumbs down
-        const strideSelect = document.getElementById('modal-stride');
-        const ciaSelect = document.getElementById('modal-cia');
-        
-        selectedStride = strideSelect.value;
-        selectedCia = ciaSelect.value;
-        
-        if (!selectedStride || !selectedCia) {
-            showFeedbackMessage('Please select both STRIDE and CIA categories.', 'error');
-            return;
-        }
+    const selectedStride = strideSelect.value;
+    const selectedCia = ciaSelect.value;
+    
+    if (!selectedStride || !selectedCia) {
+        showFeedbackMessage('Please select both STRIDE and CIA categories.', 'error');
+        return;
     }
     
     const feedback = {
