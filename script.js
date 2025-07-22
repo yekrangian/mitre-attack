@@ -133,7 +133,8 @@ async function submitFeedbackToServer(feedback, sid = "") {
                 stride: feedback.stride,
                 cia: feedback.cia,
                 feedback_type: feedback.type,
-                sid: sid
+                sid: sid,
+                comment: feedback.comment || ""
             })
         });
         
@@ -176,7 +177,7 @@ async function downloadFeedbackCSV() {
             }
             
             // Create CSV content
-            const headers = ['ID', 'Technique', 'STRIDE', 'CIA', 'Feedback Type', 'SID', 'Timestamp'];
+            const headers = ['ID', 'Technique', 'STRIDE', 'CIA', 'Feedback Type', 'SID', 'Comment', 'Timestamp'];
             const csvContent = [
                 headers.join(','),
                 ...feedback.map(f => [
@@ -186,6 +187,7 @@ async function downloadFeedbackCSV() {
                     f.CIA || f.cia,
                     f['Feedback Type'] || f.feedback_type,
                     f.SID || f.sid || '',
+                    `"${f.Comment || f.comment || ''}"`,
                     f.Timestamp || f.timestamp
                 ].join(','))
             ].join('\n');
@@ -317,6 +319,11 @@ function showFeedbackModal(techniqueName, feedbackType, existingStride = '', exi
                             ${CIA_CATEGORIES.map(cat => `<option value="${cat}" ${cat === existingCia ? 'selected' : ''}>${cat}</option>`).join('')}
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="modal-comment">Comment (Optional):</label>
+                        <textarea id="modal-comment" placeholder="Please provide additional context for your feedback..." rows="3"></textarea>
+                    </div>
                 </div>
                 
                 <div class="modal-actions">
@@ -351,9 +358,11 @@ async function saveFeedback(techniqueName, feedbackType, existingStride = '', ex
     // Get selected values for thumbs down
     const strideSelect = document.getElementById('modal-stride');
     const ciaSelect = document.getElementById('modal-cia');
+    const commentTextarea = document.getElementById('modal-comment');
     
     const selectedStride = strideSelect.value;
     const selectedCia = ciaSelect.value;
+    const comment = commentTextarea.value.trim();
     
     if (!selectedStride || !selectedCia) {
         showFeedbackMessage('Please select both STRIDE and CIA categories.', 'error');
@@ -366,6 +375,7 @@ async function saveFeedback(techniqueName, feedbackType, existingStride = '', ex
         stride: selectedStride,
         cia: selectedCia,
         type: feedbackType,
+        comment: comment,
         timestamp: new Date().toISOString()
     };
     

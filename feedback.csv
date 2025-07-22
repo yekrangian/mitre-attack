@@ -1,5 +1,11 @@
-﻿ID,Technique,STRIDE,CIA,Feedback Type,SID,Timestamp
+﻿ID,Technique,STRIDE,CIA,Feedback Type,SID,Comment,Timestamp
 
-fb_1753124690_311a2c19,Active Scanning,Information Disclosure,Confidentiality,thumbs_up,R714214,2025-07-21T15:04:50.321392
-fb_1753124697_28df37f9,Active Scanning,Spoofing,Confidentiality,thumbs_down,R714214,2025-07-21T15:04:57.003461
-fb_1753124721_3d3111d7,Gather Victim Host Information,Information Disclosure,Confidentiality,thumbs_up,R714214,2025-07-21T15:05:21.269244
+fb_1753124690_311a2c19,Active Scanning,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-07-21T15:04:50.321392
+fb_1753124697_28df37f9,Active Scanning,Spoofing,Confidentiality,thumbs_down,R714214,,2025-07-21T15:04:57.003461
+fb_1753124721_3d3111d7,Gather Victim Host Information,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-07-21T15:05:21.269244
+fb_1753201824_26c898d3,Acquire Access,Elevation of Privilege,Authorization,thumbs_up,R714214,,2025-07-22T12:30:24.820383
+fb_1753201887_5891ac53,Acquire Access,Tampering,Confidentiality,thumbs_down,R714214,,2025-07-22T12:31:27.801728
+fb_1753201927_ea3323ad,Abuse Elevation Control Mechanism,Tampering,Confidentiality,thumbs_down,R714214,,2025-07-22T12:32:07.468235
+fb_1753202048_3eda082e,Acquire Access,Repudiation,Non-Repudiation,thumbs_down,R714214,2025-07-22T12:34:08.897037
+fb_1753202092_0dbec42d,Cloud Administration Command,Repudiation,Non-Repudiation,thumbs_down,R714214,TEST,2025-07-22T12:34:52.867559
+fb_1753202120_f74b997d,Account Manipulation,Tampering,Confidentiality,thumbs_down,R714214,THIS IS A TEST,2025-07-22T12:35:20.761196
