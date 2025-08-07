@@ -286,29 +286,6 @@ function filterGraph(nodes, links, searchTerm, strideFilter, ciaFilter) {
     const strideFilterLower = strideFilter.toLowerCase();
     const ciaFilterLower = ciaFilter.toLowerCase();
 
-    // First, find matching technique nodes
-    const matchingTechniqueIds = new Set(
-        nodes
-            .filter(node => {
-                if (node.type !== NODE_TYPES.TECHNIQUE) return false;
-                
-                const matchesSearch = !searchTerm || node.name.toLowerCase().includes(searchTermLower);
-                const matchesStride = !strideFilter || links.some(link => 
-                    link.source.id === node.id && 
-                    link.type === 'stride' && 
-                    link.target.name.toLowerCase().includes(strideFilterLower)
-                );
-                const matchesCia = !ciaFilter || links.some(link => 
-                    link.source.id === node.id && 
-                    link.type === 'cia' && 
-                    link.target.name.toLowerCase().includes(ciaFilterLower)
-                );
-                
-                return matchesSearch && matchesStride && matchesCia;
-            })
-            .map(node => node.id)
-    );
-
     // If no filters are active, show everything
     if (!searchTerm && !strideFilter && !ciaFilter) {
         nodes.forEach(node => {
@@ -321,6 +298,41 @@ function filterGraph(nodes, links, searchTerm, strideFilter, ciaFilter) {
         });
         return;
     }
+
+    // Find matching technique nodes
+    const matchingTechniqueIds = new Set();
+    
+    nodes.forEach(node => {
+        if (node.type !== NODE_TYPES.TECHNIQUE) return;
+        
+        const matchesSearch = !searchTerm || node.name.toLowerCase().includes(searchTermLower);
+        
+        // Check STRIDE connections
+        let matchesStride = !strideFilter;
+        if (strideFilter) {
+            const strideLinks = links.filter(link => 
+                link.source.id === node.id && link.type === 'stride'
+            );
+            matchesStride = strideLinks.some(link => 
+                link.target.name.toLowerCase().includes(strideFilterLower)
+            );
+        }
+        
+        // Check CIA connections
+        let matchesCia = !ciaFilter;
+        if (ciaFilter) {
+            const ciaLinks = links.filter(link => 
+                link.source.id === node.id && link.type === 'cia'
+            );
+            matchesCia = ciaLinks.some(link => 
+                link.target.name.toLowerCase().includes(ciaFilterLower)
+            );
+        }
+        
+        if (matchesSearch && matchesStride && matchesCia) {
+            matchingTechniqueIds.add(node.id);
+        }
+    });
 
     // Find all related nodes and links
     const visibleNodeIds = new Set();
@@ -404,32 +416,40 @@ async function init() {
         ];
         
         // Initialize CIA categories
-        const ciaCategories = ['Confidentiality', 'Integrity', 'Availability'];
+        const ciaCategories = ['Confidentiality', 'Integrity', 'Availability', 'Authorization', 'Authenticity', 'Non-Repudiation'];
         
-        // Add autocomplete for STRIDE
-        strideInput.addEventListener('input', (e) => {
-            const value = e.target.value.trim();
-            const match = strideCategories.find(cat => 
-                cat.toLowerCase().startsWith(value.toLowerCase())
-            );
-            if (value && match && e.inputType !== 'deleteContentBackward') {
-                strideInput.value = match;
-                handleSearch();
-            }
-        });
-        
-        // Add autocomplete for CIA
-        ciaInput.addEventListener('input', (e) => {
-            const value = e.target.value.trim();
-            const match = ciaCategories.find(cat => 
-                cat.toLowerCase().startsWith(value.toLowerCase())
-            );
-            if (value && match && e.inputType !== 'deleteContentBackward') {
-                ciaInput.value = match;
-                handleSearch();
-            }
-        });
+
     }
+}
+
+// Theme toggle functionality
+function initializeTheme() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Check for saved theme preference or use system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    } else if (prefersDarkScheme.matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+    
+    // Listen for system theme changes
+    prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
+    });
 }
 
 // SID persistence functionality
@@ -451,5 +471,6 @@ function initializeSidPersistence() {
 // Start the visualization when the page loads
 window.addEventListener('load', () => {
     init();
+    initializeTheme();
     initializeSidPersistence();
 }); 
