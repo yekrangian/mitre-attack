@@ -23,13 +23,15 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    min-width: 0;
 }
 
 .search-container {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .logo-text {
@@ -62,7 +64,8 @@ header {
 }
 
 .search-input {
-    width: 200px;
+    width: auto;
+    flex: 1 1 420px;
 }
 
 #strideFilter,
@@ -483,12 +486,12 @@ nav a:hover {
 /* Main Content Styles */
 main {
     width: 100%;
-    padding: 2rem 10px;
+    padding: 1rem 10px; /* reduce top padding to avoid large gap */
 }
 
 .content-layout {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 240px minmax(0, 1fr);
     gap: 0;
 }
 
@@ -513,6 +516,9 @@ main {
     padding: 12px 8px;
     position: relative;
 }
+
+/* Prevent layout jump on load by defining initial state explicitly */
+.content-layout:not(.sidebar-collapsed) .sidebar { width: 240px; }
 .sidebar-collapse-handle {
     position: absolute;
     top: 8px;
@@ -586,7 +592,7 @@ h1 {
     background-color: var(--matrix-bg);
     gap: 2px;
     padding: 2px;
-    margin: 20px 10px;
+    margin: 6px 10px 20px 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     width: calc(100% - 20px);
@@ -957,7 +963,7 @@ h1 {
 .ribbon {
     background-color: #f8f9fa;
     border-bottom: 1px solid #dee2e6;
-    padding: 8px 16px;
+    padding: 6px 16px;
     display: flex;
     align-items: center;
 }
@@ -995,12 +1001,18 @@ h1 {
     margin-left: auto;
 }
 
+/* Make header stretch across when sidebar collapses */
+.content-layout.sidebar-collapsed + main .header-content,
+.content-layout.sidebar-collapsed ~ header .header-content {
+    width: 100%;
+}
+
 /* Modern Legend Styles */
 .legend-container {
     display: flex;
     align-items: center;
-    padding: 8px 16px;
-    margin: 0 10px 20px 10px;
+    padding: 6px 12px;
+    margin: 6px 10px 16px 10px;
     background-color: white;
     border: 1px solid var(--border-color);
     border-radius: 4px;
