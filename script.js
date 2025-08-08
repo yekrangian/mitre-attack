@@ -64,6 +64,10 @@ async function loadMitreData() {
             const stride = (r.STRIDE || '').trim();
             const cia = (r.CIA || '').trim();
             const description = (r.TechniqueDescription || '').trim();
+            const tags = (r.Tags || '')
+                .split(',')
+                .map(t => t.trim())
+                .filter(Boolean);
 
             if (!tacticsMap.has(tactic)) {
                 tacticsMap.set(tactic, {
@@ -79,7 +83,8 @@ async function loadMitreData() {
                 name: techniqueName,
                 stride: stride,
                 cia: cia,
-                description: description
+                description: description,
+                tags: tags
             });
             tacticData.count++;
         });
@@ -426,17 +431,20 @@ function showTechniqueDescription(techniqueName) {
             if (match) { found = match; break; }
         }
         const description = (found && found.description) ? found.description : 'No description available.';
+        const tags = (found && Array.isArray(found.tags)) ? found.tags : [];
 
         const existing = document.querySelector('.technique-modal');
         if (existing) existing.remove();
 
         const modal = document.createElement('div');
         modal.className = 'technique-modal';
+        const tagBadges = tags.map((t) => `<span class=\"generic-tag ${tagToClassName(t)}\">${escapeHtml(t)}</span>`).join(' ');
         modal.innerHTML = `
             <div class="modal-overlay" onclick="closeTechniqueModal()"></div>
             <div class="modal-content">
                 <h3>${techniqueName}</h3>
                 <div class="technique-description">${escapeHtml(description).replace(/\n/g,'<br>')}</div>
+                ${tags.length ? `<div class="tags-row" style="margin-top:8px;">${tagBadges}</div>` : ''}
                 <div class="modal-actions">
                     <button class="btn-cancel" onclick="closeTechniqueModal()">Close</button>
                 </div>
@@ -458,6 +466,14 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+}
+
+function tagToClassName(tag) {
+    const slug = String(tag)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+    return `tag-${slug}`;
 }
 
 // Function to create the matrix
