@@ -600,6 +600,18 @@ document.addEventListener('DOMContentLoaded', () => {
             collapseHandle.textContent = collapsed ? '›' : '‹';
         });
     }
+
+    // Close modals with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+            // Technique modal
+            closeTechniqueModal();
+            // Feedback modal
+            if (typeof closeFeedbackModal === 'function') {
+                closeFeedbackModal();
+            }
+        }
+    });
 });
 
 // Add transition for smooth filtering
