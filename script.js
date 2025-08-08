@@ -593,6 +593,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#ciaFilter').addEventListener('input', filterTechniques);
 
     initializeSidebarFilters();
+
+    const collapseHandle = document.getElementById('sidebarCollapseHandle');
+    if (collapseHandle) {
+        collapseHandle.addEventListener('click', () => {
+            const layout = document.querySelector('.content-layout');
+            const collapsed = layout.classList.toggle('sidebar-collapsed');
+            collapseHandle.textContent = collapsed ? '›' : '‹';
+        });
+    }
 });
 
 // Add transition for smooth filtering
@@ -697,6 +706,11 @@ function initializeSidebarFilters() {
       const group = title.closest('.sidebar-group');
       group.classList.toggle('collapsed');
     });
+  });
+
+  // Collapse all groups by default on load
+  document.querySelectorAll('.sidebar-group').forEach(group => {
+    group.classList.add('collapsed');
   });
 }
 
