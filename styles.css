@@ -812,18 +812,7 @@ h1 {
     color: var(--primary-color);
 }
 
-/* Add data attributes display on hover if needed */
-.technique[data-stride]:hover::after {
-    content: "STRIDE: " attr(data-stride);
-    position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    z-index: 1;
-    margin-top: 1rem;
-}
+/* Removed STRIDE tooltip on hover */
 
 .tags-container {
     display: flex;
