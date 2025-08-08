@@ -502,6 +502,10 @@ async function createMatrix() {
         tactic.techniques.forEach(technique => {
             const techniqueElement = document.createElement('div');
             techniqueElement.className = 'technique';
+            // annotate for fast filtering
+            techniqueElement.setAttribute('data-tags', (technique.tags || []).map(t => t.toLowerCase()).join('|'));
+            techniqueElement.setAttribute('data-stride', (technique.stride || '').toLowerCase());
+            techniqueElement.setAttribute('data-cia', (technique.cia || '').toLowerCase());
             techniqueElement.innerHTML = `
                 <div class="technique-content">
                     <div class="technique-name">${technique.name}</div>
@@ -587,6 +591,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.search-input').addEventListener('input', filterTechniques);
     document.querySelector('#strideFilter').addEventListener('input', filterTechniques);
     document.querySelector('#ciaFilter').addEventListener('input', filterTechniques);
+
+    initializeSidebarFilters();
 });
 
 // Add transition for smooth filtering
@@ -597,6 +603,161 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Sidebar Filters
+const TAG_GROUPS = {
+  Enterprise: ['PRE','Windows','macOS','Linux','Cloud','Network Devices','Containers','ESXi'],
+  Mobile: ['Android','iOS'],
+  ICS: []
+};
+
+function initializeSidebarFilters() {
+  // Build Enterprise section
+  const entRoot = document.getElementById('sidebar-enterprise');
+  if (entRoot) {
+    const ul = document.createElement('ul');
+    ul.className = 'sidebar-list';
+    TAG_GROUPS.Enterprise.forEach(tag => {
+      const li = document.createElement('li');
+      li.className = 'sidebar-item';
+      li.setAttribute('data-filter-tag', tag);
+      li.innerHTML = `<span class="generic-tag ${tagToClassName(tag)}">${tag}</span>`;
+      li.addEventListener('click', () => toggleSidebarSelection(li, 'tag'));
+      ul.appendChild(li);
+    });
+    entRoot.appendChild(ul);
+  }
+
+  // Build Mobile section
+  const mobRoot = document.getElementById('sidebar-mobile');
+  if (mobRoot) {
+    const ul = document.createElement('ul');
+    ul.className = 'sidebar-list';
+    TAG_GROUPS.Mobile.forEach(tag => {
+      const li = document.createElement('li');
+      li.className = 'sidebar-item';
+      li.setAttribute('data-filter-tag', tag);
+      li.innerHTML = `<span class="generic-tag ${tagToClassName(tag)}">${tag}</span>`;
+      li.addEventListener('click', () => toggleSidebarSelection(li, 'tag'));
+      ul.appendChild(li);
+    });
+    mobRoot.appendChild(ul);
+  }
+
+  // Build ICS section (single toggle item)
+  const icsRoot = document.getElementById('sidebar-ics');
+  if (icsRoot) {
+    const ul = document.createElement('ul');
+    ul.className = 'sidebar-list';
+    const li = document.createElement('li');
+    const tag = 'ICS';
+    li.className = 'sidebar-item';
+    li.setAttribute('data-filter-tag', tag);
+    li.innerHTML = `<span class="generic-tag ${tagToClassName(tag)}">${tag}</span>`;
+    li.addEventListener('click', () => toggleSidebarSelection(li, 'tag'));
+    ul.appendChild(li);
+    icsRoot.appendChild(ul);
+  }
+
+  // Build STRIDE section
+  const strideRoot = document.getElementById('sidebar-stride');
+  if (strideRoot) {
+    const ul = document.createElement('ul');
+    ul.className = 'sidebar-list';
+    STRIDE_CATEGORIES.forEach(cat => {
+      const li = document.createElement('li');
+      li.className = 'sidebar-item';
+      li.setAttribute('data-filter-stride', cat);
+      li.innerHTML = `<span class="stride-tag" data-category="${cat}">${cat}</span>`;
+      li.addEventListener('click', () => toggleSidebarSelection(li, 'stride'));
+      ul.appendChild(li);
+    });
+    strideRoot.appendChild(ul);
+  }
+
+  // Build CIA section
+  const ciaRoot = document.getElementById('sidebar-cia');
+  if (ciaRoot) {
+    const ul = document.createElement('ul');
+    ul.className = 'sidebar-list';
+    CIA_CATEGORIES.forEach(cat => {
+      const li = document.createElement('li');
+      li.className = 'sidebar-item';
+      li.setAttribute('data-filter-cia', cat);
+      li.innerHTML = `<span class="cia-tag" data-category="${cat}">${cat}</span>`;
+      li.addEventListener('click', () => toggleSidebarSelection(li, 'cia'));
+      ul.appendChild(li);
+    });
+    ciaRoot.appendChild(ul);
+  }
+
+  // Wire collapsible behavior
+  document.querySelectorAll('.sidebar-group-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const group = title.closest('.sidebar-group');
+      group.classList.toggle('collapsed');
+    });
+  });
+}
+
+const activeSidebar = { tags: new Set(), stride: new Set(), cia: new Set() };
+
+function toggleSidebarSelection(li, type) {
+  const isActive = li.classList.toggle('active');
+  const value = li.textContent.trim();
+  const set = type === 'tag' ? activeSidebar.tags : type === 'stride' ? activeSidebar.stride : activeSidebar.cia;
+  if (isActive) set.add(value); else set.delete(value);
+  applySidebarFilters();
+}
+
+function applySidebarFilters() {
+  // If nothing selected, do nothing special and let existing filters work
+  const hasAny = activeSidebar.tags.size || activeSidebar.stride.size || activeSidebar.cia.size;
+  const techniqueCards = document.querySelectorAll('.technique');
+  if (!hasAny) {
+    // restore all
+    techniqueCards.forEach(card => {
+      card.style.display = 'flex';
+      card.style.opacity = '1';
+    });
+    // update counts
+    document.querySelectorAll('.tactic-column').forEach(column => {
+      const visibleTechniques = column.querySelectorAll('.technique[style*="display: flex"]').length;
+      column.querySelector('.tactic-count').textContent = `${visibleTechniques} techniques`;
+    });
+    return;
+  }
+
+  // Filter using data attributes on cards to avoid name mismatches
+  document.querySelectorAll('.technique').forEach(card => {
+    const cardTags = (card.getAttribute('data-tags') || '').split('|').filter(Boolean);
+    const cardStride = (card.getAttribute('data-stride') || '').trim();
+    const cardCia = (card.getAttribute('data-cia') || '').trim();
+
+    let ok = true;
+    if (activeSidebar.tags.size) {
+      const loweredSet = new Set(cardTags.map(t => t.toLowerCase()));
+      const selectedLower = [...activeSidebar.tags].map(t => String(t).toLowerCase());
+      // Require ALL selected tags to be present (AND semantics)
+      ok = selectedLower.every(t => loweredSet.has(t));
+    }
+    if (ok && activeSidebar.stride.size) {
+      ok = [...activeSidebar.stride].some(s => cardStride === String(s).toLowerCase());
+    }
+    if (ok && activeSidebar.cia.size) {
+      ok = [...activeSidebar.cia].some(c => cardCia === String(c).toLowerCase());
+    }
+
+    card.style.display = ok ? 'flex' : 'none';
+    card.style.opacity = ok ? '1' : '0';
+  });
+
+  // Update tactic counts
+  document.querySelectorAll('.tactic-column').forEach(column => {
+    const visibleTechniques = column.querySelectorAll('.technique[style*="display: flex"]').length;
+    column.querySelector('.tactic-count').textContent = `${visibleTechniques} techniques`;
+  });
+}
 
 // Initialize STRIDE search
 function initializeStrideSearch() {

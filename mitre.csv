@@ -35,14 +35,14 @@ Reconnaissance,Search Open Websites/Domains,Information Disclosure,Confidentiali
 Reconnaissance,Search Victim-Owned Websites,Information Disclosure,Confidentiality,"Adversaries may search freely available websites and/or domains for information about victims that can be used during targeting. Information about victims may be available in various online sites, such as social media, new sites, or those hosting information about business operations such as hiring or requested/rewarded contracts.[1][2][3]
 
 Adversaries may search in different online sites depending on what information they seek to gather. Information from these sources may reveal opportunities for other forms of reconnaissance (ex: Phishing for Information or Search Open Technical Databases), establishing operational resources (ex: Establish Accounts or Compromise Accounts), and/or initial access (ex: External Remote Services or Phishing).","Enterprise, PRE"
-Resource Development,Acquire Access,Elevation of Privilege,Authorization,,
-Resource Development,Acquire Infrastructure,Elevation of Privilege,Authorization,,
-Resource Development,Compromise Accounts,Elevation of Privilege,Authorization,,
-Resource Development,Compromise Infrastructure,Elevation of Privilege,Authorization,,
-Resource Development,Develop Capabilities,Elevation of Privilege,Authorization,,
-Resource Development,Establish Accounts,Spoofing,Authenticity,,
-Resource Development,Obtain Capabilities,Elevation of Privilege,Authorization,,
-Resource Development,Stage Capabilities,Tampering,Integrity,,
+Resource Development,Acquire Access,Elevation of Privilege,Authorization,,"Enterprise, PRE"
+Resource Development,Acquire Infrastructure,Elevation of Privilege,Authorization,,"Enterprise, PRE"
+Resource Development,Compromise Accounts,Elevation of Privilege,Authorization,,"Enterprise, PRE"
+Resource Development,Compromise Infrastructure,Elevation of Privilege,Authorization,,"Enterprise, PRE"
+Resource Development,Develop Capabilities,Elevation of Privilege,Authorization,,"Enterprise, PRE"
+Resource Development,Establish Accounts,Spoofing,Authenticity,,"Enterprise, PRE"
+Resource Development,Obtain Capabilities,Elevation of Privilege,Authorization,,"Enterprise, PRE"
+Resource Development,Stage Capabilities,Tampering,Integrity,,"Enterprise, PRE"
 Initial Access,Content Injection,Tampering,Integrity,"Adversaries may gain access and continuously communicate with victims by injecting malicious content into systems through online network traffic. Rather than luring victims to malicious payloads hosted on a compromised website (i.e., Drive-by Target followed by Drive-by Compromise), adversaries may initially access victims through compromised data-transfer channels where they can manipulate traffic and/or inject their own content. These compromised online network channels may also be used to deliver additional payloads (i.e., Ingress Tool Transfer) and other data to already compromised systems.[1]
 
 Adversaries may inject content to victim systems in various ways, including:
@@ -50,16 +50,16 @@ Adversaries may inject content to victim systems in various ways, including:
 From the middle, where the adversary is in-between legitimate online client-server communications (Note: this is similar but distinct from Adversary-in-the-Middle, which describes AiTM activity solely within an enterprise environment) [2]
 From the side, where malicious content is injected and races to the client as a fake response to requests of a legitimate online server [3]
 Content injection is often the result of compromised upstream communication channels, for example at the level of an internet service provider (ISP) as is the case with ""lawful interception.""[3][1][4]","Enterprise, Windows, macOS, Linux"
-Initial Access,Drive-by Compromise,Tampering,Integrity,,
-Initial Access,Exploit Public-Facing Application,Tampering,Integrity,,
-Initial Access,External Remote Services,Spoofing,Authenticity,,
-Initial Access,Hardware Additions,Tampering,Integrity,,
-Initial Access,Phishing,Spoofing,Authenticity,,
-Initial Access,Replication Through Removable Media,Tampering,Integrity,,
-Initial Access,Supply Chain Compromise,Tampering,Integrity,,
-Initial Access,Trusted Relationship,Spoofing,Authenticity,,
-Initial Access,Valid Accounts,Elevation of Privilege,Authorization,,
-Initial Access,WiFi Networks,Spoofing,Authenticity,,
+Initial Access,Drive-by Compromise,Tampering,Integrity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Exploit Public-Facing Application,Tampering,Integrity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,External Remote Services,Spoofing,Authenticity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Hardware Additions,Tampering,Integrity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Phishing,Spoofing,Authenticity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Replication Through Removable Media,Tampering,Integrity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Supply Chain Compromise,Tampering,Integrity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Trusted Relationship,Spoofing,Authenticity,,"Enterprise, Windows, macOS, Linux"
+Initial Access,Valid Accounts,Elevation of Privilege,Authorization,,"Enterprise, Windows, macOS, Linux"
+Initial Access,WiFi Networks,Spoofing,Authenticity,,"Enterprise, Windows, macOS, Linux"
 Execution,Cloud Administration Command,Elevation of Privilege,Authorization,,
 Execution,Command and Scripting Interpreter,Tampering,Integrity,,
 Execution,Container Administration Command,Elevation of Privilege,Authorization,,

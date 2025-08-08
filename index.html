@@ -55,7 +55,55 @@
         </a>
     </div>
 
-    <main>
+    <div class="content-layout">
+        <aside class="sidebar" id="filterSidebar">
+            <div class="sidebar-section" id="group-enterprise">
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title" data-toggle="#sidebar-enterprise">
+                        <span class="sidebar-caret">▾</span>
+                        Enterprise
+                    </div>
+                    <div class="sidebar-children" id="sidebar-enterprise"></div>
+                </div>
+            </div>
+            <div class="sidebar-section" id="group-mobile">
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title" data-toggle="#sidebar-mobile">
+                        <span class="sidebar-caret">▾</span>
+                        Mobile
+                    </div>
+                    <div class="sidebar-children" id="sidebar-mobile"></div>
+                </div>
+            </div>
+            <div class="sidebar-section" id="group-ics">
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title" data-toggle="#sidebar-ics">
+                        <span class="sidebar-caret">▾</span>
+                        ICS
+                    </div>
+                    <div class="sidebar-children" id="sidebar-ics"></div>
+                </div>
+            </div>
+            <div class="sidebar-section" id="group-stride">
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title" data-toggle="#sidebar-stride">
+                        <span class="sidebar-caret">▾</span>
+                        STRIDE
+                    </div>
+                    <div class="sidebar-children" id="sidebar-stride"></div>
+                </div>
+            </div>
+            <div class="sidebar-section" id="group-cia">
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title" data-toggle="#sidebar-cia">
+                        <span class="sidebar-caret">▾</span>
+                        CIA
+                    </div>
+                    <div class="sidebar-children" id="sidebar-cia"></div>
+                </div>
+            </div>
+        </aside>
+        <main>
         <h1>ATT&CK Matrix for Enterprise</h1>
         <div class="legend-container">
             <div class="legend-group">
@@ -85,7 +133,8 @@
         <div class="matrix-container">
             <!-- Matrix content will be dynamically populated -->
         </div>
-    </main>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
