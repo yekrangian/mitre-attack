@@ -50,22 +50,21 @@ function initializeSidPersistence() {
 // Initialize SID persistence when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeSidPersistence);
 
-// Function to fetch and parse CSV data
+// Function to fetch and parse CSV data (robust for quoted/multiline fields)
 async function loadMitreData() {
     try {
-        const response = await fetch('mitre.csv');
-        const csvText = await response.text();
-        const rows = csvText.split('\n').map(row => row.split(','));
-        
-        // Skip header row
-        const dataRows = rows.slice(1).filter(row => row.length > 1);
-        
-        // Process the data into our required format
+        const rows = await d3.csv('mitre.csv');
+        const dataRows = rows.filter(r => (r.Tactic || '').trim() && (r.TechniqueName || '').trim());
+
         const tacticsMap = new Map();
-        
-        dataRows.forEach(row => {
-            const [tactic, techniqueName, stride, cia] = row.map(cell => cell.trim());
-            
+
+        dataRows.forEach(r => {
+            const tactic = (r.Tactic || '').trim();
+            const techniqueName = (r.TechniqueName || '').trim();
+            const stride = (r.STRIDE || '').trim();
+            const cia = (r.CIA || '').trim();
+            const description = (r.TechniqueDescription || '').trim();
+
             if (!tacticsMap.has(tactic)) {
                 tacticsMap.set(tactic, {
                     name: tactic,
@@ -73,18 +72,18 @@ async function loadMitreData() {
                     count: 0
                 });
             }
-            
+
             const tacticData = tacticsMap.get(tactic);
             tacticData.techniques.push({
                 id: `T${(tacticData.count + 1).toString().padStart(4, '0')}`,
                 name: techniqueName,
-                stride: stride || '',
-                cia: cia || ''
+                stride: stride,
+                cia: cia,
+                description: description
             });
             tacticData.count++;
         });
-        
-        // Convert map to array and format the data
+
         return Array.from(tacticsMap.values()).map(tactic => ({
             name: tactic.name,
             count: `${tactic.count} techniques`,
@@ -414,6 +413,53 @@ function showFeedbackMessage(message, type) {
     }, 3000);
 }
 
+// Show Technique Description modal
+function showTechniqueDescription(techniqueName) {
+    // Find technique across all tactics (data already rendered, so rebuild quick index)
+    // Safer approach: refetch lightweight mapping from current DOM dataset if available.
+    // Here, we re-use loadMitreData and search in-memory.
+    loadMitreData().then(tactics => {
+        if (!tactics) return;
+        let found = null;
+        for (const t of tactics) {
+            const match = t.techniques.find(tech => tech.name === techniqueName);
+            if (match) { found = match; break; }
+        }
+        const description = (found && found.description) ? found.description : 'No description available.';
+
+        const existing = document.querySelector('.technique-modal');
+        if (existing) existing.remove();
+
+        const modal = document.createElement('div');
+        modal.className = 'technique-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" onclick="closeTechniqueModal()"></div>
+            <div class="modal-content">
+                <h3>${techniqueName}</h3>
+                <div class="technique-description">${escapeHtml(description).replace(/\n/g,'<br>')}</div>
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeTechniqueModal()">Close</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    });
+}
+
+function closeTechniqueModal() {
+    const m = document.querySelector('.technique-modal');
+    if (m) m.remove();
+}
+
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Function to create the matrix
 async function createMatrix() {
     const container = document.querySelector('.matrix-container');
@@ -442,7 +488,7 @@ async function createMatrix() {
             techniqueElement.className = 'technique';
             techniqueElement.innerHTML = `
                 <div class="technique-content">
-                    <div class="technique-name">${technique.name}</div>
+                    <div class="technique-name" title="View description" onclick="showTechniqueDescription('${technique.name}')">${technique.name}</div>
                     <div class="tags-container">
                         <div class="tags-row">
                             ${technique.stride ? `<div class="stride-tag" data-category="${technique.stride}">${technique.stride}</div>` : ''}
@@ -458,6 +504,7 @@ async function createMatrix() {
                         <button class="feedback-btn thumbs-down" title="Disagree with classification" onclick="handleThumbsDown('${technique.name}')">
                             👎
                         </button>
+                        <button class="feedback-btn info" title="Show technique description" onclick="showTechniqueDescription('${technique.name}')">ℹ️</button>
                     </div>
                 </div>
             `;

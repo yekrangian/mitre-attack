@@ -13,16 +13,11 @@ const NODE_COLORS = {
     [NODE_TYPES.TACTIC]: '#ffeaa7'  // Soft yellow for tactics
 };
 
-// Load and process the data
+// Load and process the data (robust for quoted/multiline fields)
 async function loadData() {
     try {
-        const response = await fetch('mitre.csv');
-        const csvText = await response.text();
-        const rows = csvText.split('\n').map(row => row.split(','));
-        
-        // Skip header row
-        const dataRows = rows.slice(1).filter(row => row.length > 1);
-        
+        const dataRows = await d3.csv('mitre.csv');
+
         // Process data into nodes and links
         const nodes = new Map();
         const links = [];
@@ -60,8 +55,8 @@ async function loadData() {
         // First pass: collect all unique tactics
         const tactics = new Set();
         dataRows.forEach(row => {
-            const [tactic] = row.map(cell => cell.trim());
-            tactics.add(tactic);
+            const tactic = (row.Tactic || '').trim();
+            if (tactic) tactics.add(tactic);
         });
         
         // Add tactic nodes
@@ -76,8 +71,14 @@ async function loadData() {
         
         // Process techniques and create links
         dataRows.forEach(row => {
-            const [tactic, techniqueName, stride, cia] = row.map(cell => cell.trim());
-            
+            const tactic = (row.Tactic || '').trim();
+            const techniqueName = (row.TechniqueName || '').trim();
+            const stride = (row.STRIDE || '').trim();
+            const cia = (row.CIA || '').trim();
+            const description = (row.TechniqueDescription || '').trim();
+
+            if (!techniqueName) return;
+
             // Add technique node if it doesn't exist
             if (!nodes.has(techniqueName)) {
                 nodes.set(techniqueName, {
@@ -85,19 +86,20 @@ async function loadData() {
                     type: NODE_TYPES.TECHNIQUE,
                     name: techniqueName,
                     tactic: tactic,
+                    description: description,
                     radius: 6  // Smaller than category nodes
                 });
             }
-            
-            // Create link to tactic
-            links.push({
-                source: techniqueName,
-                target: tactic,
-                value: 1,
-                type: 'tactic'
-            });
-            
-            // Create links to STRIDE and CIA categories
+
+            if (tactic) {
+                links.push({
+                    source: techniqueName,
+                    target: tactic,
+                    value: 1,
+                    type: 'tactic'
+                });
+            }
+
             if (stride) {
                 links.push({
                     source: techniqueName,
@@ -106,7 +108,7 @@ async function loadData() {
                     type: 'stride'
                 });
             }
-            
+
             if (cia) {
                 links.push({
                     source: techniqueName,
@@ -232,6 +234,17 @@ function createForceSimulation(data) {
             // Reset highlights
             node.style('opacity', 1);
             link.style('opacity', 1);
+        })
+        .on('click', function(event, d) {
+            if (d.type === NODE_TYPES.TECHNIQUE) {
+                // Reuse page modal function if available, else fallback alert
+                if (typeof showTechniqueDescription === 'function') {
+                    showTechniqueDescription(d.name);
+                } else {
+                    const desc = d.description || 'No description available.';
+                    alert(`${d.name}\n\n${desc}`);
+                }
+            }
         });
     
     // Update positions on each tick
