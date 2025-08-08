@@ -560,8 +560,8 @@ const CIA_CATEGORIES = [
 
 function filterTechniques() {
     const searchTerm = document.querySelector('.search-input').value.toLowerCase().trim();
-    const strideFilter = document.querySelector('#strideFilter').value.toLowerCase().trim();
-    const ciaFilter = document.querySelector('#ciaFilter').value.toLowerCase().trim();
+    const strideFilter = '';
+    const ciaFilter = '';
     
     document.querySelectorAll('.technique').forEach(technique => {
         const techniqueName = technique.querySelector('.technique-name').textContent.toLowerCase();
@@ -587,10 +587,8 @@ function filterTechniques() {
 document.addEventListener('DOMContentLoaded', () => {
     createMatrix();
     
-    // Add event listeners for all search inputs
+    // Add event listeners for search input
     document.querySelector('.search-input').addEventListener('input', filterTechniques);
-    document.querySelector('#strideFilter').addEventListener('input', filterTechniques);
-    document.querySelector('#ciaFilter').addEventListener('input', filterTechniques);
 
     initializeSidebarFilters();
 
