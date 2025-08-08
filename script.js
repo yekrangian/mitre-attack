@@ -488,7 +488,7 @@ async function createMatrix() {
             techniqueElement.className = 'technique';
             techniqueElement.innerHTML = `
                 <div class="technique-content">
-                    <div class="technique-name" title="View description" onclick="showTechniqueDescription('${technique.name}')">${technique.name}</div>
+                    <div class="technique-name">${technique.name}</div>
                     <div class="tags-container">
                         <div class="tags-row">
                             ${technique.stride ? `<div class="stride-tag" data-category="${technique.stride}">${technique.stride}</div>` : ''}
