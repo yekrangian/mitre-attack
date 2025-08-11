@@ -16,6 +16,7 @@ header {
     background-color: var(--primary-color);
     color: white;
     padding: 0.5rem 1rem;
+    z-index: 100;
 }
 
 .header-content {
@@ -491,7 +492,7 @@ main {
 
 .content-layout {
     display: grid;
-    grid-template-columns: 170px minmax(0, 1fr);
+    grid-template-columns: 180px minmax(0, 1fr);
     gap: 0;
 }
 
@@ -518,7 +519,7 @@ main {
 }
 
 /* Prevent layout jump on load by defining initial state explicitly */
-.content-layout:not(.sidebar-collapsed) .sidebar { width: 170px; }
+.content-layout:not(.sidebar-collapsed) .sidebar { width: 180px; }
 .sidebar-collapse-handle {
     position: absolute;
     top: 8px;
@@ -1001,11 +1002,15 @@ h1 {
     margin-left: auto;
 }
 
-/* Make header stretch across when sidebar collapses */
-.content-layout.sidebar-collapsed + main .header-content,
-.content-layout.sidebar-collapsed ~ header .header-content {
+/* Ensure header uses content width and allow horizontal scroll when needed */
+body { overflow-x: auto; }
+body > header {
     width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
 }
+.header-content { width: 100%; max-width: 100%; }
 
 /* Modern Legend Styles */
 .legend-container {

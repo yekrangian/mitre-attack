@@ -647,6 +647,8 @@ function normalizeLabel(raw) {
   return val;
 }
 
+
+
 function normalizeStrideAndCia(inputStride, inputCia) {
   let stride = normalizeLabel(inputStride);
   let cia = normalizeLabel(inputCia);
@@ -731,6 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
 });
 
 // Add transition for smooth filtering
