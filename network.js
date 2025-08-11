@@ -55,7 +55,9 @@ async function loadData() {
         // First pass: collect all unique tactics
         const tactics = new Set();
         dataRows.forEach(row => {
-            const tactic = (row.Tactic || '').trim();
+            const tactic = (row.Tactic_Name || row.Tactic || '').trim();
+            const techniqueId = (row.Technique_ID || '').trim();
+            if (/\./.test(techniqueId)) return; // exclude sub-techniques
             if (tactic) tactics.add(tactic);
         });
         
@@ -71,13 +73,15 @@ async function loadData() {
         
         // Process techniques and create links
         dataRows.forEach(row => {
-            const tactic = (row.Tactic || '').trim();
-            const techniqueName = (row.TechniqueName || '').trim();
+            const tactic = (row.Tactic_Name || row.Tactic || '').trim();
+            const techniqueName = (row.Technique_Name || row.TechniqueName || '').trim();
+            const techniqueId = (row.Technique_ID || '').trim();
             const stride = (row.STRIDE || '').trim();
             const cia = (row.CIA || '').trim();
-            const description = (row.TechniqueDescription || '').trim();
+            const description = (row.Technique_Description || row.TechniqueDescription || '').trim();
 
             if (!techniqueName) return;
+            if (/\./.test(techniqueId)) return; // exclude sub-techniques
 
             // Add technique node if it doesn't exist
             if (!nodes.has(techniqueName)) {

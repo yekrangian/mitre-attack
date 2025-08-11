@@ -54,17 +54,26 @@ document.addEventListener('DOMContentLoaded', initializeSidPersistence);
 async function loadMitreData() {
     try {
         const rows = await d3.csv('mitre.csv');
-        const dataRows = rows.filter(r => (r.Tactic || '').trim() && (r.TechniqueName || '').trim());
+        // Adapt to new CSV schema and exclude sub-techniques (Technique_ID with a dot)
+        const dataRows = rows.filter(r => {
+            const tacticName = (r.Tactic_Name || r.Tactic || '').trim();
+            const techniqueName = (r.Technique_Name || r.TechniqueName || '').trim();
+            const techniqueId = (r.Technique_ID || '').trim();
+            const isSubTechnique = /\./.test(techniqueId);
+            return tacticName && techniqueName && !isSubTechnique;
+        });
 
         const tacticsMap = new Map();
 
         dataRows.forEach(r => {
-            const tactic = (r.Tactic || '').trim();
-            const techniqueName = (r.TechniqueName || '').trim();
-            const stride = (r.STRIDE || '').trim();
-            const cia = (r.CIA || '').trim();
-            const description = (r.TechniqueDescription || '').trim();
-            const tags = (r.Tags || '')
+            const tactic = (r.Tactic_Name || r.Tactic || '').trim();
+            const techniqueName = (r.Technique_Name || r.TechniqueName || '').trim();
+            const techniqueId = (r.Technique_ID || '').trim();
+            const rawStride = (r.STRIDE || '').trim();
+            const rawCia = (r.CIA || '').trim();
+            const { stride, cia } = normalizeStrideAndCia(rawStride, rawCia);
+            const description = (r.Technique_Description || r.TechniqueDescription || '').trim();
+            const tags = (r.Platform || r.Tags || '')
                 .split(',')
                 .map(t => t.trim())
                 .filter(Boolean);
@@ -79,7 +88,7 @@ async function loadMitreData() {
 
             const tacticData = tacticsMap.get(tactic);
             tacticData.techniques.push({
-                id: `T${(tacticData.count + 1).toString().padStart(4, '0')}`,
+                id: techniqueId || `T${(tacticData.count + 1).toString().padStart(4, '0')}`,
                 name: techniqueName,
                 stride: stride,
                 cia: cia,
@@ -89,7 +98,35 @@ async function loadMitreData() {
             tacticData.count++;
         });
 
-        return Array.from(tacticsMap.values()).map(tactic => ({
+        // Enforce canonical ATT&CK tactic order for columns
+        const TACTIC_ORDER = [
+            'Reconnaissance',
+            'Resource Development',
+            'Initial Access',
+            'Execution',
+            'Persistence',
+            'Privilege Escalation',
+            'Defense Evasion',
+            'Credential Access',
+            'Discovery',
+            'Lateral Movement',
+            'Collection',
+            'Command and Control',
+            'Exfiltration',
+            'Impact'
+        ];
+
+        const orderIndex = new Map(TACTIC_ORDER.map((n, i) => [n.toLowerCase(), i]));
+        const tacticsArray = Array.from(tacticsMap.values());
+        tacticsArray.sort((a, b) => {
+            const ai = orderIndex.has(a.name.toLowerCase()) ? orderIndex.get(a.name.toLowerCase()) : Number.MAX_SAFE_INTEGER;
+            const bi = orderIndex.has(b.name.toLowerCase()) ? orderIndex.get(b.name.toLowerCase()) : Number.MAX_SAFE_INTEGER;
+            if (ai !== bi) return ai - bi;
+            // Stable alphabetical fallback for any unexpected items
+            return a.name.localeCompare(b.name);
+        });
+
+        return tacticsArray.map(tactic => ({
             name: tactic.name,
             count: `${tactic.count} techniques`,
             techniques: tactic.techniques
@@ -511,10 +548,10 @@ async function createMatrix() {
                     <div class="technique-name">${technique.name}</div>
                     <div class="tags-container">
                         <div class="tags-row">
-                            ${technique.stride ? `<div class="stride-tag" data-category="${technique.stride}">${technique.stride}</div>` : ''}
+                            ${technique.stride ? `<div class="stride-tag" data-category="${normalizeLabel(technique.stride)}">${normalizeLabel(technique.stride)}</div>` : ''}
                         </div>
                         <div class="tags-row">
-                            ${technique.cia ? `<div class="cia-tag" data-category="${technique.cia}">${technique.cia}</div>` : ''}
+                            ${technique.cia ? `<div class="cia-tag" data-category="${normalizeLabel(technique.cia)}">${normalizeLabel(technique.cia)}</div>` : ''}
                         </div>
                     </div>
                     <div class="feedback-buttons">
@@ -528,6 +565,11 @@ async function createMatrix() {
                     </div>
                 </div>
             `;
+            // Ensure visible colors regardless of attribute selector behavior
+            const strideTagEl = techniqueElement.querySelector('.stride-tag');
+            applyColorToTag(strideTagEl, STRIDE_TAG_STYLES);
+            const ciaTagEl = techniqueElement.querySelector('.cia-tag');
+            applyColorToTag(ciaTagEl, CIA_TAG_STYLES);
             techniquesList.appendChild(techniqueElement);
         });
         
@@ -557,6 +599,83 @@ const CIA_CATEGORIES = [
     'Authenticity',
     'Non-Repudiation'
 ];
+
+// Inline color fallback maps to guarantee visible colors on tags
+const STRIDE_TAG_STYLES = {
+  'Spoofing': { bg: '#ffebee', color: '#d32f2f' },
+  'Tampering': { bg: '#e8f5e9', color: '#2e7d32' },
+  'Repudiation': { bg: '#fff3e0', color: '#f57c00' },
+  'Information Disclosure': { bg: '#e3f2fd', color: '#1976d2' },
+  'Denial of Service': { bg: '#f3e5f5', color: '#7b1fa2' },
+  'Elevation of Privilege': { bg: '#e0f2f1', color: '#00796b' }
+};
+
+const CIA_TAG_STYLES = {
+  'Confidentiality': { bg: '#e8eaf6', color: '#3949ab' },
+  'Integrity': { bg: '#fce4ec', color: '#c2185b' },
+  'Availability': { bg: '#f1f8e9', color: '#558b2f' },
+  'Authorization': { bg: '#fff3e0', color: '#e65100' },
+  'Authenticity': { bg: '#f3e5f5', color: '#7b1fa2' },
+  'Non-Repudiation': { bg: '#e8f5e8', color: '#2e7d32' }
+};
+
+function applyColorToTag(element, stylesMap) {
+  if (!element) return;
+  const category = (element.dataset?.category || '').trim();
+  if (!category) return;
+  const style = stylesMap[category];
+  if (!style) return;
+  element.style.backgroundColor = style.bg;
+  element.style.color = style.color;
+}
+
+// Normalization helpers to auto-correct swapped/malformed CSV values
+const STRIDE_SET = new Set(STRIDE_CATEGORIES.map(s => s.toLowerCase()));
+const CIA_SET = new Set(CIA_CATEGORIES.map(s => s.toLowerCase()));
+const NORMALIZE_ALIASES = new Map([
+  ['non repudiation', 'Non-Repudiation'],
+  ['non-repudiation', 'Non-Repudiation'],
+  ['information disclosure', 'Information Disclosure'],
+]);
+
+function normalizeLabel(raw) {
+  const val = (raw || '').trim();
+  if (!val) return '';
+  const lower = val.toLowerCase();
+  if (NORMALIZE_ALIASES.has(lower)) return NORMALIZE_ALIASES.get(lower);
+  // Return with original casing if it already looks right, else title-case basic words
+  return val;
+}
+
+function normalizeStrideAndCia(inputStride, inputCia) {
+  let stride = normalizeLabel(inputStride);
+  let cia = normalizeLabel(inputCia);
+
+  const sInStride = STRIDE_SET.has(stride.toLowerCase());
+  const sInCia = CIA_SET.has(stride.toLowerCase());
+  const cInCia = CIA_SET.has(cia.toLowerCase());
+  const cInStride = STRIDE_SET.has(cia.toLowerCase());
+
+  // If both are valid and in their proper sets, keep
+  if (sInStride && cInCia) return { stride, cia };
+
+  // If clearly swapped
+  if (sInCia && cInStride) return { stride: cia, cia: stride };
+
+  // If stride is invalid but CIA looks like STRIDE, or vice versa
+  if (!sInStride && cInStride && !cInCia) return { stride: cia, cia: '' };
+  if (!cInCia && sInCia && !sInStride) return { stride: '', cia: stride };
+
+  // If only one matches either set, assign accordingly and clear the other
+  if (sInStride && !cInCia && !cInStride) return { stride, cia: '' };
+  if (cInCia && !sInStride && !sInCia) return { stride: '', cia };
+
+  // Last resort: if both belong to the same set, prefer mapping the better fit
+  if (sInStride && cInStride) return { stride, cia: '' };
+  if (sInCia && cInCia) return { stride: '', cia };
+
+  return { stride, cia };
+}
 
 function filterTechniques() {
     const searchTerm = document.querySelector('.search-input').value.toLowerCase().trim();
@@ -625,7 +744,7 @@ document.head.appendChild(style);
 
 // Sidebar Filters
 const TAG_GROUPS = {
-  Enterprise: ['PRE','Windows','macOS','Linux','Cloud','Network Devices','Containers','ESXi'],
+  Enterprise: ['PRE','Windows','macOS','Linux','Office Suite','Identity Provider','SaaS','IaaS','Network Devices','Containers','ESXi'],
   Mobile: ['Android','iOS'],
   ICS: []
 };
@@ -1008,7 +1127,7 @@ function createTacticHeader(tactic) {
     // Calculate STRIDE distribution
     const strideCounts = {};
     STRIDE_CATEGORIES.forEach(category => {
-        strideCounts[category] = tactic.techniques.filter(t => t.stride === category).length;
+        strideCounts[category] = tactic.techniques.filter(t => normalizeLabel(t.stride) === category).length;
     });
     
     const maxStrideCount = Math.max(...Object.values(strideCounts));
@@ -1041,7 +1160,7 @@ function createTacticHeader(tactic) {
     // Calculate CIA distribution
     const ciaCounts = {};
     CIA_CATEGORIES.forEach(category => {
-        ciaCounts[category] = tactic.techniques.filter(t => t.cia === category).length;
+        ciaCounts[category] = tactic.techniques.filter(t => normalizeLabel(t.cia) === category).length;
     });
     
     const maxCiaCount = Math.max(...Object.values(ciaCounts));
