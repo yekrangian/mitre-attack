@@ -492,7 +492,7 @@ main {
 
 .content-layout {
     display: grid;
-    grid-template-columns: 190px minmax(0, 1fr);
+    grid-template-columns: 200px minmax(0, 1fr);
     gap: 0;
     position: relative;
     transition: grid-template-columns 0.3s ease;
@@ -524,7 +524,7 @@ main {
 
 
 /* Prevent layout jump on load by defining initial state explicitly */
-.content-layout:not(.sidebar-collapsed) .sidebar { width: 190px; }
+.content-layout:not(.sidebar-collapsed) .sidebar { width: 200px; }
 .sidebar-collapse-handle {
     position: absolute;
     top: 8px;
