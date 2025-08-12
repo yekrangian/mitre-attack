@@ -4,10 +4,20 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import time
 
-# Import the endpoint routers and configuration
+# Import the endpoint routers and logger
 from endpoints import feedback, procedure_example
-from config import Config
 from utils.logger import app_logger
+
+# Application Configuration - loaded from environment variables
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+APP_HOST = os.getenv("APP_HOST", "0.0.0.0")
+APP_PORT = int(os.getenv("APP_PORT", "8000"))
+APP_DEBUG = os.getenv("APP_DEBUG", "false").lower() == "true"
 
 app = FastAPI(title="MITRE ATT&CK API", version="1.0.0")
 
@@ -91,19 +101,20 @@ if __name__ == "__main__":
     
     # Log application startup
     app_logger.log_system("Starting MITRE ATT&CK application", "INFO")
-    app_logger.log_system(f"Host: {Config.APP_HOST}, Port: {Config.APP_PORT}", "INFO")
+    app_logger.log_system(f"Host: {APP_HOST}, Port: {APP_PORT}", "INFO")
     
-    # Validate configuration
-    if Config.validate():
-        app_logger.log_system("Configuration validation successful", "INFO")
+    # Validate OpenAI API key
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if openai_api_key:
+        app_logger.log_system("OpenAI API key loaded successfully", "INFO")
     else:
-        app_logger.log_system("Configuration validation failed - LLM features disabled", "WARNING")
+        app_logger.log_system("Warning: OPENAI_API_KEY not set. LLM features will not work.", "WARNING")
     
     app_logger.log_system("Starting Uvicorn server...", "INFO")
     
     uvicorn.run(
         app, 
-        host=Config.APP_HOST, 
-        port=Config.APP_PORT,
-        log_level="info" if Config.APP_DEBUG else "warning"
+        host=APP_HOST, 
+        port=APP_PORT,
+        log_level="info" if APP_DEBUG else "warning"
     )

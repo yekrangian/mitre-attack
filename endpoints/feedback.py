@@ -6,6 +6,10 @@ import os
 from datetime import datetime
 import uuid
 import sys
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add the utils directory to the path so we can import the logger
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
@@ -34,8 +38,8 @@ class FeedbackResponse(BaseModel):
     comment: str
     message: str
 
-# CSV file path
-FEEDBACK_CSV = "feedback.csv"
+# CSV file path - loaded from environment variable or default
+FEEDBACK_CSV = os.getenv("FEEDBACK_CSV", "feedback.csv")
 
 def ensure_csv_exists():
     """Ensure feedback.csv exists with headers"""

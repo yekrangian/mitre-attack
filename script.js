@@ -511,7 +511,10 @@ async function generateProcedureExample(techniqueName, techniqueDescription) {
             return;
         }
         
+        // Store original state
         const originalText = procedureButton.textContent;
+        const originalDisabled = procedureButton.disabled;
+        
         procedureButton.textContent = 'Generating...';
         procedureButton.disabled = true;
         
@@ -534,6 +537,8 @@ async function generateProcedureExample(techniqueName, techniqueDescription) {
         if (!response.ok) {
             const errorText = await response.text();
             console.error('API error response:', errorText);
+            console.error('Response status:', response.status);
+            console.error('Response headers:', Object.fromEntries(response.headers.entries()));
             throw new Error(`HTTP error! status: ${response.status}, response: ${errorText}`);
         }
         
@@ -541,6 +546,7 @@ async function generateProcedureExample(techniqueName, techniqueDescription) {
         console.log('API response data:', data);
         
         // Display the procedure example in the modal
+        console.log('Displaying procedure example:', data.procedure_example);
         displayProcedureExample(data.procedure_example);
         
     } catch (error) {
@@ -550,8 +556,8 @@ async function generateProcedureExample(techniqueName, techniqueDescription) {
         // Restore button state
         const procedureButton = document.querySelector('.btn-procedure');
         if (procedureButton) {
-            procedureButton.textContent = 'Procedure';
-            procedureButton.disabled = false;
+            procedureButton.textContent = originalText;
+            procedureButton.disabled = originalDisabled;
         }
     }
 }

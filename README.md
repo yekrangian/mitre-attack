@@ -11,18 +11,18 @@ A web application for exploring MITRE ATT&CK techniques with feedback collection
 
 ## Backend Architecture
 
-The backend has been refactored into a modular structure:
+The backend has been refactored into a modular structure with distributed configuration:
 
 ```
-├── main.py                 # Main application entry point
-├── config.py              # Configuration management
+├── main.py                 # Main application entry point (app config)
 ├── endpoints/             # API endpoint modules
 │   ├── __init__.py
-│   ├── feedback.py        # Feedback collection endpoints
+│   ├── feedback.py        # Feedback collection endpoints (CSV config)
 │   └── procedure_example.py # LLM procedure generation endpoints
 ├── utils/                 # Utility modules
 │   ├── __init__.py
-│   └── llm_client.py      # OpenAI LLM client
+│   ├── logger.py          # Centralized logging system
+│   └── llm_client.py      # OpenAI LLM client (OpenAI config)
 └── requirements.txt       # Python dependencies
 ```
 
@@ -39,15 +39,10 @@ pip install -r requirements.txt
 Create a `.env` file in the root directory:
 
 ```bash
-# OpenAI Configuration
+# OpenAI API key (required for LLM features)
 OPENAI_API_KEY=your_openai_api_key_here
 
-# Optional: Customize OpenAI settings
-OPENAI_MODEL=gpt-3.5-turbo
-OPENAI_MAX_TOKENS=800
-OPENAI_TEMPERATURE=0.7
-
-# Application Configuration
+# Application Configuration (optional - will use defaults if not set)
 APP_HOST=0.0.0.0
 APP_PORT=8000
 APP_DEBUG=false
@@ -88,7 +83,13 @@ The frontend (`script.js`) needs to be updated to include the new Procedure butt
 
 ## Configuration
 
-All configuration is managed through environment variables and the `config.py` file. The application will warn if required configuration (like OpenAI API key) is missing.
+Configuration is distributed across the modules where it's used:
+
+- **Application Settings** (`main.py`): Host, port, debug mode (from env or defaults)
+- **OpenAI Settings** (`utils/llm_client.py`): Model, tokens, temperature (hardcoded) + API key (from .env)
+- **File Paths** (`endpoints/feedback.py`): CSV file locations (from env or defaults)
+
+Only the OpenAI API key is required in the `.env` file. All other settings have sensible defaults.
 
 ## Development
 

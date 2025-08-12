@@ -118,3 +118,31 @@ async def health_check(llm_client: LLMClient = Depends(get_llm_client)):
 async def test_endpoint():
     """Simple test endpoint to verify the router is working"""
     return {"message": "Procedure example endpoint is working!"}
+
+@router.get("/debug")
+async def debug_endpoint():
+    """Debug endpoint to check environment and dependencies"""
+    try:
+        # Check if OpenAI API key is available
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        api_key_status = "Set" if openai_api_key else "Not Set"
+        
+        # Check if we can create an LLM client
+        try:
+            llm_client = LLMClient()
+            llm_status = "Available"
+        except Exception as e:
+            llm_status = f"Error: {str(e)}"
+        
+        return {
+            "status": "debug_info",
+            "openai_api_key": api_key_status,
+            "llm_client": llm_status,
+            "environment": {
+                "OPENAI_MODEL": os.getenv("OPENAI_MODEL", "Not Set"),
+                "OPENAI_MAX_TOKENS": os.getenv("OPENAI_MAX_TOKENS", "Not Set"),
+                "OPENAI_TEMPERATURE": os.getenv("OPENAI_TEMPERATURE", "Not Set")
+            }
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}

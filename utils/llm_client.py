@@ -1,13 +1,8 @@
 import openai
 import os
-import sys
 import time
 from typing import Optional, Dict, Any
 import logging
-
-# Add the parent directory to the path to import config
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from config import Config
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -16,9 +11,14 @@ logger = logging.getLogger(__name__)
 class LLMClient:
     """Client for interacting with OpenAI LLM API"""
     
+    # OpenAI Configuration - hardcoded for consistency
+    OPENAI_MODEL = "gpt-3.5-turbo"
+    OPENAI_MAX_TOKENS = 800
+    OPENAI_TEMPERATURE = 0.7
+    
     def __init__(self, api_key: Optional[str] = None):
         """Initialize the LLM client with OpenAI API key"""
-        self.api_key = api_key or Config.OPENAI_API_KEY
+        self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass it to constructor.")
         
@@ -51,13 +51,13 @@ class LLMClient:
         """Make the actual call to OpenAI API"""
         try:
             response = self.client.chat.completions.create(
-                model=Config.OPENAI_MODEL,
+                model=self.OPENAI_MODEL,
                 messages=[
                     {"role": "system", "content": "You are a cybersecurity expert specializing in MITRE ATT&CK techniques. Provide clear, educational examples."},
                     {"role": "user", "content": prompt}
                 ],
-                max_tokens=Config.OPENAI_MAX_TOKENS,
-                temperature=Config.OPENAI_TEMPERATURE
+                max_tokens=self.OPENAI_MAX_TOKENS,
+                temperature=self.OPENAI_TEMPERATURE
             )
             
             return response.choices[0].message.content.strip()
