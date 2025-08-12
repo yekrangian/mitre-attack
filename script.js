@@ -722,6 +722,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Add resizable sidebar functionality
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        let isResizing = false;
+        let startX, startWidth;
+
+        sidebar.addEventListener('mousedown', (e) => {
+            const rect = sidebar.getBoundingClientRect();
+            const isOnResizeArea = e.clientX > rect.right - 6;
+            
+            if (isOnResizeArea) {
+                isResizing = true;
+                startX = e.clientX;
+                startWidth = parseInt(getComputedStyle(sidebar).width);
+                document.body.style.cursor = 'col-resize';
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            
+            const deltaX = e.clientX - startX;
+            const newWidth = Math.max(150, Math.min(400, startWidth + deltaX));
+            
+            const layout = document.querySelector('.content-layout');
+            layout.style.gridTemplateColumns = `${newWidth}px minmax(0, 1fr)`;
+            sidebar.style.width = `${newWidth}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                document.body.style.cursor = '';
+            }
+        });
+    }
+
     // Close modals with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'Esc') {

@@ -492,16 +492,17 @@ main {
 
 .content-layout {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
+    grid-template-columns: 190px minmax(0, 1fr);
     gap: 0;
+    position: relative;
 }
 
 .content-layout.sidebar-collapsed {
-    grid-template-columns: 12px 1fr;
+    grid-template-columns: 20px 1fr;
 }
 
 .content-layout.sidebar-collapsed .sidebar {
-    width: 12px;
+    width: 20px;
     overflow: visible;
     padding: 0;
     border-right: 1px solid var(--border-color);
@@ -518,15 +519,31 @@ main {
     position: relative;
 }
 
+.sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -3px;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+    background: transparent;
+    z-index: 20;
+}
+
+.sidebar:hover::after {
+    background: rgba(0, 0, 0, 0.1);
+}
+
 /* Prevent layout jump on load by defining initial state explicitly */
-.content-layout:not(.sidebar-collapsed) .sidebar { width: 180px; }
+.content-layout:not(.sidebar-collapsed) .sidebar { width: 190px; }
 .sidebar-collapse-handle {
     position: absolute;
     top: 8px;
-    right: -10px;
+    right: 8px;
     width: 20px;
     height: 28px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px;
     border: 1px solid var(--border-color);
     background: var(--technique-bg);
     color: var(--text-color);
@@ -536,7 +553,7 @@ main {
 }
 
 .content-layout.sidebar-collapsed .sidebar-collapse-handle {
-    right: -10px; /* keep visible when collapsed */
+    right: -3px; /* shift right when collapsed for better visibility */
 }
 
 .sidebar-section + .sidebar-section { margin-top: 16px; }
