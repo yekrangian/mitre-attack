@@ -519,21 +519,7 @@ main {
     position: relative;
 }
 
-.sidebar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -3px;
-    width: 6px;
-    height: 100%;
-    cursor: col-resize;
-    background: transparent;
-    z-index: 20;
-}
 
-.sidebar:hover::after {
-    background: rgba(0, 0, 0, 0.1);
-}
 
 /* Prevent layout jump on load by defining initial state explicitly */
 .content-layout:not(.sidebar-collapsed) .sidebar { width: 190px; }
