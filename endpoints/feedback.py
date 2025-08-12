@@ -5,6 +5,11 @@ import csv
 import os
 from datetime import datetime
 import uuid
+import sys
+
+# Add the utils directory to the path so we can import the logger
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
+from logger import app_logger
 
 # Create router for feedback endpoints
 router = APIRouter(prefix="/api/feedback", tags=["feedback"])
@@ -79,6 +84,9 @@ async def submit_feedback(feedback: FeedbackItem):
         # Append to CSV
         append_feedback_to_csv(feedback_data)
         
+        # Log successful feedback submission
+        app_logger.log_feedback("SUBMIT", feedback.technique, feedback.feedback_type, True)
+        
         return FeedbackResponse(
             id=feedback_id,
             technique=feedback.technique,
@@ -92,6 +100,8 @@ async def submit_feedback(feedback: FeedbackItem):
         )
         
     except Exception as e:
+        # Log failed feedback submission
+        app_logger.log_feedback("SUBMIT", feedback.technique, feedback.feedback_type, False)
         raise HTTPException(status_code=500, detail=f"Error saving feedback: {str(e)}")
 
 @router.get("/")
@@ -99,6 +109,7 @@ async def get_feedback():
     """Get all feedback from CSV"""
     try:
         if not os.path.exists(FEEDBACK_CSV):
+            app_logger.log_feedback("GET", "ALL", "N/A", True)
             return {"feedback": []}
         
         feedback_list = []
@@ -107,9 +118,11 @@ async def get_feedback():
             for row in reader:
                 feedback_list.append(row)
         
+        app_logger.log_feedback("GET", "ALL", f"{len(feedback_list)} items", True)
         return {"feedback": feedback_list}
         
     except Exception as e:
+        app_logger.log_feedback("GET", "ALL", "N/A", False)
         raise HTTPException(status_code=500, detail=f"Error reading feedback: {str(e)}")
 
 @router.delete("/")
@@ -117,9 +130,11 @@ async def clear_feedback():
     """Clear all feedback (recreate CSV with headers only)"""
     try:
         ensure_csv_exists()
+        app_logger.log_feedback("CLEAR", "ALL", "N/A", True)
         return {"message": "All feedback cleared successfully!"}
         
     except Exception as e:
+        app_logger.log_feedback("CLEAR", "ALL", "N/A", False)
         raise HTTPException(status_code=500, detail=f"Error clearing feedback: {str(e)}")
 
 @router.get("/download")

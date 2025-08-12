@@ -5,6 +5,10 @@ __pycache__
 # Environment variables
 .env
 
+# Logs
+*.log
+logs/
+
 # Python cache
 *.pyc
 *.pyo

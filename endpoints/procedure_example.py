@@ -3,10 +3,12 @@ from pydantic import BaseModel
 from typing import Optional
 import sys
 import os
+import time
 
-# Add the utils directory to the path so we can import the LLM client
+# Add the utils directory to the path so we can import the LLM client and logger
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
 from llm_client import LLMClient
+from logger import app_logger
 
 # Create router for procedure example endpoints
 router = APIRouter(prefix="/api/procedure", tags=["procedure"])
@@ -75,8 +77,16 @@ async def generate_procedure_example(
             technique_description=request.technique_description
         )
         
+        # Log LLM request
+        app_logger.log_llm_request(request.technique_name, len(prompt))
+        
         # Generate procedure example using LLM
+        start_time = time.time()
         procedure_example = await llm_client.generate_procedure_example(prompt)
+        response_time = time.time() - start_time
+        
+        # Log successful LLM response
+        app_logger.log_llm_response(request.technique_name, len(procedure_example), response_time)
         
         return ProcedureResponse(
             technique_name=request.technique_name,
@@ -86,7 +96,7 @@ async def generate_procedure_example(
         
     except Exception as e:
         # Log the error for debugging
-        print(f"Error generating procedure example: {str(e)}")
+        app_logger.log_llm_error(request.technique_name, e)
         raise HTTPException(
             status_code=500, 
             detail=f"Failed to generate procedure example: {str(e)}"

@@ -16,3 +16,5 @@ fb_1754944895_35383016,Exfiltration Over Other Network Medium,Confidentiality,In
 fb_1754961320_a3c1a618,Acquire Infrastructure,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-08-11T21:15:20.267637
 fb_1754961325_ed5352f2,Acquire Infrastructure,Repudiation,Integrity,thumbs_down,R714214,,2025-08-11T21:15:25.240612
 fb_1754962552_c95f76c8,Acquire Infrastructure,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-08-11T21:35:52.516217
+fb_1754962916_bf6b86f8,External Remote Services,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-08-11T21:41:56.987889
+fb_1754962921_785e13f8,External Remote Services,Repudiation,Confidentiality,thumbs_down,R714214,,2025-08-11T21:42:01.870947

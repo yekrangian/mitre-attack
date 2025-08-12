@@ -1,6 +1,7 @@
 import openai
 import os
 import sys
+import time
 from typing import Optional, Dict, Any
 import logging
 
@@ -35,7 +36,11 @@ class LLMClient:
             Generated procedure example as a string
         """
         try:
+            start_time = time.time()
             response = await self._call_openai(prompt)
+            response_time = time.time() - start_time
+            
+            logger.info(f"OpenAI API call successful in {response_time:.3f}s")
             return response
             
         except Exception as e:
