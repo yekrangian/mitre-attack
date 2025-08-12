@@ -1277,6 +1277,27 @@ body > header {
     background-color: #0056b3;
 }
 
+.btn-procedure {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-procedure:hover {
+    background-color: #218838;
+}
+
+.btn-procedure:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 /* Feedback Messages */
 .feedback-message {
     position: fixed;
@@ -1435,6 +1456,109 @@ body > header {
     line-height: 1.5;
 }
 
+.technique-modal .procedure-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+}
+
+.technique-modal .procedure-section h4 {
+    margin: 0 0 10px 0;
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.technique-modal .procedure-content {
+    line-height: 1.6;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* Markdown formatting styles */
+.technique-modal .procedure-content h1,
+.technique-modal .procedure-content h2,
+.technique-modal .procedure-content h3,
+.technique-modal .procedure-content h4 {
+    margin: 20px 0 10px 0;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.technique-modal .procedure-content h1 {
+    font-size: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.technique-modal .procedure-content h2 {
+    font-size: 18px;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 3px;
+}
+
+.technique-modal .procedure-content h3 {
+    font-size: 16px;
+    color: #34495e;
+}
+
+.technique-modal .procedure-content h4 {
+    font-size: 15px;
+    color: #34495e;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.technique-modal .procedure-content p {
+    margin: 12px 0;
+    line-height: 1.7;
+}
+
+.technique-modal .procedure-content ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.technique-modal .procedure-content li {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.technique-modal .procedure-content strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.technique-modal .procedure-content em {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.technique-modal .procedure-content .code-block {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.technique-modal .procedure-content .inline-code {
+    background-color: #f1f3f4;
+    border: 1px solid #dadce0;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #d73a49;
+}
+
 /* Dark theme component-specific overrides to keep Day mode unchanged */
 [data-theme="dark"] .zoom-controls {
     background-color: rgba(20, 24, 30, 0.9);
@@ -1469,6 +1593,54 @@ body > header {
     background-color: #1f2937;
     border-color: #3b4252;
     box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+
+[data-theme="dark"] .procedure-section {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .procedure-section h4 {
+    color: #e5e7eb;
+}
+
+[data-theme="dark"] .procedure-content {
+    color: #d1d5db;
+}
+
+[data-theme="dark"] .procedure-content h1,
+[data-theme="dark"] .procedure-content h2,
+[data-theme="dark"] .procedure-content h3,
+[data-theme="dark"] .procedure-content h4 {
+    color: #e5e7eb;
+}
+
+[data-theme="dark"] .procedure-content h1 {
+    border-bottom-color: #60a5fa;
+}
+
+[data-theme="dark"] .procedure-content h2 {
+    border-bottom-color: #6b7280;
+}
+
+[data-theme="dark"] .procedure-content strong {
+    color: #e5e7eb;
+}
+
+[data-theme="dark"] .procedure-content em {
+    color: #9ca3af;
+}
+
+[data-theme="dark"] .procedure-content .code-block {
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #d1d5db;
+}
+
+[data-theme="dark"] .procedure-content .inline-code {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #fbbf24;
 }
 
 /* Force light (day) mode cards and buttons to stay white */

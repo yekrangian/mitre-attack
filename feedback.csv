@@ -13,3 +13,6 @@ fb_1754614605_0e57f331,Active Scanning,Information Disclosure,Confidentiality,th
 fb_1754615899_90e7c496,Active Scanning,Denial of Service,Confidentiality,thumbs_down,R714214,,2025-08-07T21:18:19.123765
 fb_1754944887_0aa6de1f,Disk Wipe,Confidentiality,Information Disclosure,thumbs_up,R714214,,2025-08-11T16:41:27.570277
 fb_1754944895_35383016,Exfiltration Over Other Network Medium,Confidentiality,Information Disclosure,thumbs_up,R714214,,2025-08-11T16:41:35.427095
+fb_1754961320_a3c1a618,Acquire Infrastructure,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-08-11T21:15:20.267637
+fb_1754961325_ed5352f2,Acquire Infrastructure,Repudiation,Integrity,thumbs_down,R714214,,2025-08-11T21:15:25.240612
+fb_1754962552_c95f76c8,Acquire Infrastructure,Information Disclosure,Confidentiality,thumbs_up,R714214,,2025-08-11T21:35:52.516217

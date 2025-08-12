@@ -483,6 +483,7 @@ function showTechniqueDescription(techniqueName) {
                 <div class="technique-description">${escapeHtml(description).replace(/\n/g,'<br>')}</div>
                 ${tags.length ? `<div class="tags-row" style="margin-top:8px;">${tagBadges}</div>` : ''}
                 <div class="modal-actions">
+                    <button class="btn-procedure" onclick="generateProcedureExample('${techniqueName}', '${escapeHtml(description)}')">Procedure</button>
                     <button class="btn-cancel" onclick="closeTechniqueModal()">Close</button>
                 </div>
             </div>
@@ -494,6 +495,137 @@ function showTechniqueDescription(techniqueName) {
 function closeTechniqueModal() {
     const m = document.querySelector('.technique-modal');
     if (m) m.remove();
+}
+
+// Generate procedure example using LLM
+async function generateProcedureExample(techniqueName, techniqueDescription) {
+    console.log('generateProcedureExample called with:', { techniqueName, techniqueDescription });
+    
+    try {
+        // Show loading state
+        const procedureButton = document.querySelector('.btn-procedure');
+        console.log('Found procedure button:', procedureButton);
+        
+        if (!procedureButton) {
+            console.error('Procedure button not found!');
+            return;
+        }
+        
+        const originalText = procedureButton.textContent;
+        procedureButton.textContent = 'Generating...';
+        procedureButton.disabled = true;
+        
+        console.log('Making API call to /api/procedure/generate...');
+        
+        // Call the backend API
+        const response = await fetch(`${API_BASE}/procedure/generate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                technique_name: techniqueName,
+                technique_description: techniqueDescription
+            })
+        });
+        
+        console.log('API response status:', response.status);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('API error response:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}, response: ${errorText}`);
+        }
+        
+        const data = await response.json();
+        console.log('API response data:', data);
+        
+        // Display the procedure example in the modal
+        displayProcedureExample(data.procedure_example);
+        
+    } catch (error) {
+        console.error('Error generating procedure example:', error);
+        alert('Error generating procedure example. Please try again.');
+    } finally {
+        // Restore button state
+        const procedureButton = document.querySelector('.btn-procedure');
+        if (procedureButton) {
+            procedureButton.textContent = 'Procedure';
+            procedureButton.disabled = false;
+        }
+    }
+}
+
+// Display procedure example in the modal
+function displayProcedureExample(procedureText) {
+    const modal = document.querySelector('.technique-modal');
+    if (!modal) return;
+    
+    // Create or update the procedure section
+    let procedureSection = modal.querySelector('.procedure-section');
+    if (!procedureSection) {
+        procedureSection = document.createElement('div');
+        procedureSection.className = 'procedure-section';
+        procedureSection.innerHTML = `
+            <h4>AI-Generated Procedure Example</h4>
+            <div class="procedure-content"></div>
+        `;
+        
+        // Insert after the technique description
+        const description = modal.querySelector('.technique-description');
+        description.parentNode.insertBefore(procedureSection, description.nextSibling);
+    }
+    
+    // Update the content with properly formatted markdown
+    const content = procedureSection.querySelector('.procedure-content');
+    content.innerHTML = formatMarkdown(procedureText);
+    
+    // Scroll to the procedure section
+    procedureSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Format markdown text to HTML
+function formatMarkdown(text) {
+    return text
+        // Headers (#### -> h4, ### -> h3, ## -> h2, # -> h1)
+        .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        
+        // Bold text (**text** -> <strong>text</strong>)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        
+        // Italic text (*text* -> <em>text</em>)
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        
+        // Code blocks (```shell ... ``` -> <pre><code>...</code></pre>)
+        .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="code-block"><code class="language-$1">$2</code></pre>')
+        
+        // Inline code (`code` -> <code>code</code>)
+        .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+        
+        // Lists (- item -> <li>item</li>
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        
+        // Convert consecutive <li> elements to proper <ul> lists
+        .replace(/(<li>.*<\/li>)/gs, function(match) {
+            const items = match.split('</li><li>').map(item => 
+                item.replace('<li>', '').replace('</li>', '')
+            ).filter(item => item.trim());
+            return '<ul>' + items.map(item => `<li>${item}</li>`).join('') + '</ul>';
+        })
+        
+        // Line breaks
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>')
+        
+        // Wrap in paragraphs
+        .replace(/^(.+)$/gm, '<p>$1</p>')
+        
+        // Clean up empty paragraphs
+        .replace(/<p><\/p>/g, '')
+        .replace(/<p><br><\/p>/g, '');
 }
 
 function escapeHtml(str) {
